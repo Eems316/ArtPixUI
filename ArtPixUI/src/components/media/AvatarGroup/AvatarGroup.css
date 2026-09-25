@@ -1,0 +1,27 @@
+.art-pix-avatar-group {
+  --art-pix-avatar-group-size: 48px;
+  --art-pix-avatar-group-overlap: 12px;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  isolation: isolate;
+}
+.art-pix-avatar-group--small { --art-pix-avatar-group-size: 32px; --art-pix-avatar-group-overlap: 8px; }
+.art-pix-avatar-group--large { --art-pix-avatar-group-size: 64px; --art-pix-avatar-group-overlap: 16px; }
+.art-pix-avatar-group__item { display: inline-flex; position: relative; flex-shrink: 0; }
+.art-pix-avatar-group__item + .art-pix-avatar-group__item { margin-inline-start: calc(-1 * var(--art-pix-avatar-group-overlap)); }
+.art-pix-avatar-group__overflow {
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--art-pix-avatar-group-size);
+  height: var(--art-pix-avatar-group-size);
+  padding-inline: 6px;
+  border: 2px solid var(--art-pix-color-border);
+  border-radius: 999px;
+  background: var(--art-pix-color-parchment);
+  color: var(--art-pix-color-primary);
+  font: 700 14px/1 var(--art-pix-font-mono);
+}
+.art-pix-avatar-group--small .art-pix-avatar-group__overflow { font-size: 11px; }
+.art-pix-avatar-group--large .art-pix-avatar-group__overflow { font-size: 18px; }

@@ -1,0 +1,14 @@
+.art-pix-list {
+  margin: 0;
+  padding-inline-start: 1.75em;
+  color: var(--art-pix-color-text);
+  font-family: var(--art-pix-font-mono);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+ul.art-pix-list { list-style-type: square; }
+.art-pix-list > li { padding-inline-start: 0.25em; }
+.art-pix-list > li::marker { color: var(--art-pix-color-primary); font-weight: 700; }
+.art-pix-list > li + li { margin-block-start: 12px; }
+.art-pix-list--compact > li + li { margin-block-start: 4px; }
+.art-pix-list > li > .art-pix-list { margin-block-start: 8px; }

@@ -1,0 +1,13 @@
+.art-pix-icon-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.art-pix-icon-group--horizontal { flex-direction: row; }
+.art-pix-icon-group--vertical { flex-direction: column; align-items: flex-start; }
+.art-pix-icon-group--small { gap: 0.5rem; }
+.art-pix-icon-group--medium { gap: 0.75rem; }
+.art-pix-icon-group--large { gap: 1rem; }
+.art-pix-icon-group--wrap { flex-wrap: wrap; }

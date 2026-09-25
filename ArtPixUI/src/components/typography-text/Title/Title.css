@@ -1,0 +1,16 @@
+.art-pix-title {
+  margin: 0;
+  color: var(--art-pix-color-text);
+  font-family: var(--art-pix-font-mono);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.art-pix-title--1 { font-size: clamp(2rem, 4vw, 3rem); }
+.art-pix-title--2 { font-size: clamp(1.875rem, 3vw, 2.25rem); }
+.art-pix-title--3 { font-size: 1.75rem; }
+.art-pix-title--4 { font-size: 1.5rem; }
+.art-pix-title--5 { font-size: 1.25rem; }
+.art-pix-title--6 { font-size: 1rem; }

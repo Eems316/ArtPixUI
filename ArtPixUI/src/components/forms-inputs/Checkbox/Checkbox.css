@@ -1,0 +1,42 @@
+.art-pix-checkbox {
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-grid;
+  place-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin: 0;
+  vertical-align: middle;
+  border: 2px solid var(--art-pix-color-border);
+  border-radius: 6px;
+  background: var(--art-pix-color-parchment);
+  color: var(--art-pix-color-on-primary);
+  box-shadow: 0 3px 0 var(--art-pix-color-border), inset 2px 2px 0 var(--art-pix-color-highlight);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.art-pix-checkbox::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  visibility: hidden;
+  clip-path: polygon(0 43%, 21% 43%, 21% 64%, 43% 64%, 43% 43%, 64% 43%, 64% 21%, 79% 21%, 79% 0, 100% 0, 100% 36%, 79% 36%, 79% 57%, 57% 57%, 57% 79%, 36% 79%, 36% 100%, 15% 100%, 15% 79%, 0 79%);
+}
+.art-pix-checkbox:checked,
+.art-pix-checkbox:indeterminate { background: var(--art-pix-color-primary); box-shadow: 0 3px 0 var(--art-pix-color-border); }
+.art-pix-checkbox:checked::before,
+.art-pix-checkbox:indeterminate::before { visibility: visible; }
+.art-pix-checkbox:indeterminate::before { clip-path: none; height: 4px; }
+.art-pix-checkbox:focus-visible { outline: 3px solid var(--art-pix-color-focus); outline-offset: 5px; }
+.art-pix-checkbox:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--art-pix-color-border); }
+.art-pix-checkbox:disabled { opacity: 0.6; cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) {
+  .art-pix-checkbox { transition: none; }
+  .art-pix-checkbox:active:not(:disabled) { transform: none; }
+}
+@media (forced-colors: active) {
+  .art-pix-checkbox { appearance: auto; box-shadow: none; }
+  .art-pix-checkbox::before { display: none; }
+}

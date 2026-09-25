@@ -1,0 +1,4 @@
+.art-pix-button--secondary {
+  background: var(--art-pix-color-surface);
+  color: var(--art-pix-color-text);
+}

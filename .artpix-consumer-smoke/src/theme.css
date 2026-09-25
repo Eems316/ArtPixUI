@@ -1,0 +1,6 @@
+:root {
+  --art-pix-color-primary: #7c287f;
+}
+
+body { margin: 32px; font-family: system-ui, sans-serif; background: #f6f2e6; }
+form { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }

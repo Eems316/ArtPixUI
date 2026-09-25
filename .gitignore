@@ -1,0 +1,19 @@
+# Shared rules for the library and consumer smoke test
+node_modules/
+dist/
+dist-ssr/
+*.tgz
+*.tsbuildinfo
+*.log
+*.local
+
+# Local environment settings (keep example templates)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Operating system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,18 @@
+.art-pix-basic-card {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  border: 2px solid var(--art-pix-color-border);
+  border-radius: var(--art-pix-radius-card);
+  background-color: var(--art-pix-color-surface);
+  background-image: radial-gradient(var(--art-pix-color-grain) 0.65px, transparent 0.65px);
+  background-size: 6px 6px;
+  color: var(--art-pix-color-text);
+  box-shadow: 0 4px 0 var(--art-pix-color-border), inset 3px 3px 0 var(--art-pix-color-highlight), inset -3px -3px 0 var(--art-pix-color-bevel);
+  font-family: var(--art-pix-font-mono);
+  overflow-wrap: anywhere;
+}
+
+.art-pix-basic-card--small { padding: 1rem; }
+.art-pix-basic-card--medium { padding: 1.5rem; }
+.art-pix-basic-card--large { padding: 2rem; }

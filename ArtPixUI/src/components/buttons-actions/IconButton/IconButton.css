@@ -1,0 +1,23 @@
+.art-pix-icon-button {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: var(--art-pix-color-accent);
+  color: var(--art-pix-color-text);
+}
+
+.art-pix-icon-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  line-height: 1;
+}
+
+.art-pix-icon-button__icon > svg,
+.art-pix-icon-button__icon > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

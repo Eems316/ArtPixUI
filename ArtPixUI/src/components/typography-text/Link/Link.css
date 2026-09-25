@@ -1,0 +1,25 @@
+.art-pix-link {
+  color: var(--art-pix-color-primary);
+  font-family: var(--art-pix-font-mono);
+  font-weight: 700;
+  line-height: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: auto;
+  overflow-wrap: anywhere;
+  transition: color 140ms ease;
+}
+
+.art-pix-link:hover { color: var(--art-pix-color-text); }
+
+.art-pix-link:focus-visible {
+  outline: 3px solid var(--art-pix-color-focus);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .art-pix-link { transition: none; }
+}

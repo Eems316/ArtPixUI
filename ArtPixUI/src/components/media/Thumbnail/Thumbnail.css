@@ -1,0 +1,3 @@
+.art-pix-thumbnail { flex-shrink: 0; border-radius: var(--art-pix-radius-action); }
+.art-pix-thumbnail.art-pix-placeholder-image { padding: 6px; gap: 4px; font-size: 0.625rem; line-height: 1.2; }
+.art-pix-thumbnail.art-pix-placeholder-image > .art-pix-icon { width: 24px; height: 24px; }

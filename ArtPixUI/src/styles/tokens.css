@@ -1,0 +1,17 @@
+:where(:root) {
+  --art-pix-color-primary: #247b3b;
+  --art-pix-color-on-primary: #fffbea;
+  --art-pix-color-surface: #fff9e5;
+  --art-pix-color-text: #2c3025;
+  --art-pix-color-border: #2c3025;
+  --art-pix-color-focus: #247b3b;
+  --art-pix-color-accent: #f3ad38;
+  --art-pix-color-parchment: #f3e8c5;
+  --art-pix-color-muted: #726448;
+  --art-pix-color-bevel: #c6b888;
+  --art-pix-color-highlight: #fffef4;
+  --art-pix-color-grain: #80632614;
+  --art-pix-font-mono: "Courier New", Courier, monospace;
+  --art-pix-radius-action: 10px;
+  --art-pix-radius-card: 16px;
+}

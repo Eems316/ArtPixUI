@@ -1,0 +1,536 @@
+import { useState } from "react";
+import { Button, ContactCard, IconButton, Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, ToggleSwitch, Slider, FileUpload, PlaceholderImage, Image, Thumbnail, Avatar } from "../index.js";
+import avatar from "./avatar.svg";
+import { AvatarGroup, Logo, ImageWithOverlay, List } from "../index.js";
+import logo from "./logo.svg";
+
+function PixelMark({ kind = "spark" }: { kind?: "spark" | "arrow" | "heart" | "plus" | "check" }) {
+  const paths = {
+    spark: "M7 0h2v5h2v2h5v2h-5v2H9v5H7v-5H5V9H0V7h5V5h2z",
+    arrow: "M8 2h2v2h2v2h2v4h-2v2h-2v2H8v-4H1V6h7zm2 4v4h2V6z",
+    heart: "M2 2h4v2h4V2h4v2h2v6h-2v2h-2v2h-2v2H6v-2H4v-2H2v-2H0V4h2z",
+    plus: "M6 1h4v5h5v4h-5v5H6v-5H1V6h5z",
+    check: "M12 2h3v3h-3v3H9v3H6v3H3v-3H0V8h3v3h3V8h3V5h3z",
+  };
+  return <svg viewBox="0 0 16 16" fill="currentColor" shapeRendering="crispEdges" aria-hidden="true"><path d={paths[kind]} /></svg>;
+}
+
+export function App() {
+  const [count, setCount] = useState(0);
+  const [saved, setSaved] = useState(false);
+  const [heroName, setHeroName] = useState("");
+  const [story, setStory] = useState("");
+  const [supplies, setSupplies] = useState([true, false]);
+  const [route, setRoute] = useState("forest");
+  const [questAlerts, setQuestAlerts] = useState(false);
+  const [volume, setVolume] = useState(40);
+  const [selectedFiles, setSelectedFiles] = useState(0);
+  const [imageRecovered, setImageRecovered] = useState(false);
+  const [avatarRecovered, setAvatarRecovered] = useState(false);
+
+  return (
+    <div className="playground">
+      <header className="playground-header">
+        <a href="#" className="playground-brand"><span><PixelMark /></span>ArtPix<span className="playground-brand-ui">UI</span></a>
+        <span className="playground-header-note">A LITTLE PIXEL. A LITTLE PRESS.</span>
+        <span className="playground-version">VOL. 001 <span aria-hidden="true">↗</span></span>
+      </header>
+      <main className="playground-main">
+        <section className="playground-intro" aria-labelledby="playground-title">
+          <div>
+            <p className="playground-eyebrow"><span className="playground-status-dot" /> THE COMPONENT WORKSHOP</p>
+            <h1 id="playground-title">Small details.<br /><span>A little character.</span></h1>
+          </div>
+          <div className="playground-intro-aside">
+            <p>Parchment, pixels, and a satisfying press.<br />Familiar pieces with a playful second life.</p>
+            <div className="playground-swatches" aria-label="Parchment, green, amber, and ink palette">
+              <span /><span /><span /><span /><span className="playground-palette-label">SPRITE × SURFACE</span>
+            </div>
+          </div>
+        </section>
+        <div className="playground-section-label"><span>THE COMPONENT COLLECTION</span><span>BUILT TO BE TOUCHED</span></div>
+        <div className="playground-exhibits">
+          <section className="playground-exhibit playground-exhibit--contact" id="contact-demo" aria-labelledby="contact-heading">
+            <div className="playground-exhibit-heading"><span className="playground-number">01</span><h2 id="contact-heading">A familiar face</h2><span className="playground-kind">CONTACT CARD</span></div>
+            <div className="playground-contact-stage">
+              <span className="playground-stage-note">GOOD PEOPLE. ONE CLICK AWAY.</span>
+              <ContactCard title="Creative collaborator" name="Mira Chen" phone="+1 (415) 555-0142" email="mira@example.com" data-testid="contact-primary">
+                <div className="playground-contact-note"><span className="playground-status-dot" /> Open for a new adventure</div>
+                <Button link="mailto:mira@example.com">Say hello <PixelMark kind="arrow" /></Button>
+              </ContactCard>
+              <p className="playground-gesture">Hover to peek. Click to keep.</p>
+              <div className="playground-contact-alt">
+                <span className="playground-stage-note">WITH YOUR OWN IMAGE</span>
+                <ContactCard title="Design engineer" name="Rory Brooks" img={avatar} imgAlt="Pixel portrait of Rory" phone="+1 (212) 555-0198" email="rory@example.com" />
+              </div>
+            </div>
+            <div className="playground-exhibit-footer"><span>A small introduction, with more underneath.</span><span aria-hidden="true">↗</span></div>
+          </section>
+          <div className="playground-actions-column">
+            <section className="playground-exhibit" aria-labelledby="button-heading">
+              <div className="playground-exhibit-heading"><span className="playground-number">02</span><h2 id="button-heading">Make a move</h2><span className="playground-kind">BUTTON</span></div>
+              <div className="playground-button-stage">
+                <Button link="#contact-demo">Start a conversation <PixelMark kind="arrow" /></Button>
+                <div className="playground-button-row">
+                  <Button variant="secondary" onClick={() => setCount(count + 1)}><PixelMark kind="plus" /> Add to party</Button>
+                  <Button disabled>Unavailable</Button>
+                </div>
+                <p className="playground-feedback" role="status">{count ? `${count} ${count === 1 ? "friend" : "friends"} added to the party.` : "A little lift. A lovely click."}</p>
+              </div>
+              <div className="playground-exhibit-footer"><span>Go somewhere. Do something.</span><span aria-hidden="true">↗</span></div>
+            </section>
+            <section className="playground-exhibit" aria-labelledby="icon-heading">
+              <div className="playground-exhibit-heading"><span className="playground-number">03</span><h2 id="icon-heading">Less is plenty</h2><span className="playground-kind">ICON BUTTON</span></div>
+              <div className="playground-icon-stage">
+                <div className="playground-icon-example"><IconButton link="#contact-demo" aria-label="View contact"><PixelMark kind="arrow" /></IconButton><span>EXPLORE</span></div>
+                <div className="playground-icon-example"><IconButton aria-label={saved ? "Unsave contact" : "Save contact"} aria-pressed={saved} onClick={() => setSaved(!saved)}><PixelMark kind={saved ? "check" : "heart"} /></IconButton><span role="status">{saved ? "SAVED" : "SAVE"}</span></div>
+                <div className="playground-icon-example"><IconButton aria-label="Add contact (unavailable)" disabled><PixelMark kind="plus" /></IconButton><span>DISABLED</span></div>
+              </div>
+              <div className="playground-exhibit-footer"><span>Small footprint. Full of personality.</span><span aria-hidden="true">↗</span></div>
+            </section>
+          </div>
+        </div>
+        <section className="playground-exhibit playground-label-exhibit" id="label-demo" aria-labelledby="label-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">04</span><h2 id="label-heading">Give it a name</h2><span className="playground-kind">LABEL · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <div className="playground-label-example">
+              <Label htmlFor="demo-hero-name" required>Hero name</Label>
+              <input id="demo-hero-name" className="playground-label-input" required placeholder="Enter your name…" aria-describedby="demo-hero-hint" />
+              <p id="demo-hero-hint">Click the label to focus the field. * Required.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="demo-guild-name">Guild name</Label>
+              <input id="demo-guild-name" className="playground-label-input" placeholder="A place to belong…" aria-describedby="demo-guild-hint" />
+              <p id="demo-guild-hint">An optional field, without the marker.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label className="playground-label-checkbox"><input type="checkbox" /> Remember this adventurer</Label>
+              <p>A nested native control. Click the text to toggle it.</p>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Quiet type. Clear purpose. Native inputs shown only to demonstrate the labels.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-title-exhibit" id="title-demo" aria-labelledby="title-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">05</span><h2 id="title-heading">A few bold words</h2><span className="playground-kind">TITLE · AWAITING REVIEW</span></div>
+          <div className="playground-title-stage">
+            <div className="playground-title-example"><span>H1</span><Title level={1}>A new adventure</Title></div>
+            <div className="playground-title-example"><span>H2</span><Title>Make yourself at home</Title></div>
+            <div className="playground-title-example"><span>H3</span><Title level={3}>Meet your next collaborator</Title></div>
+            <div className="playground-title-example"><span>H4</span><Title level={4}>Good things start small</Title></div>
+            <div className="playground-title-example"><span>H5</span><Title level={5}>The details matter</Title></div>
+            <div className="playground-title-example"><span>H6</span><Title level={6}>One little step at a time</Title></div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Six semantic levels. Dark ink, bold type, no animation. Defaults to H2.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-link-exhibit" id="link-demo" aria-labelledby="link-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">06</span><h2 id="link-heading">Follow a little curiosity</h2><span className="playground-kind">LINK · AWAITING REVIEW</span></div>
+          <div className="playground-link-stage">
+            <div className="playground-link-example"><span className="playground-link-caption">SAME TAB</span><Link href="#contact-demo">Meet the collaborators</Link><p>A native link to the contact cards.</p></div>
+            <div className="playground-link-example"><span className="playground-link-caption">NEW TAB</span><Link href="/#title-demo" target="_blank">Explore the headings (new tab)</Link><p>Opens separately with safe default link attributes.</p></div>
+            <div className="playground-link-example"><span className="playground-link-caption">IN CONTEXT</span><p>Every adventure begins somewhere. <Link href="#link-note">Read the field notes</Link> before you set out.</p></div>
+          </div>
+          <div className="playground-exhibit-footer" id="link-note"><span>Field notes: hover for dark ink; use Tab to see the focus outline and Enter to follow a link.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-code-exhibit" id="code-demo" aria-labelledby="code-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">07</span><h2 id="code-heading">Notes from the workshop</h2><span className="playground-kind">CODE BLOCK · AWAITING REVIEW</span></div>
+          <div className="playground-code-stage">
+            <CodeBlock language="tsx" aria-label="Scrollable code example">{'<ContactCard\n  title="Creative collaborator"\n  name="Mira Chen"\n  email="mira@example.com"\n>\n  <Button link="mailto:mira@example.com">Say hello to your next creative collaborator</Button>\n</ContactCard>'}</CodeBlock>
+            <CodeBlock wrap aria-label="Wrapped code example">{'// Optional wrapping; no language heading\nconst message = "Good things begin with a little curiosity, a few kind words, and room for one more adventurer.";\n\nconsole.log(message);'}</CodeBlock>
+          </div>
+          <div className="playground-exhibit-footer"><span>Plain text, preserved spacing. Tab into the first example and use arrow keys to scroll.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="icon-demo" aria-labelledby="icon-demo-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">08</span><h2 id="icon-demo-heading">A little pixel language</h2><span className="playground-kind">ICON · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            {(["small", "medium", "large"] as const).map(size => (
+              <div className="playground-icon-demo-example" key={size}>
+                <Icon size={size}><path d="M7 0h2v5h2v2h5v2h-5v2H9v5H7v-5H5V9H0V7h5V5h2z" /></Icon>
+                <span>{size} · {size === "small" ? 16 : size === "medium" ? 24 : 32}px</span>
+              </div>
+            ))}
+            <div className="playground-icon-demo-example">
+              <Icon size="large" color="var(--art-pix-color-primary)" aria-label="Favorite"><path d="M2 2h4v2h4V2h4v2h2v6h-2v2h-2v2h-2v2H6v-2H4v-2H2v-2H0V4h2z" /></Icon>
+              <span>Meaningful · Favorite</span>
+            </div>
+            <div className="playground-icon-demo-example">
+              <IconButton link="#contact-demo" aria-label="View contact"><Icon><path d="M8 2h2v2h2v2h2v4h-2v2h-2v2H8v-4H1V6h7zm2 4v4h2V6z" /></Icon></IconButton>
+              <span>Decorative inside a labeled action</span>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Inherits your text color. SVG shapes through children. No animation or added dependencies.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="icon-group-demo" aria-labelledby="icon-group-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">09</span><h2 id="icon-group-heading">Better together</h2><span className="playground-kind">ICON GROUP · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            <div className="playground-icon-demo-example">
+              <IconGroup aria-label="Workshop symbols" spacing="small">
+                {["M6 1h4v5h5v4h-5v5H6v-5H1V6h5z", "M7 0h2v5h2v2h5v2h-5v2H9v5H7v-5H5V9H0V7h5V5h2z"].map((path, index) => <Icon key={path} aria-label={index === 0 ? "Add" : "Spark"}><path d={path} /></Icon>)}
+              </IconGroup>
+              <span>Horizontal · small spacing</span>
+            </div>
+            <div className="playground-icon-demo-example">
+              <IconGroup direction="vertical" spacing="large" aria-label="Explore components">
+                <IconButton link="#contact-demo" aria-label="View contact"><PixelMark kind="arrow" /></IconButton>
+                <IconButton link="#icon-demo" aria-label="View icons"><PixelMark /></IconButton>
+              </IconGroup>
+              <span>Vertical · large spacing</span>
+            </div>
+            <div className="playground-icon-demo-example">
+              <IconGroup wrap aria-label="Party actions" style={{ width: 140 }}>
+                <IconButton aria-label="Add friend" onClick={() => setCount(count + 1)}><PixelMark kind="plus" /></IconButton>
+                <IconButton aria-label={saved ? "Unsave friend" : "Save friend"} aria-pressed={saved} onClick={() => setSaved(!saved)}><PixelMark kind={saved ? "check" : "heart"} /></IconButton>
+                <IconButton link="#contact-demo" aria-label="Contact friend"><PixelMark kind="arrow" /></IconButton>
+                <IconButton disabled aria-label="Invite friend (unavailable)"><PixelMark /></IconButton>
+              </IconGroup>
+              <span>Wrapping · medium spacing</span>
+              <span role="status">{count} friends · {saved ? "Saved" : "Not saved"}</span>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Layout only. Tab visits each enabled action; the group adds no keyboard stop.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="basic-card-demo" aria-labelledby="basic-card-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">10</span><h2 id="basic-card-heading">Room for your ideas</h2><span className="playground-kind">BASIC CARD · AWAITING REVIEW</span></div>
+          <div className="playground-basic-card-stage">
+            <BasicCard padding="small" className="playground-basic-card-content">
+              <span className="playground-stage-note">SMALL · 16PX</span>
+              <Title level={3}>A little note</Title>
+              <p>A quiet surface for whatever you want to share.</p>
+            </BasicCard>
+            <BasicCard className="playground-basic-card-content">
+              <span className="playground-stage-note">MEDIUM · 24PX · DEFAULT</span>
+              <Title level={3}>Start something good</Title>
+              <p>Compose a heading, some words, and an action. The card stays still; the button does the work.</p>
+              <Button link="#contact-demo">Meet a collaborator <PixelMark kind="arrow" /></Button>
+            </BasicCard>
+            <BasicCard padding="large" className="playground-basic-card-content">
+              <span className="playground-stage-note">LARGE · 32PX</span>
+              <Title level={3}>A little breathing room</Title>
+              <p>Generous space, the same parchment texture, and a softly beveled edge.</p>
+              <Link href="#code-demo">Explore the code examples</Link>
+            </BasicCard>
+          </div>
+          <div className="playground-exhibit-footer"><span>Content through children. No built-in heading or actions, and no hover animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="text-input-demo" aria-labelledby="text-input-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">11</span><h2 id="text-input-heading">Your story starts here</h2><span className="playground-kind">TEXT INPUT · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <div className="playground-label-example">
+              <Label htmlFor="text-hero" required>Adventurer name</Label>
+              <TextInput id="text-hero" name="hero" required value={heroName} onChange={event => setHeroName(event.target.value)} placeholder="Enter your name…" aria-describedby="text-hero-hint" />
+              <p id="text-hero-hint">Controlled value: {heroName || "(empty)"}. Required; steady caret where supported.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="text-guild">Your guild</Label>
+              <TextInput id="text-guild" name="guild" defaultValue="Mossglen makers" aria-describedby="text-guild-hint" />
+              <p id="text-guild-hint">Uncontrolled: native editing, selection, and undo.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="text-email">Contact email</Label>
+              <TextInput id="text-email" type="email" defaultValue="not-an-email" aria-invalid="true" aria-describedby="text-email-error" />
+              <p id="text-email-error">Example error: enter an email address such as hero@example.com. This example keeps its invalid state for review.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="text-readonly">Member code</Label>
+              <TextInput id="text-readonly" readOnly defaultValue="ART-001" aria-describedby="text-readonly-hint" />
+              <p id="text-readonly-hint">Read-only: focus and select to copy.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="text-disabled">Invite code</Label>
+              <TextInput id="text-disabled" disabled defaultValue="Unavailable" />
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native input behavior. Label and descriptions are composed separately. Unsupported browsers retain their native caret.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="text-area-demo" aria-labelledby="text-area-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">12</span><h2 id="text-area-heading">A little more to say</h2><span className="playground-kind">TEXT AREA · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <div className="playground-label-example">
+              <Label htmlFor="area-story" required>Your adventure</Label>
+              <TextArea id="area-story" name="story" required value={story} onChange={event => setStory(event.target.value)} placeholder="Every adventure starts somewhere…" aria-describedby="area-story-hint" />
+              <p id="area-story-hint">{story.length} characters. Resizable by default: drag the bottom-right corner. Width stays within its container.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="area-fixed">Field notes</Label>
+              <TextArea id="area-fixed" resizable={false} rows={4} defaultValue={'Meet by the old oak.\nBring a little curiosity.'} aria-describedby="area-fixed-hint" />
+              <p id="area-fixed-hint">Resizable is false. Native multiline editing remains available; overflowing text scrolls.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="area-invalid">Missing description</Label>
+              <TextArea id="area-invalid" rows={3} aria-invalid="true" aria-describedby="area-error" />
+              <p id="area-error">Example error: add a short description. Invalid styling stays on for review.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="area-readonly">Archived note</Label>
+              <TextArea id="area-readonly" readOnly rows={3} defaultValue={'A good day in Mossglen.\nThree new friends.'} />
+            </div>
+            <div className="playground-label-example">
+              <Label htmlFor="area-disabled">Unavailable notes</Label>
+              <TextArea id="area-disabled" disabled resizable={false} rows={3} defaultValue="This notebook is locked." />
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native multiline editing and resize handle. Steady caret where supported; native caret otherwise.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="checkbox-demo" aria-labelledby="checkbox-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">13</span><h2 id="checkbox-heading">Pack a little possibility</h2><span className="playground-kind">CHECKBOX · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <div className="playground-label-example">
+              <Label className="playground-checkbox-label"><Checkbox checked={supplies.every(Boolean)} indeterminate={supplies.some(Boolean) && !supplies.every(Boolean)} onChange={event => setSupplies([event.target.checked, event.target.checked])} /> All supplies</Label>
+              <Label className="playground-checkbox-label"><Checkbox checked={supplies[0]} onChange={event => setSupplies([event.target.checked, supplies[1]])} /> Notebook</Label>
+              <Label className="playground-checkbox-label"><Checkbox checked={supplies[1]} onChange={event => setSupplies([supplies[0], event.target.checked])} /> Map</Label>
+              <p>Controlled selection. All supplies shows a dash when only some are selected.</p>
+            </div>
+            <div className="playground-label-example">
+              <div className="playground-checkbox-label"><Checkbox id="checkbox-reminders" defaultChecked name="reminders" /><Label htmlFor="checkbox-reminders">Send reminders</Label></div>
+              <Label className="playground-checkbox-label" required><Checkbox required name="agreement" /> Accept quest rules</Label>
+              <p>Uncontrolled and native required examples. Click the text or press Space.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label className="playground-checkbox-label"><Checkbox disabled /> Unavailable</Label>
+              <Label className="playground-checkbox-label"><Checkbox disabled defaultChecked /> Already assigned</Label>
+              <p>Disabled controls cannot be toggled or reached with Tab.</p>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native checkbox semantics. Pixel check, mixed-state dash, and a little press.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="radio-button-demo" aria-labelledby="radio-button-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">14</span><h2 id="radio-button-heading">Choose your path</h2><span className="playground-kind">RADIO BUTTON · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <fieldset className="playground-radio-fieldset">
+              <legend>Travel route · controlled</legend>
+              <Label className="playground-checkbox-label"><RadioButton name="demo-route" value="forest" checked={route === "forest"} onChange={event => setRoute(event.target.value)} /> Forest trail</Label>
+              <Label className="playground-checkbox-label"><RadioButton name="demo-route" value="mountain" disabled /> Mountain pass (closed)</Label>
+              <Label className="playground-checkbox-label"><RadioButton name="demo-route" value="river" checked={route === "river"} onChange={event => setRoute(event.target.value)} /> River road</Label>
+              <p>Selected: {route}. Arrow keys skip the disabled route.</p>
+            </fieldset>
+            <fieldset className="playground-radio-fieldset">
+              <legend>Departure · uncontrolled</legend>
+              <div className="playground-checkbox-label"><RadioButton id="radio-dawn" name="demo-departure" value="dawn" defaultChecked /><Label htmlFor="radio-dawn">At dawn</Label></div>
+              <div className="playground-checkbox-label"><RadioButton id="radio-noon" name="demo-departure" value="noon" /><Label htmlFor="radio-noon">At noon</Label></div>
+              <p>Only one option with the same name can be selected.</p>
+            </fieldset>
+            <fieldset className="playground-radio-fieldset">
+              <legend>Quest length · required</legend>
+              <Label className="playground-checkbox-label"><RadioButton name="demo-length" value="short" required /> Short quest</Label>
+              <Label className="playground-checkbox-label"><RadioButton name="demo-length" value="long" required /> Long quest</Label>
+              <p>Choose one. Native required validity applies to the group.</p>
+            </fieldset>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native grouping, labels, and arrow-key selection. Tab moves between groups.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="toggle-switch-demo" aria-labelledby="toggle-switch-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">15</span><h2 id="toggle-switch-heading">A little change of setting</h2><span className="playground-kind">TOGGLE SWITCH · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <div className="playground-label-example">
+              <Label className="playground-checkbox-label"><ToggleSwitch checked={questAlerts} onChange={event => setQuestAlerts(event.target.checked)} aria-describedby="switch-alerts-hint" /> Quest alerts</Label>
+              <p id="switch-alerts-hint">Controlled: alerts are {questAlerts ? "on" : "off"}. Click the label or press Space.</p>
+            </div>
+            <div className="playground-label-example">
+              <div className="playground-checkbox-label"><ToggleSwitch id="switch-reminders" name="reminders" defaultChecked /><Label htmlFor="switch-reminders">Daily reminders</Label></div>
+              <p>Uncontrolled, initially on. The thumb slides; the label stays the same.</p>
+            </div>
+            <div className="playground-label-example">
+              <Label className="playground-checkbox-label"><ToggleSwitch disabled /> Unavailable setting</Label>
+              <Label className="playground-checkbox-label"><ToggleSwitch disabled defaultChecked /> Always enabled</Label>
+              <p>Disabled examples: on and off remain distinguishable by thumb position.</p>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native checked state with switch semantics. Reduced motion removes the thumb transition.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="slider-demo" aria-labelledby="slider-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">16</span><h2 id="slider-heading">Find your setting</h2><span className="playground-kind">SLIDER · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <div className="playground-label-example">
+              <Label htmlFor="slider-volume">Music volume</Label>
+              <Slider id="slider-volume" min={0} max={100} step={5} value={volume} onChange={event => setVolume(event.target.valueAsNumber)} aria-valuetext={`${volume} percent`} aria-describedby="slider-volume-hint" />
+              <output htmlFor="slider-volume">{volume}%</output>
+              <p id="slider-volume-hint">Controlled. Drag or use arrow keys; Home/End select the bounds.</p>
+            </div>
+            <form className="playground-label-example">
+              <Label htmlFor="slider-distance">Travel distance</Label>
+              <Slider id="slider-distance" name="distance" min={10} max={50} step={2} defaultValue={26} aria-describedby="slider-distance-hint" />
+              <p id="slider-distance-hint">Uncontrolled: 10–50 in steps of 2. Reset restores 26 and its fill.</p>
+              <Button type="reset" variant="secondary">Reset distance</Button>
+            </form>
+            <div className="playground-label-example">
+              <Label htmlFor="slider-locked">Locked setting</Label>
+              <Slider id="slider-locked" disabled defaultValue={65} />
+              <p>Disabled: unavailable to pointer and keyboard input.</p>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native range behavior. Immediate thumb movement and a subtle pressed shadow.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="file-upload-demo" aria-labelledby="file-upload-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">17</span><h2 id="file-upload-heading">Bring something along</h2><span className="playground-kind">FILE UPLOAD · AWAITING REVIEW</span></div>
+          <div className="playground-label-stage">
+            <div className="playground-label-example">
+              <Label htmlFor="upload-portrait">Portrait image</Label>
+              <FileUpload id="upload-portrait" accept="image/*" aria-describedby="upload-portrait-hint" />
+              <p id="upload-portrait-hint">Choose one image. Files stay local; nothing is uploaded.</p>
+            </div>
+            <form className="playground-label-example" onReset={() => setSelectedFiles(0)}>
+              <Label htmlFor="upload-notes">Adventure notes</Label>
+              <FileUpload id="upload-notes" name="notes" multiple accept=".txt,.md" onChange={event => setSelectedFiles(event.target.files?.length ?? 0)} aria-describedby="upload-notes-hint" />
+              <p id="upload-notes-hint">{selectedFiles} files selected. Text or Markdown; multiple selection supported.</p>
+              <Button type="reset" variant="secondary">Clear selection</Button>
+            </form>
+            <div className="playground-label-example">
+              <Label htmlFor="upload-disabled">Unavailable attachment</Label>
+              <FileUpload id="upload-disabled" disabled />
+              <p>Disabled. Accepted types guide the picker, not security validation.</p>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native file selection and filename feedback. No automatic upload, progress UI, or added dependencies.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="placeholder-image-demo" aria-labelledby="placeholder-image-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">18</span><h2 id="placeholder-image-heading">A space for something good</h2><span className="playground-kind">PLACEHOLDER IMAGE · AWAITING REVIEW</span></div>
+          <div className="playground-basic-card-stage">
+            <div className="playground-label-example">
+              <PlaceholderImage text="Image coming soon" alt="Landscape image coming soon" />
+              <p>Default 16:9 ratio. Visible text with an accessible image description.</p>
+            </div>
+            <div className="playground-label-example">
+              <PlaceholderImage aspectRatio="1 / 1" width={180} alt="Portrait unavailable" />
+              <p>Square, 180px wide, with an icon only.</p>
+            </div>
+            <div className="playground-label-example">
+              <PlaceholderImage width={220} height={120} alt="" />
+              <p>Explicit dimensions. Decorative placeholder, hidden from assistive technology.</p>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>No image loading, animation, or network requests. A reusable fallback surface.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="image-demo" aria-labelledby="image-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">19</span><h2 id="image-heading">A picture with a place</h2><span className="playground-kind">IMAGE · AWAITING REVIEW</span></div>
+          <div className="playground-basic-card-stage">
+            <div className="playground-label-example">
+              <Image src={avatar} alt="Pixel portrait, cropped to a wide frame" aspectRatio="16 / 9" fit="cover" />
+              <p>Cover: fills the frame and crops the image.</p>
+            </div>
+            <div className="playground-label-example">
+              <Image src={avatar} srcSet={`${avatar} 1x`} alt="Complete pixel portrait" width={260} height={180} fit="contain" loading="lazy" />
+              <p>Contain: keeps the whole image visible. Native lazy loading and srcSet.</p>
+            </div>
+            <div className="playground-label-example">
+              <Image alt="Portrait not supplied" fallbackText="No image supplied" aspectRatio="16 / 9" />
+              <p>Missing source: the shared PlaceholderImage.</p>
+            </div>
+            <div className="playground-label-example">
+              <Image src={imageRecovered ? avatar : "data:image/png;base64,broken"} alt="Recoverable pixel portrait" aspectRatio="16 / 9" fallbackText="Image unavailable" />
+              <Button variant="secondary" onClick={() => setImageRecovered(!imageRecovered)}>{imageRecovered ? "Use broken source" : "Restore image"}</Button>
+              <p>A failed source falls back. Changing the source retries loading.</p>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native image loading. No animation or added dependencies.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="thumbnail-demo" aria-labelledby="thumbnail-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">20</span><h2 id="thumbnail-heading">Small pictures, familiar faces</h2><span className="playground-kind">THUMBNAIL · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            {(["small", "medium", "large"] as const).map(size => <div className="playground-icon-demo-example" key={size}>
+              <Thumbnail src={avatar} alt={`Pixel portrait, ${size} thumbnail`} size={size} />
+              <span>{size} · {size === "small" ? 64 : size === "medium" ? 96 : 128}px</span>
+            </div>)}
+            <div className="playground-icon-demo-example"><Thumbnail src={avatar} alt="Uncropped portrait thumbnail" width={128} height={80} fit="contain" /><span>Contain · custom 128×80</span></div>
+            <div className="playground-icon-demo-example"><Thumbnail size="small" alt="Portrait missing" /><span>Missing source</span></div>
+            <div className="playground-icon-demo-example"><Thumbnail src="data:image/png;base64,broken" alt="Portrait unavailable" fallbackText="Unavailable" /><span>Failed source</span></div>
+            <div className="playground-icon-demo-example"><Thumbnail src={avatar} alt="" size="small" /><span>Decorative image</span></div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Built on Image. Shared loading and fallback behavior; no animation or built-in action.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="avatar-demo" aria-labelledby="avatar-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">21</span><h2 id="avatar-heading">A face in the party</h2><span className="playground-kind">AVATAR · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            {(["small", "medium", "large"] as const).map(size => <div className="playground-icon-demo-example" key={size}>
+              <Avatar src={avatar} name="Rory Brooks" size={size} alt={`Rory Brooks, ${size} avatar`} />
+              <span>{size} · {size === "small" ? 32 : size === "medium" ? 48 : 64}px</span>
+            </div>)}
+            <div className="playground-icon-demo-example"><Avatar name="Mira Chen" /><span>Missing image · initials</span></div>
+            <div className="playground-icon-demo-example"><Avatar /><span>No name · pixel person</span></div>
+            <div className="playground-icon-demo-example"><Avatar src={avatar} name="Rory Brooks" alt="" /><span>Decorative</span></div>
+            <div className="playground-icon-demo-example">
+              <Avatar src={avatarRecovered ? avatar : "data:image/png;base64,broken"} name="Alex Taylor" size="large" />
+              <Button variant="secondary" onClick={() => setAvatarRecovered(!avatarRecovered)}>{avatarRecovered ? "Break avatar image" : "Restore avatar image"}</Button>
+              <span>Failed source · initials, then recovery</span>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Portrait, initials, or pixel person. One accessible name; no animation or built-in action.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="avatar-group-demo" aria-labelledby="avatar-group-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">22</span><h2 id="avatar-group-heading">Gather your party</h2><span className="playground-kind">AVATAR GROUP · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            {(["small", "medium", "large"] as const).map(size => <div className="playground-icon-demo-example" key={size}>
+              <AvatarGroup size={size} max={3} aria-label={`${size} party`}>
+                <Avatar src={avatar} name="Rory Brooks" />
+                <Avatar name="Mira Chen" />
+                <Avatar name="Alex Taylor" />
+                <Avatar name="Sam Lee" />
+                <Avatar name="Robin Park" />
+              </AvatarGroup>
+              <span>{size} · three visible, two more</span>
+            </div>)}
+            <div className="playground-icon-demo-example">
+              <AvatarGroup aria-label="Whole party"><Avatar src={avatar} name="Rory Brooks" /><Avatar name="Mira Chen" /><Avatar /></AvatarGroup>
+              <span>No limit · everyone visible</span>
+            </div>
+            <div className="playground-icon-demo-example">
+              <AvatarGroup max={0} aria-label="Count only"><Avatar name="Mira Chen" /><Avatar name="Sam Lee" /></AvatarGroup>
+              <span>Zero visible · count only</span>
+            </div>
+            <div className="playground-icon-demo-example">
+              <AvatarGroup dir="rtl" max={2} aria-label="Right-to-left party"><Avatar src={avatar} name="Rory Brooks" /><Avatar name="Mira Chen" /><Avatar name="Sam Lee" /></AvatarGroup>
+              <span>Right-to-left · one more</span>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Overlapping portraits with an accessible overflow count. No animation or built-in action.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="logo-demo" aria-labelledby="logo-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">23</span><h2 id="logo-heading">Make your mark</h2><span className="playground-kind">LOGO · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            <div className="playground-icon-demo-example"><Logo src={logo} alt="ArtPixUI sample brand" width={216} /><span>Natural proportions · 216px wide</span></div>
+            <div className="playground-icon-demo-example"><Logo src={logo} alt="ArtPixUI small sample brand" width={144} /><span>Scaled · 144px wide</span></div>
+            <div className="playground-icon-demo-example"><Logo src={logo} alt="ArtPixUI" link="#logo-heading" linkLabel="ArtPixUI logo section" width={216} /><span>Linked · keyboard focus outline</span></div>
+            <div className="playground-icon-demo-example"><Logo src={logo} alt="" width={180} height={80} /><span>Decorative · contained in 180×80</span></div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Sample artwork only; supply your own brand image. No animation or forced image border.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="image-with-overlay-demo" aria-labelledby="image-with-overlay-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">24</span><h2 id="image-with-overlay-heading">A story in the frame</h2><span className="playground-kind">IMAGE WITH OVERLAY · AWAITING REVIEW</span></div>
+          <div className="playground-basic-card-stage">
+            {(["top", "center", "bottom"] as const).map(position => <ImageWithOverlay key={position} src={avatar} alt="" position={position} aspectRatio="1 / 1">
+              <strong>{position.toUpperCase()} · The next adventure</strong>
+              <span>Pixel portraits, familiar faces, and stories worth sharing.</span>
+              <Button link="#image-with-overlay-heading">Explore</Button>
+            </ImageWithOverlay>)}
+            <ImageWithOverlay src="data:image/png;base64,broken" alt="Unavailable party portrait" aspectRatio="1 / 1">
+              <strong>The story stays visible</strong>
+              <span>A failed image uses the shared fallback. Content and actions remain available.</span>
+            </ImageWithOverlay>
+            <ImageWithOverlay alt="" aspectRatio="16 / 9">
+              <strong>Room for a longer story</strong>
+              <span>Missing images keep the same frame. Content participates in normal layout, so this panel can grow when words wrap on a narrow screen. Supply any children, including your own headings, descriptions, and buttons. The wrapper itself is not clickable.</span>
+            </ImageWithOverlay>
+          </div>
+          <div className="playground-exhibit-footer"><span>Top, center, or bottom content. Shared image fallback; no animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="list-demo" aria-labelledby="list-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">25</span><h2 id="list-heading">Every little detail</h2><span className="playground-kind">LIST · AWAITING REVIEW</span></div>
+          <div className="playground-basic-card-stage">
+            <div className="playground-basic-card-content"><strong>Pack for the journey</strong>
+              <List aria-label="Supplies"><li>A map of the forest</li><li>A notebook for discoveries and longer notes that wrap naturally</li><li><Link href="#list-heading">Read the packing guide</Link></li></List>
+            </div>
+            <div className="playground-basic-card-content"><strong>Continue your quest</strong>
+              <List ordered start={3} aria-label="Quest steps"><li>Meet your party</li><li>Choose your trail</li><li>Begin the adventure</li></List>
+            </div>
+            <div className="playground-basic-card-content"><strong>Compact inventory</strong>
+              <List compact aria-label="Inventory"><li>Compass</li><li>Lantern</li><li>Journal<List compact aria-label="Journal sections"><li>Field notes</li><li>Sketches</li></List></li></List>
+            </div>
+            <div className="playground-basic-card-content"><strong>Reverse order · RTL layout</strong>
+              <List ordered reversed start={3} compact dir="rtl" aria-label="Countdown"><li>Prepare</li><li>Ready</li><li>Go</li></List>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native lists and list items. Regular or compact spacing; no animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
+      </main>
+    </div>
+  );
+}

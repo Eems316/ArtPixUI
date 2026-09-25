@@ -1,0 +1,11 @@
+.art-pix-image {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  border: 2px solid var(--art-pix-color-border);
+  border-radius: var(--art-pix-radius-card);
+  background: var(--art-pix-color-parchment);
+}
+img.art-pix-image { display: block; }
+img.art-pix-image:not([width]) { width: 100%; }
+img.art-pix-image:not([height]) { height: auto; }

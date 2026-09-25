@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 48" fill="none">
+  <rect x="2" y="2" width="44" height="44" rx="10" fill="#f3e8c5" stroke="#2c3025" stroke-width="2"/>
+  <path d="M21 8h6v10h10v6H27v10h-6V24H11v-6h10z" fill="#247b3b" shape-rendering="crispEdges"/>
+  <path d="M33 32h6v6h-6z" fill="#f3ad38"/>
+  <text x="58" y="31" fill="#2c3025" font-family="Courier New,monospace" font-size="26" font-weight="700">ArtPixUI</text>
+</svg>

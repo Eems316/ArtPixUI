@@ -1,0 +1,141 @@
+.art-pix-contact-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 380px;
+  border: 2px solid var(--art-pix-color-border);
+  border-radius: var(--art-pix-radius-card);
+  background-color: var(--art-pix-color-surface);
+  background-image: radial-gradient(var(--art-pix-color-grain) 0.65px, transparent 0.65px);
+  background-size: 6px 6px;
+  color: var(--art-pix-color-text);
+  box-shadow: 0 6px 0 var(--art-pix-color-border), inset 3px 3px 0 var(--art-pix-color-highlight), inset -3px -3px 0 var(--art-pix-color-bevel);
+  font-family: var(--art-pix-font-mono);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.art-pix-contact-card[data-expanded="true"] {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--art-pix-color-border), inset 3px 3px 0 var(--art-pix-color-highlight), inset -3px -3px 0 var(--art-pix-color-bevel);
+}
+
+.art-pix-contact-card__summary {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 22px 24px 24px;
+  border: 0;
+  border-radius: calc(var(--art-pix-radius-card) - 2px);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.art-pix-contact-card__summary:focus-visible,
+.art-pix-contact-card__contact-link:focus-visible {
+  outline: 3px solid var(--art-pix-color-focus);
+  outline-offset: 5px;
+}
+
+.art-pix-contact-card__topline,
+.art-pix-contact-card__identity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.art-pix-contact-card__topline { margin-bottom: 20px; }
+.art-pix-contact-card__title {
+  color: var(--art-pix-color-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.art-pix-contact-card__name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.05em;
+  overflow-wrap: anywhere;
+}
+
+.art-pix-contact-card__avatar {
+  display: inline-flex;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--art-pix-color-border);
+  border-radius: 50%;
+  background: var(--art-pix-color-parchment);
+  box-shadow: 0 2px 0 var(--art-pix-color-border);
+}
+
+.art-pix-contact-card__avatar > img { width: 100%; height: 100%; object-fit: cover; }
+.art-pix-contact-card__avatar > svg { width: 36px; height: 36px; }
+.art-pix-contact-card__details {
+  padding: 0 24px 24px;
+  animation: art-pix-contact-reveal 180ms ease-out;
+}
+
+.art-pix-contact-card__contact {
+  display: grid;
+  gap: 18px;
+  padding-top: 22px;
+  border-top: 2px solid var(--art-pix-color-bevel);
+  font-style: normal;
+}
+
+.art-pix-contact-card__contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 3px;
+  color: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.art-pix-contact-card__contact-link:hover { color: var(--art-pix-color-primary); text-decoration: underline; }
+.art-pix-contact-card__contact-icon {
+  box-sizing: border-box;
+  display: inline-grid;
+  flex: 0 0 32px;
+  place-items: center;
+  height: 32px;
+  border: 1px solid var(--art-pix-color-bevel);
+  border-radius: 6px;
+  background: var(--art-pix-color-parchment);
+  color: var(--art-pix-color-primary);
+}
+.art-pix-contact-card__contact-icon svg { width: 16px; height: 16px; }
+.art-pix-contact-card__field {
+  display: block;
+  color: var(--art-pix-color-muted);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.art-pix-contact-card__extra { margin-top: 22px; font-size: 0.8125rem; line-height: 1.6; }
+.art-pix-contact-card__extra:first-child { margin-top: 0; }
+
+@keyframes art-pix-contact-reveal {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .art-pix-contact-card { transition: none; }
+  .art-pix-contact-card__details { animation: none; }
+}
