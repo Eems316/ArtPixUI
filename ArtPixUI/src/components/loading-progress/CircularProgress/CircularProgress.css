@@ -1,0 +1,19 @@
+.art-pix-circular-progress { display: inline-flex; flex-direction: column; align-items: center; gap: 10px; max-width: 100%; min-width: 0; color: var(--art-pix-color-muted); font: 400 0.875rem/1.5 var(--art-pix-font-mono); vertical-align: middle; }
+.art-pix-circular-progress__dial { position: relative; width: 96px; max-width: 100%; aspect-ratio: 1; flex-shrink: 0; }
+.art-pix-circular-progress--small .art-pix-circular-progress__dial { width: 64px; }
+.art-pix-circular-progress--large .art-pix-circular-progress__dial { width: 128px; }
+.art-pix-circular-progress__dial svg { display: block; width: 100%; height: 100%; fill: none; }
+.art-pix-circular-progress__outline { stroke: var(--art-pix-color-border); stroke-width: 16; }
+.art-pix-circular-progress__track { stroke: var(--art-pix-color-parchment); stroke-width: 12; }
+.art-pix-circular-progress__fill { stroke: var(--art-pix-color-primary); stroke-width: 12; stroke-linecap: butt; transition: stroke-dashoffset 180ms ease-out; }
+.art-pix-circular-progress__percentage { position: absolute; inset: 0; display: grid; place-items: center; color: var(--art-pix-color-text); font-weight: 700; font-variant-numeric: tabular-nums; }
+.art-pix-circular-progress--small .art-pix-circular-progress__percentage { font-size: 0.75rem; }
+.art-pix-circular-progress--large .art-pix-circular-progress__percentage { font-size: 1.125rem; }
+.art-pix-circular-progress__label { max-width: 100%; text-align: center; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .art-pix-circular-progress__fill { transition: none; } }
+@media (forced-colors: active) {
+  .art-pix-circular-progress__outline { stroke: CanvasText; }
+  .art-pix-circular-progress__track { stroke: Canvas; }
+  .art-pix-circular-progress__fill { stroke: Highlight; }
+  .art-pix-circular-progress__dial svg { forced-color-adjust: none; }
+}

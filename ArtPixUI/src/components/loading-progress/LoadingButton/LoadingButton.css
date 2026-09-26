@@ -1,0 +1,5 @@
+.art-pix-loading-button[aria-busy="true"] { cursor: progress; }
+.art-pix-loading-button__text { min-width: 0; overflow-wrap: anywhere; }
+.art-pix-loading-button .art-pix-loading-button__spinner { flex-shrink: 0; gap: 0; color: inherit; }
+.art-pix-loading-button__spinner .art-pix-spinner-status__spinner { color: inherit; }
+.art-pix-loading-button__spinner .art-pix-spinner-status__label { display: none; }

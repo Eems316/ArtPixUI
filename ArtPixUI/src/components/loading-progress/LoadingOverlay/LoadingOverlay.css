@@ -1,0 +1,7 @@
+.art-pix-loading-overlay { display: grid; position: relative; isolation: isolate; min-width: 0; border-radius: var(--art-pix-radius-card); }
+.art-pix-loading-overlay__content { grid-area: 1 / 1; min-width: 0; }
+.art-pix-loading-overlay__content[inert] { pointer-events: none; user-select: none; }
+.art-pix-loading-overlay__status { grid-area: 1 / 1; min-width: 0; pointer-events: none; border-radius: inherit; }
+.art-pix-loading-overlay__status[data-loading="true"] { z-index: 1; display: flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 112px; padding: 24px; pointer-events: auto; cursor: progress; background: color-mix(in srgb, var(--art-pix-color-parchment) 90%, transparent); }
+.art-pix-loading-overlay__indicator { padding: 12px 16px; border: 2px solid var(--art-pix-color-border); border-radius: var(--art-pix-radius-action); background: var(--art-pix-color-surface); box-shadow: 0 3px 0 var(--art-pix-color-border); }
+@media (forced-colors: active) { .art-pix-loading-overlay__status[data-loading="true"] { background: Canvas; outline: 1px solid CanvasText; } }

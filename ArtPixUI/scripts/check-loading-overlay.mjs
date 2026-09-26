@@ -1,0 +1,24 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { LoadingOverlay } from "../dist/art-pix-ui.js";
+
+const render = (props = {}) => renderToStaticMarkup(createElement(LoadingOverlay, props, createElement("button", { type: "button" }, "Kept content")));
+const idle = render();
+assert(idle.includes('aria-busy="false"'));
+assert(!idle.includes('inert=""'));
+assert(!idle.includes('<svg'));
+assert(idle.includes('role="status"'));
+const busy = render({ loading: true, label: "Refreshing…" });
+for (const expected of ['aria-busy="true"', 'inert=""', 'data-loading="true"', 'Refreshing…', 'aria-live="polite"', 'aria-atomic="true"', 'Kept content']) assert(busy.includes(expected));
+assert.equal((busy.match(/role="status"/g) ?? []).length, 1);
+assert(busy.indexOf('</button></div>') < busy.indexOf('role="status"'));
+assert(!/aria-modal|tabindex/.test(busy));
+const custom = render({ className: "custom", id: "local-region", style: { maxWidth: 240 } });
+for (const expected of ['art-pix-loading-overlay custom', 'id="local-region"', 'max-width:240px']) assert(custom.includes(expected));
+const css = readFileSync(new URL("../src/components/loading-progress/LoadingOverlay/LoadingOverlay.css", import.meta.url), "utf8");
+assert(css.includes('pointer-events: none'));
+assert(css.includes('pointer-events: auto'));
+assert(!css.includes('position: fixed'));
+console.log("LoadingOverlay retained content, inert/busy state, single live status, native props and local blocking CSS checks passed.");

@@ -1,0 +1,8 @@
+.art-pix-pulse-loader { display: inline-flex; align-items: center; gap: 10px; min-width: 0; max-width: 100%; vertical-align: middle; color: var(--art-pix-color-muted); font: 400 0.875rem/1.5 var(--art-pix-font-mono); }
+.art-pix-pulse-loader__indicator { flex-shrink: 0; width: 16px; height: 16px; background: var(--art-pix-color-primary); animation: art-pix-pulse-loader-pulse 1.6s ease-in-out infinite; }
+.art-pix-pulse-loader--small .art-pix-pulse-loader__indicator { width: 12px; height: 12px; }
+.art-pix-pulse-loader--large .art-pix-pulse-loader__indicator { width: 24px; height: 24px; }
+.art-pix-pulse-loader__label { min-width: 0; overflow-wrap: anywhere; }
+@keyframes art-pix-pulse-loader-pulse { 0%, 100% { transform: scale(0.75); opacity: 0.45; } 50% { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .art-pix-pulse-loader__indicator { animation: none; transform: none; opacity: 1; } }
+@media (forced-colors: active) { .art-pix-pulse-loader__indicator { background: CanvasText; forced-color-adjust: none; } }

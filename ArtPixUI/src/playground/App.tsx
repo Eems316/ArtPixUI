@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, ContactCard, IconButton, Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, ToggleSwitch, Slider, FileUpload, PlaceholderImage, Image, Thumbnail, Avatar } from "../index.js";
 import avatar from "./avatar.svg";
-import { AvatarGroup, Logo, ImageWithOverlay, List, KeyValueDisplay, Table, Timeline, Header, Footer, NavigationBar, Sidebar, Breadcrumbs, Pagination, FaqAccordion } from "../index.js";
+import { AvatarGroup, Logo, ImageWithOverlay, List, KeyValueDisplay, Table, Timeline, Header, Footer, NavigationBar, Sidebar, Breadcrumbs, Pagination, FaqAccordion, SpinnerStatus, DotsLoader, PulseLoader } from "../index.js";
 import logo from "./logo.svg";
 
 function PixelMark({ kind = "spark" }: { kind?: "spark" | "arrow" | "heart" | "plus" | "check" }) {
@@ -707,8 +707,277 @@ export function App() {
           </div>
           <div className="playground-exhibit-footer"><span>Enter or Space toggles a question. Closed answers are inert and hidden from assistive technology. Reduced motion removes transitions.</span><span aria-hidden="true">↗</span></div>
         </section>
+        <section className="playground-exhibit playground-icon-demo" id="spinner-status-demo" aria-labelledby="spinner-status-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">36</span><h2 id="spinner-status-heading">A little moment</h2><span className="playground-kind">SPINNER STATUS · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            <SpinnerStatus size="small" label="Saving field notes…" />
+            <SpinnerStatus />
+            <SpinnerStatus size="large" label="Gathering your party…" />
+            <div style={{ maxWidth: 200 }}><SpinnerStatus label="Loading a longer status message that wraps in a narrow space…" /></div>
+            <Button link="#spinner-status-heading">Still available</Button>
+          </div>
+          <div className="playground-exhibit-footer"><span>16 / 24 / 32px indicators. Stepped rotation; static with reduced motion. No blocked interactions.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="dots-loader-demo" aria-labelledby="dots-loader-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">37</span><h2 id="dots-loader-heading">Good things take a moment</h2><span className="playground-kind">DOTS LOADER · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            <DotsLoader size="small" label="Saving notes…" />
+            <DotsLoader />
+            <DotsLoader size="large" label="Gathering supplies…" />
+            <div style={{ maxWidth: 180 }}><DotsLoader label="Loading a longer message that wraps in a narrow space…" /></div>
+            <Button link="#dots-loader-heading">Still available</Button>
+          </div>
+          <div className="playground-exhibit-footer"><span>Three square dots, staggered opacity pulses. Static dots with reduced motion; no blocked interactions.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="pulse-loader-demo" aria-labelledby="pulse-loader-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">38</span><h2 id="pulse-loader-heading">A quiet little rhythm</h2><span className="playground-kind">PULSE LOADER · AWAITING REVIEW</span></div>
+          <div className="playground-icon-demo-stage">
+            <PulseLoader size="small" label="Saving notes…" />
+            <PulseLoader />
+            <PulseLoader size="large" label="Preparing your adventure…" />
+            <div style={{ maxWidth: 180 }}><PulseLoader label="Loading a longer status message that wraps in a narrow space…" /></div>
+            <Button link="#pulse-loader-heading">Still available</Button>
+          </div>
+          <div className="playground-exhibit-footer"><span>12 / 16 / 24px squares. Gentle scale and opacity pulse; static with reduced motion. No blocked interactions.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="progress-bar-demo" aria-labelledby="progress-bar-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">39</span><h2 id="progress-bar-heading">Every little step counts</h2><span className="playground-kind">PROGRESS BAR · AWAITING REVIEW</span></div>
+          <ProgressBarDemo />
+          <div className="playground-exhibit-footer"><span>Controlled progress. Optional percentage, clamped values, and reduced-motion support.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="indeterminate-progress-bar-demo" aria-labelledby="indeterminate-progress-bar-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">40</span><h2 id="indeterminate-progress-bar-heading">An adventure in the making</h2><span className="playground-kind">INDETERMINATE PROGRESS BAR · AWAITING REVIEW</span></div>
+          <div style={{ display: "grid", gap: 28, padding: 28 }}>
+            <IndeterminateProgressBar />
+            <IndeterminateProgressBar label="Gathering your supplies…" />
+            <div style={{ maxWidth: 180 }}><IndeterminateProgressBar label="A longer loading message in a narrow space…" /></div>
+            <IndeterminateProgressBar dir="rtl" label="RTL loading preview" />
+            <Button link="#indeterminate-progress-bar-heading">Still available</Button>
+          </div>
+          <div className="playground-exhibit-footer"><span>Unknown duration, no percentage. Repeating sweep; static centered segment with reduced motion.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="circular-progress-demo" aria-labelledby="circular-progress-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">41</span><h2 id="circular-progress-heading">Coming full circle</h2><span className="playground-kind">CIRCULAR PROGRESS · AWAITING REVIEW</span></div>
+          <CircularProgressDemo />
+          <div className="playground-exhibit-footer"><span>64 / 96 / 128px rings. Controlled progress, optional percentage, and reduced-motion support.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="progress-steps-demo" aria-labelledby="progress-steps-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">42</span><h2 id="progress-steps-heading">One step closer</h2><span className="playground-kind">PROGRESS STEPS · AWAITING REVIEW</span></div>
+          <ProgressStepsDemo />
+          <div className="playground-exhibit-footer"><span>Completed, current, upcoming. Display-only steps; your application controls progression.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="skeleton-loader-demo" aria-labelledby="skeleton-loader-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">43</span><h2 id="skeleton-loader-heading">Room for what's coming</h2><span className="playground-kind">SKELETON LOADER · AWAITING REVIEW</span></div>
+          <div style={{ display: "grid", gap: 28, padding: 28 }}>
+            <div style={{ display: "grid", gap: 12 }}><Label>Rectangle</Label><SkeletonLoader height={96} /></div>
+            <div style={{ display: "grid", gap: 12 }}><Label>Text lines</Label><SkeletonLoader shape="text" /><SkeletonLoader shape="text" width="75%" /><SkeletonLoader shape="text" width="45%" /></div>
+            <div style={{ display: "grid", gap: 12 }}><Label>Circle</Label><SkeletonLoader shape="circle" width={64} /></div>
+            <BasicCard style={{ maxWidth: 260 }}>
+              <div style={{ display: "grid", gap: 16 }}>
+                <span>Profile loading…</span>
+                <SkeletonLoader shape="circle" />
+                <SkeletonLoader shape="text" width="65%" />
+                <SkeletonLoader shape="text" />
+                <SkeletonLoader shape="text" width="80%" />
+              </div>
+            </BasicCard>
+          </div>
+          <div className="playground-exhibit-footer"><span>Static decorative placeholders. Numeric or CSS dimensions; no animation or focus stops.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="shimmer-skeleton-demo" aria-labelledby="shimmer-skeleton-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">44</span><h2 id="shimmer-skeleton-heading">A little light on the way</h2><span className="playground-kind">SHIMMER SKELETON · AWAITING REVIEW</span></div>
+          <div style={{ display: "grid", gap: 28, padding: 28 }}>
+            <div style={{ display: "grid", gap: 12 }}><Label>Rectangle</Label><ShimmerSkeleton height={96} /></div>
+            <div style={{ display: "grid", gap: 12 }}><Label>Text lines</Label><ShimmerSkeleton shape="text" /><ShimmerSkeleton shape="text" width="75%" /><ShimmerSkeleton shape="text" width="45%" /></div>
+            <div style={{ display: "grid", gap: 12 }}><Label>Circle</Label><ShimmerSkeleton shape="circle" width={64} /></div>
+            <BasicCard style={{ maxWidth: 260 }}>
+              <div style={{ display: "grid", gap: 16 }}>
+                <span>Profile loading…</span>
+                <ShimmerSkeleton shape="circle" />
+                <ShimmerSkeleton shape="text" width="65%" />
+                <ShimmerSkeleton shape="text" />
+                <ShimmerSkeleton shape="text" width="80%" />
+              </div>
+            </BasicCard>
+            <div dir="rtl" style={{ display: "grid", gap: 12 }}><Label>Right-to-left sweep</Label><ShimmerSkeleton height={48} /></div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Gentle highlight sweep. Static with reduced motion or forced colors; decorative and non-interactive.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="loading-button-demo" aria-labelledby="loading-button-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">45</span><h2 id="loading-button-heading">A moment for the adventure</h2><span className="playground-kind">LOADING BUTTON · AWAITING REVIEW</span></div>
+          <LoadingButtonDemo />
+          <div className="playground-exhibit-footer"><span>Controlled loading, optional busy text, blocked activation. Stepped spinner; static with reduced motion.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="upload-progress-demo" aria-labelledby="upload-progress-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">46</span><h2 id="upload-progress-heading">Supplies on their way</h2><span className="playground-kind">UPLOAD PROGRESS · AWAITING REVIEW</span></div>
+          <UploadProgressDemo />
+          <div className="playground-exhibit-footer"><span>Display only: no files are uploaded. Byte counts and percentage follow your application.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="download-progress-demo" aria-labelledby="download-progress-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">47</span><h2 id="download-progress-heading">A new adventure arriving</h2><span className="playground-kind">DOWNLOAD PROGRESS · AWAITING REVIEW</span></div>
+          <DownloadProgressDemo />
+          <div className="playground-exhibit-footer"><span>Display only: no files are downloaded. Byte counts and percentage follow your application.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="buffering-indicator-demo" aria-labelledby="buffering-indicator-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">48</span><h2 id="buffering-indicator-heading">The story will be right back</h2><span className="playground-kind">BUFFERING INDICATOR · AWAITING REVIEW</span></div>
+          <BufferingIndicatorDemo />
+          <div className="playground-exhibit-footer"><span>Caller-controlled visibility. Polite status, stepped spinner and reduced-motion support. No media playback.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="loading-overlay-demo" aria-labelledby="loading-overlay-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">49</span><h2 id="loading-overlay-heading">A pause in this corner</h2><span className="playground-kind">LOADING OVERLAY · AWAITING REVIEW</span></div>
+          <LoadingOverlayDemo />
+          <div className="playground-exhibit-footer"><span>Only this region is blocked. Children stay mounted; loading is controlled outside the overlay.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="loading-screen-demo" aria-labelledby="loading-screen-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">50</span><h2 id="loading-screen-heading">Your next chapter is loading</h2><span className="playground-kind">LOADING SCREEN · AWAITING REVIEW</span></div>
+          <LoadingScreenDemo />
+          <div className="playground-exhibit-footer"><span>Full-height page replacement, not an overlay. Shared pixel spinner; static with reduced motion.</span><span aria-hidden="true">↗</span></div>
+        </section>
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>
     </div>
   );
 }
+
+function ProgressBarDemo() {
+  const [value, setValue] = useState(40);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <ProgressBar label="Preparing your adventure" value={value} showPercentage />
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+      <Button onClick={() => setValue((current) => Math.min(100, current + 20))} disabled={value === 100}>Advance 20%</Button>
+      <Button onClick={() => setValue(0)}>Reset progress</Button>
+    </div>
+    <ProgressBar label="Waiting to begin" value={0} showPercentage />
+    <ProgressBar label="All supplies gathered" value={250} max={250} showPercentage />
+    <div style={{ maxWidth: 180 }}><ProgressBar label="A longer label in a narrow space" value={3} max={8} /></div>
+  </div>;
+}
+function CircularProgressDemo() {
+  const [value, setValue] = useState(40);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 28 }}>
+      <CircularProgress size="small" value={0} label="Ready to begin" showPercentage />
+      <CircularProgress value={value} label="Gathering supplies" showPercentage />
+      <CircularProgress size="large" value={8} max={8} label="All packed" showPercentage />
+      <div style={{ maxWidth: 140 }}><CircularProgress value={3} max={8} label="A longer label in a narrow space" /></div>
+    </div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+      <Button onClick={() => setValue(current => Math.min(100, current + 20))} disabled={value === 100}>Advance ring 20%</Button>
+      <Button onClick={() => setValue(0)}>Reset ring</Button>
+    </div>
+  </div>;
+}
+
+function ProgressStepsDemo() {
+  const [currentStep, setCurrentStep] = useState(2);
+  const steps = [
+    { id: "plan", label: "Plan", description: "Choose your adventure." },
+    { id: "pack", label: "Pack", description: "Gather your supplies." },
+    { id: "depart", label: "Depart", description: "The journey awaits." },
+  ];
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <ProgressSteps steps={steps} currentStep={currentStep} aria-label="Adventure preparation" />
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+      <Button onClick={() => setCurrentStep(step => Math.max(1, step - 1))} disabled={currentStep === 1}>Previous step</Button>
+      <Button onClick={() => setCurrentStep(step => Math.min(4, step + 1))} disabled={currentStep === 4}>{currentStep === 3 ? "Complete steps" : "Next step"}</Button>
+      <Button onClick={() => setCurrentStep(1)}>Reset steps</Button>
+    </div>
+    <div style={{ maxWidth: 220 }}><ProgressSteps steps={steps} currentStep={3} aria-label="Narrow layout" /></div>
+    <ProgressSteps dir="rtl" steps={steps} currentStep={4} aria-label="Completed RTL example" />
+  </div>;
+}
+
+function LoadingButtonDemo() {
+  const [loading, setLoading] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center" }}>
+      <LoadingButton loading={loading} loadingText="Saving adventure…" onClick={() => { setAttempts(count => count + 1); setLoading(true); }}>Save adventure</LoadingButton>
+      <Button variant="secondary" disabled={!loading} onClick={() => setLoading(false)}>Finish demo loading</Button>
+      <span>Actions started: {attempts}</span>
+    </div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+      <LoadingButton loading>Gather supplies</LoadingButton>
+      <LoadingButton loading variant="secondary" loadingText="Preparing…">Prepare</LoadingButton>
+      <LoadingButton disabled>Unavailable</LoadingButton>
+      <LoadingButton loading link="#loading-button-heading" loadingText="Opening…">Open adventure</LoadingButton>
+    </div>
+  </div>;
+}
+
+function UploadProgressDemo() {
+  const [uploaded, setUploaded] = useState(400000);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <UploadProgress fileName="adventure-map.png" uploadedBytes={uploaded} totalBytes={1000000} />
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+      <Button disabled={uploaded >= 1000000} onClick={() => setUploaded(value => Math.min(1000000, value + 200000))}>Simulate 200 KB</Button>
+      <Button onClick={() => setUploaded(0)}>Reset upload preview</Button>
+    </div>
+    <UploadProgress fileName="supplies.zip" uploadedBytes={2500000} totalBytes={2500000} />
+    <UploadProgress fileName="unknown-size.bin" uploadedBytes={12000} totalBytes={0} />
+    <div style={{ maxWidth: 200 }}><UploadProgress fileName="a-very-long-adventure-map-filename.png" uploadedBytes={3} totalBytes={8} /></div>
+  </div>;
+}
+
+function DownloadProgressDemo() {
+  const [downloaded, setDownloaded] = useState(400000);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <DownloadProgress fileName="adventure-map.png" downloadedBytes={downloaded} totalBytes={1000000} />
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+      <Button disabled={downloaded >= 1000000} onClick={() => setDownloaded(value => Math.min(1000000, value + 200000))}>Receive 200 KB (demo)</Button>
+      <Button onClick={() => setDownloaded(0)}>Reset download preview</Button>
+    </div>
+    <DownloadProgress fileName="supplies.zip" downloadedBytes={2500000} totalBytes={2500000} />
+    <DownloadProgress fileName="unknown-size.bin" downloadedBytes={12000} totalBytes={0} />
+    <div style={{ maxWidth: 200 }}><DownloadProgress fileName="a-very-long-adventure-map-filename.png" downloadedBytes={3} totalBytes={8} /></div>
+  </div>;
+}
+
+function BufferingIndicatorDemo() {
+  const [buffering, setBuffering] = useState(true);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <BasicCard>
+      <div style={{ display: "grid", gap: 20 }}>
+        <span>Media status preview — no audio or video is loaded.</span>
+        <div style={{ minHeight: 32 }}><BufferingIndicator buffering={buffering} /></div>
+        <Button aria-pressed={buffering} onClick={() => setBuffering(value => !value)}>Toggle buffering preview</Button>
+      </div>
+    </BasicCard>
+    <BufferingIndicator size="small" label="Waiting for audio…" />
+    <BufferingIndicator size="large" label="Preparing the next scene…" />
+    <div style={{ maxWidth: 180 }}><BufferingIndicator label="Waiting for a longer scene to finish buffering…" /></div>
+  </div>;
+}
+
+function LoadingOverlayDemo() {
+  const [loading, setLoading] = useState(false);
+  const [actions, setActions] = useState(0);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <Button aria-pressed={loading} onClick={() => setLoading(value => !value)}>Toggle region loading</Button>
+    <LoadingOverlay loading={loading} label="Refreshing your adventure…">
+      <BasicCard>
+        <div style={{ display: "grid", gap: 16 }}>
+          <Label htmlFor="overlay-notes">Adventure notes</Label>
+          <TextInput id="overlay-notes" defaultValue="Keep these notes while loading" />
+          <Button onClick={() => setActions(value => value + 1)}>Use region action</Button>
+          <span>Region actions: {actions}</span>
+        </div>
+      </BasicCard>
+    </LoadingOverlay>
+    <Button link="#loading-overlay-heading">Outside region link</Button>
+    <div style={{ maxWidth: 240 }}><LoadingOverlay loading label="Loading a longer message in a narrow region…"><BasicCard>Underlying sample content.</BasicCard></LoadingOverlay></div>
+  </div>;
+}
+
+function LoadingScreenDemo() {
+  const [loading, setLoading] = useState(true);
+  return <div>
+    <div style={{ padding: 24 }}><Button aria-pressed={loading} onClick={() => setLoading(value => !value)}>Toggle loading screen preview</Button></div>
+    {loading ? <LoadingScreen label="Preparing your next adventure…">
+      <p>Gathering maps, supplies, and a little inspiration.</p>
+      <Button variant="secondary" onClick={() => setLoading(false)}>Finish loading preview</Button>
+    </LoadingScreen> : <BasicCard><p>Your adventure is ready. The loading screen has been replaced.</p><Button onClick={() => setLoading(true)}>Show loading screen again</Button></BasicCard>}
+  </div>;
+}
+
+import { ProgressBar, IndeterminateProgressBar, CircularProgress, ProgressSteps, SkeletonLoader, ShimmerSkeleton, LoadingButton, UploadProgress, DownloadProgress, BufferingIndicator, LoadingOverlay, LoadingScreen } from "../index.js";

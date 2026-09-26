@@ -1,0 +1,24 @@
+.art-pix-indeterminate-progress-bar__segment {
+  width: 35%;
+  margin-inline-start: 0;
+  transition: none;
+  animation: art-pix-indeterminate-progress-bar-sweep 1.6s ease-in-out infinite;
+}
+@keyframes art-pix-indeterminate-progress-bar-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(286%); }
+}
+.art-pix-indeterminate-progress-bar:dir(rtl) .art-pix-indeterminate-progress-bar__segment {
+  animation-name: art-pix-indeterminate-progress-bar-sweep-rtl;
+}
+@keyframes art-pix-indeterminate-progress-bar-sweep-rtl {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-286%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .art-pix-indeterminate-progress-bar .art-pix-indeterminate-progress-bar__segment {
+    animation: none;
+    transform: none;
+    margin-inline-start: 32.5%;
+  }
+}

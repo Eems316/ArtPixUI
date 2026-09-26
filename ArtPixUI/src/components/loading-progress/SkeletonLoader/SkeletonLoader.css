@@ -1,0 +1,17 @@
+.art-pix-skeleton-loader {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: 96px;
+  flex-shrink: 0;
+  border: 1px solid var(--art-pix-color-bevel);
+  border-radius: var(--art-pix-radius-action);
+  background: var(--art-pix-color-parchment);
+  box-shadow: inset 0 1px 0 var(--art-pix-color-highlight);
+  pointer-events: none;
+  user-select: none;
+}
+.art-pix-skeleton-loader--text { height: 1em; border-radius: 4px; }
+.art-pix-skeleton-loader--circle { width: 48px; height: auto; aspect-ratio: 1; border-radius: 50%; }
+@media (forced-colors: active) { .art-pix-skeleton-loader { border-color: GrayText; background: Canvas; box-shadow: none; } }

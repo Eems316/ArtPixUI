@@ -1,0 +1,8 @@
+.art-pix-spinner-status { display: inline-flex; align-items: center; gap: 10px; max-width: 100%; min-width: 0; color: var(--art-pix-color-muted); font: 400 0.875rem/1.5 var(--art-pix-font-mono); vertical-align: middle; }
+.art-pix-spinner-status__spinner { flex-shrink: 0; width: 24px; height: 24px; color: var(--art-pix-color-primary); animation: art-pix-spinner-status-turn 1s steps(8, end) infinite; }
+.art-pix-spinner-status--small .art-pix-spinner-status__spinner { width: 16px; height: 16px; }
+.art-pix-spinner-status--large .art-pix-spinner-status__spinner { width: 32px; height: 32px; }
+.art-pix-spinner-status__label { min-width: 0; overflow-wrap: anywhere; }
+@keyframes art-pix-spinner-status-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .art-pix-spinner-status__spinner { animation: none; } }
+@media (forced-colors: active) { .art-pix-spinner-status__spinner { color: CanvasText; } }

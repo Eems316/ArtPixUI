@@ -1,0 +1,22 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { LoadingScreen } from "../dist/art-pix-ui.js";
+
+const render = (props = {}, children) => renderToStaticMarkup(createElement(LoadingScreen, props, children));
+const defaults = render();
+for (const expected of ['Loading…', 'role="status"', 'aria-live="polite"', 'aria-atomic="true"', 'aria-hidden="true"', 'art-pix-spinner-status--large']) assert(defaults.includes(expected));
+assert.equal((defaults.match(/role="status"/g) ?? []).length, 1);
+assert(!defaults.includes('art-pix-loading-screen__content'));
+assert(!/aria-modal|inert=|tabindex|aria-busy/.test(defaults));
+const custom = render({ label: "Gathering supplies…", className: "custom", id: "loading", style: { minHeight: 320 } }, createElement("button", { type: "button" }, "Cancel"));
+for (const expected of ['Gathering supplies…', 'art-pix-loading-screen custom', 'id="loading"', 'min-height:320px', 'art-pix-loading-screen__content', '<button type="button">Cancel</button>']) assert(custom.includes(expected));
+assert(custom.indexOf('art-pix-loading-screen__content') > custom.indexOf('</svg>'));
+const css = readFileSync(new URL("../src/components/loading-progress/LoadingScreen/LoadingScreen.css", import.meta.url), "utf8");
+assert(css.includes("min-height: 100svh"));
+assert(css.includes("place-items: center"));
+assert(!/position: fixed|overflow: hidden/.test(css));
+const spinnerCss = readFileSync(new URL("../src/components/loading-progress/SpinnerStatus/SpinnerStatus.css", import.meta.url), "utf8");
+assert.match(spinnerCss, /prefers-reduced-motion: reduce[^}]+animation: none/);
+console.log("LoadingScreen labels, live status, supporting content, native props, in-flow layout and shared reduced-motion CSS checks passed.");

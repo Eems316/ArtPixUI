@@ -1,0 +1,37 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { LoadingButton } from "../dist/art-pix-ui.js";
+
+const render = (props = {}) => renderToStaticMarkup(createElement(LoadingButton, props, "Save"));
+const idle = render();
+assert(idle.includes('type="button"'));
+assert(idle.includes('aria-busy="false"'));
+assert(!idle.includes('disabled=""'));
+assert(!idle.includes('<svg'));
+const busy = render({ loading: true, loadingText: "Saving…" });
+for (const expected of ['disabled=""', 'aria-busy="true"', 'Saving…', 'aria-hidden="true"', 'aria-live="off"']) assert(busy.includes(expected));
+assert(!busy.includes('role="status"'));
+assert(render({ loading: true }).includes('>Save</span>'));
+assert(render({ disabled: true }).includes('disabled=""'));
+assert(render({ type: "submit" }).includes('type="submit"'));
+assert(render({ link: "/adventure" }).includes('href="/adventure"'));
+const busyLink = render({ link: "/adventure", loading: true });
+assert(!busyLink.includes('href='));
+assert(busyLink.includes('aria-disabled="true"'));
+assert(busyLink.includes('tabindex="-1"'));
+assert(render({ className: "custom", variant: "secondary" }).includes('art-pix-button--secondary art-pix-loading-button custom'));
+// Resolve the existing Button/Action composition to exercise its disabled-link guard.
+let calls = 0;
+let prevented = false;
+const button = LoadingButton({ link: "/adventure", loading: true, children: "Save", onClick: () => calls++ });
+const action = button.type(button.props);
+const anchor = action.type(action.props);
+anchor.props.onClick({ preventDefault: () => { prevented = true; } });
+assert(prevented);
+assert.equal(calls, 0);
+const css = readFileSync(new URL("../src/components/loading-progress/SpinnerStatus/SpinnerStatus.css", import.meta.url), "utf8");
+assert(css.includes("steps(8, end)"));
+assert.match(css, /prefers-reduced-motion: reduce[^}]+animation: none/);
+console.log("LoadingButton idle/busy states, labels, variants, submission type, disabled links and shared spinner CSS checks passed.");

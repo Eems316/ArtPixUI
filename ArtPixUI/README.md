@@ -32,7 +32,7 @@ Import the stylesheet once in the consumer application's global entry:
 import "art-pix-ui/styles.css";
 ```
 
-Available components: `FaqAccordion`, `Pagination`, `Breadcrumbs`, `Sidebar`, `NavigationBar`, `Footer`, `Header`, `Timeline`, `Table`, `KeyValueDisplay`, `List`, `ImageWithOverlay`, `Logo`, `AvatarGroup`, `Avatar`, `Thumbnail`, `Image`, `PlaceholderImage`, `FileUpload`, `Slider`, `ToggleSwitch`, `RadioButton`, `Checkbox`, `TextArea`, `TextInput`, `BasicCard`, `IconGroup`, `Icon`, `CodeBlock`, `Link`, `Title`, `Label`, `ContactCard`, `Button`, and `IconButton`. Their corresponding props types are also exported. Review status is tracked separately in `task-list.md`.
+Available components: `LoadingScreen`, `LoadingOverlay`, `BufferingIndicator`, `DownloadProgress`, `UploadProgress`, `LoadingButton`, `ShimmerSkeleton`, `SkeletonLoader`, `ProgressSteps`, `CircularProgress`, `IndeterminateProgressBar`, `ProgressBar`, `PulseLoader`, `DotsLoader`, `SpinnerStatus`, `FaqAccordion`, `Pagination`, `Breadcrumbs`, `Sidebar`, `NavigationBar`, `Footer`, `Header`, `Timeline`, `Table`, `KeyValueDisplay`, `List`, `ImageWithOverlay`, `Logo`, `AvatarGroup`, `Avatar`, `Thumbnail`, `Image`, `PlaceholderImage`, `FileUpload`, `Slider`, `ToggleSwitch`, `RadioButton`, `Checkbox`, `TextArea`, `TextInput`, `BasicCard`, `IconGroup`, `Icon`, `CodeBlock`, `Link`, `Title`, `Label`, `ContactCard`, `Button`, and `IconButton`. Their corresponding props types are also exported. Review status is tracked separately in `task-list.md`.
 
 ```tsx
 import { Button, ContactCard, IconButton } from "art-pix-ui";
@@ -58,6 +58,241 @@ export function Contact() {
   );
 }
 ```
+
+### LoadingScreen
+
+A full-height parchment loading view with subtle pixel grain, a centered large green pixel spinner and monospaced message. It stays in normal document flow and is intended to replace page content, not cover it as an overlay.
+
+```tsx
+import { LoadingScreen } from "art-pix-ui";
+
+return loading ? (
+  <LoadingScreen label="Preparing your next adventure…">
+    <p>Gathering maps and supplies.</p>
+  </LoadingScreen>
+) : <AdventurePage />;
+```
+
+`label` defaults to "Loading…"; optional children supply supporting text or caller-owned actions. `LoadingScreenProps` includes native wrapper div attributes and ref. Default minimum height is 100svh with a 100vh fallback; override minHeight through style when embedding in a smaller region. Long content can grow and scroll naturally. The shared spinner exposes polite atomic status and becomes static with reduced motion; supporting content is outside that live region.
+
+The caller owns display, completion and focus management. No automatic navigation, timers, focus trap, modal semantics, page locking or main landmark are added. Run `node scripts/check-loading-screen.mjs` after building for labels, status semantics, children, native props, in-flow layout and shared reduced-motion CSS checks.
+
+### LoadingOverlay
+
+A local translucent parchment layer with a centered pixel spinner and outlined loading label. `loading` defaults to false and `label` to "Loading…". It wraps children without unmounting them, preserving their state while loading.
+
+```tsx
+import { LoadingOverlay } from "art-pix-ui";
+
+<LoadingOverlay loading={refreshing} label="Refreshing your adventure…">
+  <AdventurePanel />
+</LoadingOverlay>
+```
+
+`LoadingOverlayProps` supports native wrapper div attributes and ref. While loading, the inner content receives native `inert` and `aria-busy`, removing its descendants from keyboard interaction and the accessibility tree. The local layer intercepts pointers. A persistent polite atomic status is a sibling outside the inert/busy content, with the shared spinner presented decoratively. Reduced motion stops spinner rotation.
+
+This is not a modal: it does not trap focus, lock the page, manage asynchronous work, restore focus, or block outside controls. Keep completion/cancellation controls outside its children. Native inert applies to DOM descendants; content portalled elsewhere and top-layer dialogs require caller coordination. The grid layer can expand short regions to fit the indicator (minimum 112px), and long labels wrap. Run `node scripts/check-loading-overlay.mjs` after building for retained children, inert/busy markup, live-status placement, native props and blocking CSS checks. Browser keyboard/pointer review remains necessary.
+
+### BufferingIndicator
+
+Media buffering status composed from SpinnerStatus: green pixel spinner, muted monospaced label and stepped rotation. Reduced motion leaves a static spinner. It does not load media, change playback or attach media event listeners.
+
+```tsx
+import { BufferingIndicator } from "art-pix-ui";
+
+<BufferingIndicator buffering={isBuffering} />
+<BufferingIndicator buffering={isBuffering} label="Waiting for audio…" size="small" />
+```
+
+`buffering` defaults to true; false renders nothing. `label` defaults to "Buffering…" and size defaults to medium. `BufferingIndicatorProps` inherits SpinnerStatus props, including native span attributes and ref, custom className, and small/medium/large sizes. Default semantics are role=status, aria-live=polite and aria-atomic=true; the spinner is decorative. Visibility and completion remain caller-controlled, with no focus movement or blocked interactions. Run `node scripts/check-buffering-indicator.mjs` after building for visibility, labels, sizes, status semantics, composition and reduced-motion CSS checks.
+
+### DownloadProgress
+
+Matches UploadProgress with a filename, parchment track, green fill, percentage and readable downloaded/total byte counts. It only displays caller-provided progress and does not download, save or validate files.
+
+```tsx
+import { DownloadProgress } from "art-pix-ui";
+
+<DownloadProgress fileName="adventure-map.png" downloadedBytes={400000} totalBytes={1000000} />
+```
+
+`fileName`, `downloadedBytes`, and `totalBytes` are required. Finite byte counts are floored; negative/non-finite downloaded counts become zero and known totals cap the received count. Totals below 1 or non-finite totals use IndeterminateProgressBar, omit the percentage and display "total unavailable". An empty filename uses "File download". Decimal units use 1000 B = 1 KB and at most one decimal above bytes, using the shared transfer formatter. A full bar indicates reported bytes received, not a successfully saved or verified file.
+
+`DownloadProgressProps` includes native wrapper div attributes and ref except children. `aria-label` and `aria-labelledby` name the inner indicator; known totals expose actual byte values and readable aria-valuetext. Shared bars supply reduced-motion behavior. No timers, repeated live announcements or transfer controls are included. Run `node scripts/check-download-progress.mjs` after building; also run `node scripts/check-upload-progress.mjs` to check the shared byte formatter against UploadProgress.
+
+### UploadProgress
+
+Composes ProgressBar with a filename and readable uploaded/total byte counts. All data is caller-controlled: it does not access files, upload anything, manage timers or infer server-confirmed success.
+
+```tsx
+import { UploadProgress } from "art-pix-ui";
+
+<UploadProgress fileName="adventure-map.png" uploadedBytes={400000} totalBytes={1000000} />
+```
+
+`fileName`, `uploadedBytes`, and `totalBytes` are required. Finite byte values are floored; negative or non-finite uploaded values become zero and known totals cap the uploaded count. A total below 1 byte or non-finite total is treated as unknown: IndeterminateProgressBar replaces the percentage and the count reads "total unavailable". An empty filename uses "File upload". Counts use decimal units (1000 B = 1 KB), rounded to at most one decimal above bytes. A 100% bar only indicates all reported bytes transferred, not acceptance by the server.
+
+`UploadProgressProps` includes native wrapper div attributes and ref except children. `aria-label` and `aria-labelledby` target the inner progress indicator. Known totals expose actual byte values plus readable `aria-valuetext`; counts are not a repeatedly announcing live region. Shared progress styling supplies reduced-motion behavior. Run `node scripts/check-upload-progress.mjs` after building for formatting, normalization, unknown totals, percentages and accessibility checks.
+
+### LoadingButton
+
+Composes Button with the small pixel SpinnerStatus indicator. `LoadingButtonProps` preserves Button props (including `link`, native button `type`, children and primary/secondary variants) and adds `loading?: boolean` (default false) and `loadingText?: string`.
+
+```tsx
+import { LoadingButton } from "art-pix-ui";
+
+<LoadingButton loading={saving} loadingText="Saving…" onClick={save}>
+  Save adventure
+</LoadingButton>
+```
+
+While loading, it sets `aria-busy`, displays a decorative spinner, and disables activation. A native button is disabled; a link loses its href, has aria-disabled and leaves the tab order. Existing disabled behavior remains independent of loading. Without loadingText, the original children remain visible. The spinner inherits the button text color and its stepped rotation becomes static for reduced motion. The caller owns asynchronous work, state, error handling and completion; no timers or promises are managed internally. This blocks this control only, not other submission paths in a surrounding form. Supply separate completion/error announcements as needed. Run `node scripts/check-loading-button.mjs` after building for idle/busy rendering, disabled link behavior, native type, variants, and shared spinner CSS checks.
+
+### ShimmerSkeleton
+
+Composes SkeletonLoader with a soft highlight sweeping across its shape every 1.8 seconds. The highlight is clipped to the placeholder, reverses in RTL, and disappears completely for reduced-motion or forced-color preferences, leaving the static base placeholder.
+
+```tsx
+import { ShimmerSkeleton } from "art-pix-ui";
+
+<ShimmerSkeleton height={120} />
+<ShimmerSkeleton shape="text" width="75%" />
+<ShimmerSkeleton shape="circle" width={64} />
+```
+
+`ShimmerSkeletonProps` reuses `SkeletonLoaderProps`, including shape, width, height, native span attributes, ref, className and style. Defaults and dimension behavior are identical. It remains decorative (`aria-hidden`) and non-focusable, with no loading announcement, timer, or automatic replacement. Put loading status on the containing UI as needed. Run `node scripts/check-shimmer-skeleton.mjs` after building for composition, shape, dimension, accessibility and motion fallback CSS checks.
+
+### SkeletonLoader
+
+Static decorative placeholders in muted parchment with a subtle outline and highlight. `shape` is `"rectangle"` (default), `"text"`, or `"circle"`. Defaults are full width × 96px for rectangles, full width × 1em for text lines, and 48px with a square aspect ratio for circles.
+
+```tsx
+import { SkeletonLoader } from "art-pix-ui";
+
+<SkeletonLoader height={120} />
+<SkeletonLoader shape="text" width="75%" />
+<SkeletonLoader shape="circle" width={64} />
+```
+
+`width` and `height` accept React CSS dimension values (numbers are pixels). Use width alone to resize a circle while keeping its aspect ratio; explicitly unequal width and height produce an oval. Width is capped to the available container width by default. Native span attributes, ref, className and style are supported; explicit width/height props override the matching style fields. `SkeletonLoaderProps` excludes children, editable content, tabIndex, raw HTML and aria-hidden overrides.
+
+Placeholders are always `aria-hidden`, have no focus stop, and do not announce loading or set the surrounding region busy. Add meaningful loading status to the containing UI where needed. No animations, timers or automatic content replacement are included. Run `node scripts/check-skeleton-loader.mjs` after building for shape, dimensions, style merging, decorative semantics and static CSS checks.
+
+### ProgressSteps
+
+Display-only ordered steps with numbered parchment markers, dark rounded outlines, green completed markers and an amber current marker. Labels and visible Completed / Current step / Upcoming text keep state understandable without color. The layout wraps in narrow containers and respects text direction. Marker colors transition over 180ms unless reduced motion is requested.
+
+```tsx
+import { ProgressSteps } from "art-pix-ui";
+
+<ProgressSteps
+  currentStep={2}
+  steps={[
+    { id: "plan", label: "Plan", description: "Choose your adventure." },
+    { id: "pack", label: "Pack", description: "Gather your supplies." },
+    { id: "depart", label: "Depart" },
+  ]}
+/>
+```
+
+Each step requires a unique stable `id` and string `label`; `description` is optional. `currentStep` is one-based and defaults to 1. Earlier steps are completed, the current step uses `aria-current="step"`, and later steps are upcoming. Set `currentStep` to `steps.length + 1` for all completed. Finite values are floored and clamped to 1 through length + 1; non-finite values fall back to 1. Empty steps render nothing. No callbacks, links, navigation, timers, or focus stops are added: the application controls progression.
+
+`ProgressStepsProps` and `ProgressStepsItem` are exported. Native ordered-list attributes and ref are supported except children, role, start, reversed and type. The default accessible name is "Progress steps" and can be overridden with `aria-label` or `aria-labelledby`. Run `node scripts/check-progress-steps.mjs` after building for state normalization, empty/single cases, semantics, props, and reduced-motion CSS checks.
+
+### CircularProgress
+
+A determinate parchment ring with a dark outline and green clockwise arc starting at twelve o’clock. `value` is required. Defaults: `max={100}`, `label="Progress"`, `size="medium"`, and `showPercentage={false}`. Small, medium, and large rings are 64, 96, and 128px respectively, with a wrapping visible label below.
+
+```tsx
+import { CircularProgress } from "art-pix-ui";
+
+<CircularProgress value={42} label="Gathering supplies" showPercentage />
+<CircularProgress value={3} max={8} size="large" label="Files processed" />
+```
+
+Values clamp to zero/max. Invalid or non-positive max falls back to 100; NaN value becomes zero and infinities clamp to the endpoints. The optional centered percentage is rounded, while accessible progress retains the actual normalized value and max. Zero is an empty track and completion fills the full ring. Changes transition over 180ms; reduced motion disables the transition.
+
+`CircularProgressProps` includes native div attributes and ref, excluding children and reserved progress semantics. Use `aria-label` or `aria-labelledby` to override its accessible name. The SVG is decorative; the outer element provides named progressbar semantics. The caller owns updates and completion, with no automatic progress or focus stop. Run `node scripts/check-circular-progress.mjs` after building for value/size cases, arc geometry, labels, props, and reduced-motion CSS checks.
+
+### IndeterminateProgressBar
+
+Unknown-duration loading using the same parchment track, rounded dark outline, and green fill styling as ProgressBar. A 35%-wide decorative segment sweeps every 1.6 seconds, reverses for RTL, and rests centered with reduced motion. Its size does not represent completion.
+
+```tsx
+import { IndeterminateProgressBar } from "art-pix-ui";
+
+<IndeterminateProgressBar />
+<IndeterminateProgressBar label="Gathering your supplies…" />
+```
+
+`label` defaults to "Loading…". `IndeterminateProgressBarProps` includes native div attributes and ref except children, role, and value-related ARIA attributes. It exposes a named `progressbar` with no known value or percentage. Override its accessible name with `aria-label` or `aria-labelledby` when needed. The caller controls visibility and completion; there are no timers, live announcements on each sweep, or blocked interactions. Run `node scripts/check-indeterminate-progress-bar.mjs` after building for rendering semantics, props, RTL and reduced-motion CSS checks.
+
+### ProgressBar
+
+A controlled determinate bar with a parchment track, dark rounded outline, green fill, and a visible monospaced label. `value` is required; `max` defaults to 100, `label` to "Progress", and `showPercentage` to false. Values clamp between zero and max. Invalid/non-positive max falls back to 100; NaN value becomes zero and infinities clamp to the endpoints. The rounded percentage is visual; accessible progress retains the actual value and max.
+
+```tsx
+import { ProgressBar } from "art-pix-ui";
+
+<ProgressBar value={42} label="Gathering supplies" showPercentage />
+<ProgressBar value={3} max={8} label="Files processed" />
+```
+
+`ProgressBarProps` is exported, including native div attributes and ref (excluding children and reserved progress semantics). Use `aria-label` or `aria-labelledby` to override the accessible name if needed. It has no automatic updates, timers, completion callbacks, or focus stop. Fill changes transition over 180ms and become immediate with reduced motion. Run `node scripts/check-progress-bar.mjs` after building to check normalization, rendering, accessibility attributes, and reduced-motion CSS.
+
+### PulseLoader
+
+One green pixel-square indicator with muted monospaced status text. `label` defaults to "Loading…"; supply meaningful nonempty text. `size` is `small` (12px), `medium` (16px, default), or `large` (24px), changing the indicator rather than the text. Longer labels wrap.
+
+The square gently pulses between 75% and 100% scale and 45% and 100% opacity over 1.6 seconds, without changing layout dimensions. Reduced-motion preferences disable animation and leave a full-size, fully visible square. The graphic is decorative; the outer span defaults to role=status, aria-live=polite, and aria-atomic=true. Native span props and ref target that span.
+
+There is no focus stop, blocked interaction, overlay, percentage tracking, or automatic completion. The caller controls visibility and aria-busy on surrounding content if needed. Keep a live region mounted before changing its label for more reliable announcements; actual behavior depends on assistive technology. Avoid duplicate nested status announcements.
+
+```tsx
+import { PulseLoader } from "art-pix-ui";
+
+<PulseLoader />
+<PulseLoader size="small" label="Saving notes…" />
+<PulseLoader size="large" label="Preparing your adventure…" />
+```
+
+`PulseLoaderProps` is exported. After building, run `node scripts/check-pulse-loader.mjs` for rendering, status, and reduced-motion CSS checks.
+
+### DotsLoader
+
+Three green pixel-square dots with a muted monospaced label. `label` defaults to "Loading…"; provide meaningful nonempty text. `size` selects `small` (4px dots), `medium` (6px, default), or `large` (8px), with 4px gaps. Text size stays constant and longer labels wrap.
+
+Dots pulse in opacity over 1.2 seconds, staggered by 150ms. Reduced-motion preferences remove animation and leave all three dots fully visible. The dots are decorative; the outer span defaults to role=status, aria-live=polite, and aria-atomic=true. Native span props and ref target that outer element.
+
+There is no focus stop, overlay, automatic completion, or percentage tracking. The caller controls visibility and any aria-busy state on the surrounding content. For reliable status updates, keep a live region mounted before changing its label; actual announcements depend on assistive technology. Avoid duplicate nested live-region announcements.
+
+```tsx
+import { DotsLoader } from "art-pix-ui";
+
+<DotsLoader />
+<DotsLoader size="small" label="Saving notes…" />
+<DotsLoader size="large" label="Gathering supplies…" />
+```
+
+`DotsLoaderProps` is exported. After building, run `node scripts/check-dots-loader.mjs` for rendering, three-dot structure, status semantics, and reduced-motion CSS checks.
+
+### SpinnerStatus
+
+A green pixel-style indeterminate spinner with muted monospaced text. `label` defaults to "Loading…"; provide a meaningful, nonempty status message. `size` is `small` (16px), `medium` (24px, default), or `large` (32px) and changes the indicator size, not the text size.
+
+The indicator rotates in eight steps over one second. Reduced-motion preferences disable animation, retaining the static graphic and text. The SVG is decorative. The outer span defaults to role=status, aria-live=polite, and aria-atomic=true, with native span props and ref forwarded. There is no focus stop, overlay, disabled state, progress percentage, or automatic completion.
+
+The caller decides when to render/remove the spinner and manages any aria-busy state on the loading content separately. A live region present before its text changes provides more reliable announcements than inserting a pre-filled live region; actual announcements depend on assistive technology. Avoid duplicating status announcements in nested live regions.
+
+```tsx
+import { SpinnerStatus } from "art-pix-ui";
+
+<SpinnerStatus />
+<SpinnerStatus size="small" label="Saving notes…" />
+<SpinnerStatus size="large" label="Loading your workspace…" />
+```
+
+`SpinnerStatusProps` is exported. After building, run `node scripts/check-spinner-status.mjs` for rendering and reduced-motion CSS checks.
 
 ### FaqAccordion
 
@@ -629,7 +864,7 @@ The source catalog uses all 15 canonical categories:
 | Data visualization | `src/components/data-visualization/` |
 | Decorative Effects | `src/components/decorative-effects/` |
 
-The implemented components live in `cards-content/FaqAccordion`, `navigation/Pagination`, `navigation/Breadcrumbs`, `navigation/Sidebar`, `navigation/NavigationBar`, `layout-containers/Footer`, `layout-containers/Header`, `data-display/Timeline`, `data-display/Table`, `data-display/KeyValueDisplay`, `data-display/List`, `media/ImageWithOverlay`, `media/Logo`, `media/AvatarGroup`, `media/Avatar`, `media/Thumbnail`, `media/Image`, `media/PlaceholderImage`, `forms-inputs/FileUpload`, `forms-inputs/Slider`, `forms-inputs/ToggleSwitch`, `forms-inputs/RadioButton`, `forms-inputs/Checkbox`, `forms-inputs/TextArea`, `forms-inputs/TextInput`, `cards-content/BasicCard`, `media/IconGroup`, `media/Icon`, `typography-text/CodeBlock`, `typography-text/Link`, `typography-text/Title`, `typography-text/Label`, `buttons-actions/Button`, `buttons-actions/IconButton`, and `cards-content/ContactCard`. The other 150 component folders remain empty stubs. The duplicate TextBox stub was removed, leaving 185 active catalog components. Each component folder contains a `.tsx` source file, a `.css` file, and an `index.ts`. The catalog is declared in `scripts/generate-component-stubs.mjs`; rerunning that script only creates missing files and preserves implementations.
+The implemented components live in `loading-progress/LoadingScreen`, `loading-progress/LoadingOverlay`, `loading-progress/BufferingIndicator`, `loading-progress/DownloadProgress`, `loading-progress/UploadProgress`, `loading-progress/LoadingButton`, `loading-progress/ShimmerSkeleton`, `loading-progress/SkeletonLoader`, `loading-progress/ProgressSteps`, `loading-progress/CircularProgress`, `loading-progress/IndeterminateProgressBar`, `loading-progress/ProgressBar`, `loading-progress/PulseLoader`, `loading-progress/DotsLoader`, `loading-progress/SpinnerStatus`, `cards-content/FaqAccordion`, `navigation/Pagination`, `navigation/Breadcrumbs`, `navigation/Sidebar`, `navigation/NavigationBar`, `layout-containers/Footer`, `layout-containers/Header`, `data-display/Timeline`, `data-display/Table`, `data-display/KeyValueDisplay`, `data-display/List`, `media/ImageWithOverlay`, `media/Logo`, `media/AvatarGroup`, `media/Avatar`, `media/Thumbnail`, `media/Image`, `media/PlaceholderImage`, `forms-inputs/FileUpload`, `forms-inputs/Slider`, `forms-inputs/ToggleSwitch`, `forms-inputs/RadioButton`, `forms-inputs/Checkbox`, `forms-inputs/TextArea`, `forms-inputs/TextInput`, `cards-content/BasicCard`, `media/IconGroup`, `media/Icon`, `typography-text/CodeBlock`, `typography-text/Link`, `typography-text/Title`, `typography-text/Label`, `buttons-actions/Button`, `buttons-actions/IconButton`, and `cards-content/ContactCard`. The other 135 component folders remain empty stubs. The duplicate TextBox stub was removed, leaving 185 active catalog components. Each component folder contains a `.tsx` source file, a `.css` file, and an `index.ts`. The catalog is declared in `scripts/generate-component-stubs.mjs`; rerunning that script only creates missing files and preserves implementations.
 
 ## Adding a component implementation
 

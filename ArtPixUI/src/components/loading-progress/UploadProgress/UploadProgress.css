@@ -1,0 +1,2 @@
+.art-pix-upload-progress { display: grid; gap: 12px; min-width: 0; width: 100%; }
+.art-pix-upload-progress__counts { min-width: 0; overflow-wrap: anywhere; color: var(--art-pix-color-muted); font: 400 0.8125rem/1.5 var(--art-pix-font-mono); font-variant-numeric: tabular-nums; }
