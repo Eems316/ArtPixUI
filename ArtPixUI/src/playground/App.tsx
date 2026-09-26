@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, ContactCard, IconButton, Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, ToggleSwitch, Slider, FileUpload, PlaceholderImage, Image, Thumbnail, Avatar } from "../index.js";
 import avatar from "./avatar.svg";
-import { AvatarGroup, Logo, ImageWithOverlay, List } from "../index.js";
+import { AvatarGroup, Logo, ImageWithOverlay, List, KeyValueDisplay, Table, Timeline, Header, Footer, NavigationBar, Sidebar, Breadcrumbs, Pagination, FaqAccordion } from "../index.js";
 import logo from "./logo.svg";
 
 function PixelMark({ kind = "spark" }: { kind?: "spark" | "arrow" | "heart" | "plus" | "check" }) {
@@ -17,6 +17,17 @@ function PixelMark({ kind = "spark" }: { kind?: "spark" | "arrow" | "heart" | "p
 
 export function App() {
   const [count, setCount] = useState(0);
+  const [faqOpenIds, setFaqOpenIds] = useState<string[]>(["start"]);
+  const [demoPage, setDemoPage] = useState(1);
+  const [longPage, setLongPage] = useState(10);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [drawerCollapsed, setDrawerCollapsed] = useState(false);
+  const sidebarItems = [
+    { id: "home", label: "Overview", href: "#sidebar-heading", current: true, icon: <PixelMark kind="spark" /> },
+    { id: "people", label: "People", href: "#contact-demo", icon: <PixelMark kind="heart" /> },
+    { id: "notes", label: "Field notes", href: "#code-demo", icon: <PixelMark kind="check" /> },
+  ];
   const [saved, setSaved] = useState(false);
   const [heroName, setHeroName] = useState("");
   const [story, setStory] = useState("");
@@ -528,6 +539,173 @@ export function App() {
             </div>
           </div>
           <div className="playground-exhibit-footer"><span>Native lists and list items. Regular or compact spacing; no animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="key-value-display-demo" aria-labelledby="key-value-display-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">26</span><h2 id="key-value-display-heading">The details that matter</h2><span className="playground-kind">KEY VALUE DISPLAY · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24 }}>
+            <KeyValueDisplay aria-label="Adventure details" items={[
+              { id: "name", label: "Adventure", value: "The Mossglen trail" },
+              { id: "guide", label: "Guide", value: <Link href="#key-value-display-heading">Mira Chen · View guide</Link> },
+              { id: "supplies", label: "Supplies remaining", value: 0 },
+              { id: "notes", label: "Field notes", value: "Follow the forest path past the old watchtower. Longer descriptions wrap without pushing the labels or values outside the frame." },
+            ]} />
+            <div style={{ maxWidth: 300, marginTop: 24 }}>
+              <strong>Narrow container</strong>
+              <KeyValueDisplay aria-label="Compact details" items={[
+                { id: "party", label: "Party", value: <AvatarGroup aria-label="Travelers"><Avatar name="Mira Chen" /><Avatar name="Alex Taylor" /></AvatarGroup> },
+                { id: "reference", label: "Reference", value: "MOSSGLEN-EXPEDITION-2026-EXTRA-LONG-REFERENCE" },
+                { id: "status", label: "Status", value: "Ready for departure" },
+              ]} />
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Semantic label/value pairs. Stacks at 400px container width; no animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="table-demo" aria-labelledby="table-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">27</span><h2 id="table-heading">A place for every detail</h2><span className="playground-kind">TABLE · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24, display: "grid", gap: 28, minWidth: 0 }}>
+            <Table caption="Party supplies" scrollLabel="Party supplies — scroll horizontally" minWidth={600}>
+              <thead><tr><th scope="col">Item</th><th scope="col">Keeper</th><th scope="col">Quantity</th><th scope="col">Notes</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Lantern</th><td><Link href="#table-heading">Mira Chen</Link></td><td>2</td><td>Ready for the forest trail</td></tr>
+                <tr><th scope="row">Maps</th><td>Alex Taylor</td><td>3</td><td>Includes the old watchtower route</td></tr>
+                <tr><th scope="row">Rations</th><td>Sam Lee</td><td>0</td><td>Restock before departure</td></tr>
+              </tbody>
+              <tfoot><tr><th scope="row" colSpan={2}>Total supplies</th><td>5</td><td>Three categories</td></tr></tfoot>
+            </Table>
+            <div style={{ maxWidth: 300, minWidth: 0 }}>
+              <Table aria-label="Upcoming quests" scrollLabel="Upcoming quests — scroll horizontally">
+                <thead><tr><th scope="col">Quest</th><th scope="col">Destination</th><th scope="col">Status</th></tr></thead>
+                <tbody><tr><td colSpan={3}>No quests scheduled. Add your own empty-state content.</td></tr></tbody>
+              </Table>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Tab to a scrolling region and use arrow keys. Native headers and cells; no sorting or pagination.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="timeline-demo" aria-labelledby="timeline-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">28</span><h2 id="timeline-heading">One step, then another</h2><span className="playground-kind">TIMELINE · AWAITING REVIEW</span></div>
+          <div className="playground-basic-card-stage">
+            <Timeline aria-label="Adventure events" items={[
+              { id: "gather", title: "Party assembled", timestamp: "September 25 · 8:00 AM", dateTime: "2026-09-25T08:00:00-04:00", content: "Mira and Alex meet at the old oak." },
+              { id: "trail", title: "The trail begins", timestamp: "Later that morning", content: <>A longer field note wraps naturally without interrupting the line between events. <Link href="#timeline-heading">Read the field notes</Link></> },
+              { id: "camp", title: "Camp established", content: <AvatarGroup aria-label="Camp companions"><Avatar name="Mira Chen" /><Avatar name="Alex Taylor" /></AvatarGroup> },
+            ]} />
+            <div className="playground-basic-card-content"><strong>Single event · right-to-left</strong>
+              <Timeline dir="rtl" aria-label="Single event" items={[{ id: "ready", title: "Ready for the next chapter", timestamp: "Whenever you are", content: "One marker, no trailing connector." }]} />
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Supplied order and timestamps. Optional custom content; no animation or automatic date formatting.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="header-demo" aria-labelledby="header-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">29</span><h2 id="header-heading">A welcoming beginning</h2><span className="playground-kind">HEADER · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24, display: "grid", gap: 28, minWidth: 0 }}>
+            <Header aria-label="Workshop header" brand={<Logo src={logo} alt="ArtPixUI" width={180} link="#header-heading" linkLabel="ArtPixUI workshop" />}
+              navigationLabel="Workshop navigation"
+              navigation={<><Link href="#header-heading" aria-current="page">Overview</Link><Link href="#contact-demo">People</Link><Link href="#table-demo">Supplies</Link></>}
+              actions={<Button link="#contact-demo">Say hello</Button>}>
+              <span>A home for little things with character.</span>
+            </Header>
+            <div style={{ maxWidth: 300, minWidth: 0 }}>
+              <Header aria-label="Compact section header" brand={<strong>Adventure journal</strong>}
+                navigationLabel="Journal navigation" navigation={<><Link href="#header-heading">Entries</Link><Link href="#timeline-demo">Timeline</Link></>}
+                actions={<IconButton link="#contact-demo" aria-label="Meet the party"><PixelMark kind="arrow" /></IconButton>} />
+            </div>
+            <Header aria-label="Simple section header" brand={<strong>Field notes</strong>}>A title and supporting content, without navigation or actions.</Header>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native page or section header. Flexible slots wrap naturally; no sticky behavior or animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="footer-demo" aria-labelledby="footer-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">30</span><h2 id="footer-heading">A thoughtful sign-off</h2><span className="playground-kind">FOOTER · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24, display: "grid", gap: 28, minWidth: 0 }}>
+            <Footer aria-label="Workshop footer" brand={<Logo src={logo} alt="ArtPixUI" width={180} link="#footer-heading" linkLabel="ArtPixUI footer example" />}
+              navigationLabel="Workshop footer links" navigation={<><Link href="#footer-heading">About</Link><Link href="#contact-demo">Contact</Link><Link href="#code-demo">Documentation</Link></>}>
+              <span>© 2026 ArtPixUI. Made of little things, with room for your own story.</span>
+            </Footer>
+            <div style={{ maxWidth: 300, minWidth: 0 }}>
+              <Footer aria-label="Compact journal footer" brand={<strong>Adventure journal</strong>}
+                navigationLabel="Journal footer links" navigation={<><Link href="#timeline-demo">Past adventures</Link><Link href="#footer-heading">Back to the journal</Link></>}>
+                <span>A longer supporting note wraps naturally inside this narrow 300px container.</span>
+              </Footer>
+            </div>
+            <Footer aria-label="Simple section footer">End of the field notes. No brand or navigation required.</Footer>
+          </div>
+          <div className="playground-exhibit-footer"><span>Native page or section footer. Optional slots and wrapping content; no fixed positioning or animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="navigation-bar-demo" aria-labelledby="navigation-bar-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">31</span><h2 id="navigation-bar-heading">Find your way</h2><span className="playground-kind">NAVIGATION BAR · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24, display: "grid", gap: 28, minWidth: 0 }}>
+            <NavigationBar aria-label="Workshop primary navigation"
+              brand={<Logo src={logo} alt="ArtPixUI" width={180} />}
+              items={[{ id: "overview", label: "Overview", href: "#navigation-bar-heading", current: true }, { id: "people", label: "People", href: "#contact-demo" }, { id: "supplies", label: "Supplies", href: "#table-demo" }]}
+              actions={<Button link="#contact-demo">Say hello</Button>} />
+            <div style={{ maxWidth: 300, minWidth: 0 }}>
+              <NavigationBar aria-label="Compact journal navigation" brand={<strong>Adventure journal</strong>}
+                items={[{ id: "journal", label: "Journal", href: "#navigation-bar-heading", current: true }, { id: "past", label: "Past adventures and field notes", href: "#timeline-demo" }]}
+                actions={<IconButton link="#contact-demo" aria-label="Meet the party"><PixelMark kind="arrow" /></IconButton>} />
+            </div>
+            <NavigationBar aria-label="Right-to-left section navigation" dir="rtl" items={[{ id: "notes", label: "Notes", href: "#navigation-bar-heading" }, { id: "history", label: "History", href: "#timeline-demo", current: true }]} />
+          </div>
+          <div className="playground-exhibit-footer"><span>Current page is caller-supplied. Native links and wrapping layout; no mobile drawer or added motion.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="sidebar-demo" aria-labelledby="sidebar-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">32</span><h2 id="sidebar-heading">A companion at your side</h2><span className="playground-kind">SIDEBAR · AWAITING REVIEW</span></div>
+          <div className="playground-basic-card-stage">
+            <div className="playground-basic-card-content"><strong>Static · collapse disabled</strong>
+              <Sidebar heading="Workshop" aria-label="Static sidebar" navigationLabel="Static workshop links" items={sidebarItems} collapsed animated={false}>Always expanded, even with collapsed=true.</Sidebar>
+            </div>
+            <div className="playground-basic-card-content"><strong>Collapsible · hover to peek</strong>
+              <Sidebar heading="Workshop" aria-label="Collapsible sidebar" navigationLabel="Collapsible workshop links" items={sidebarItems} collapse collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed}>
+                <Link href="#sidebar-heading">Supporting content</Link>
+              </Sidebar>
+              <span>{sidebarCollapsed ? "Collapsed" : "Expanded"} · controlled by the example</span>
+            </div>
+            <div className="playground-basic-card-content"><strong>Optional drawer</strong>
+              <Button onClick={() => setSidebarOpen(true)}>Open sidebar drawer</Button>
+              <span>Escape, backdrop, or Close dismisses it. Focus returns to this button.</span>
+              <Sidebar drawer open={sidebarOpen} onOpenChange={setSidebarOpen} collapse collapsed={drawerCollapsed} onCollapsedChange={setDrawerCollapsed}
+                heading="Your workshop" aria-label="Workshop drawer" navigationLabel="Drawer workshop links"
+                items={sidebarItems.map(item => ({ ...item, onClick: () => setSidebarOpen(false) }))}>
+                <span>Content remains available when expanded.</span>
+              </Sidebar>
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Capability and state are separate. Hover/focus peeks; expand control opens fully. Reduced motion removes sidebar animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="breadcrumbs-demo" aria-labelledby="breadcrumbs-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">33</span><h2 id="breadcrumbs-heading">Remember the way here</h2><span className="playground-kind">BREADCRUMBS · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24, display: "grid", gap: 28, minWidth: 0 }}>
+            <Breadcrumbs aria-label="Workshop breadcrumb trail" items={[{ id: "home", label: "Home", href: "#breadcrumbs-heading" }, { id: "components", label: "Components", href: "#navigation-bar-demo" }, { id: "current", label: "Breadcrumbs", href: "#breadcrumbs-heading" }]} />
+            <div style={{ maxWidth: 240 }}><Breadcrumbs aria-label="Narrow breadcrumb trail" items={[{ id: "home", label: "Home", href: "#breadcrumbs-heading" }, { id: "journal", label: "Adventure journal", href: "#timeline-demo" }, { id: "current", label: "A very long field note from the Mossglen expedition" }]} /></div>
+            <Breadcrumbs aria-label="Single-page breadcrumb trail" items={[{ id: "current", label: "Workshop home" }]} />
+            <Breadcrumbs dir="rtl" aria-label="Right-to-left breadcrumb trail" items={[{ id: "home", label: "Home", href: "#breadcrumbs-heading" }, { id: "section", label: "Archive" }, { id: "current", label: "Field notes" }]} />
+          </div>
+          <div className="playground-exhibit-footer"><span>The last item is the current page, never a link. Decorative separators; wrapping without truncation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="pagination-demo" aria-labelledby="pagination-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">34</span><h2 id="pagination-heading">A little further along</h2><span className="playground-kind">PAGINATION · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24, display: "grid", gap: 28, minWidth: 0 }}>
+            <div><strong>Five pages</strong><Pagination aria-label="Short results pagination" page={demoPage} totalPages={5} onPageChange={setDemoPage} /><p aria-live="polite">Showing page {demoPage} of 5</p></div>
+            <div style={{ maxWidth: 300 }}><strong>Long range · narrow container</strong><Pagination aria-label="Long results pagination" page={longPage} totalPages={20} onPageChange={setLongPage} /><p aria-live="polite">Showing page {longPage} of 20</p></div>
+            <div><strong>Single page</strong><Pagination aria-label="Single-page results" page={1} totalPages={1} onPageChange={() => {}} /></div>
+            <div><strong>Disabled controls</strong><Pagination aria-label="Disabled results pagination" page={2} totalPages={3} onPageChange={() => {}} disabled /></div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Controlled, one-based pages. Ellipses are decorative; native buttons support Tab, Enter, and Space.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit playground-icon-demo" id="faq-accordion-demo" aria-labelledby="faq-accordion-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">35</span><h2 id="faq-accordion-heading">A few good questions</h2><span className="playground-kind">FAQ ACCORDION · AWAITING REVIEW</span></div>
+          <div style={{ padding: 24, display: "grid", gap: 28, minWidth: 0 }}>
+            <FaqAccordion aria-label="Workshop questions" items={[
+              { id: "pack", question: "What should I bring?", answer: <>A notebook, a little curiosity, and comfortable shoes. <Link href="#faq-accordion-heading">Read the packing notes</Link></> },
+              { id: "friends", question: "Can I invite a friend?", answer: <><p>There is always room for one more adventurer.</p><Button link="#contact-demo">Meet the party</Button></> },
+              { id: "long", question: "What happens when a longer question or answer needs room on a small screen?", answer: "Both wrap naturally, and the open panel grows with its content. No fixed answer height or text truncation is needed." },
+            ]} />
+            <div style={{ maxWidth: 300 }}><strong>Single open · controlled</strong>
+              <FaqAccordion aria-label="Journey questions" singleOpen openIds={faqOpenIds} onOpenChange={setFaqOpenIds} items={[
+                { id: "start", question: "Where do we start?", answer: "At the old oak, just after sunrise." },
+                { id: "return", question: "When do we return?", answer: "Before the lanterns are lit. Opening this answer closes the other." },
+              ]} />
+            </div>
+          </div>
+          <div className="playground-exhibit-footer"><span>Enter or Space toggles a question. Closed answers are inert and hidden from assistive technology. Reduced motion removes transitions.</span><span aria-hidden="true">↗</span></div>
         </section>
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>

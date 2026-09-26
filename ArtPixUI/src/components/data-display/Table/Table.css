@@ -1,0 +1,35 @@
+.art-pix-table-frame {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  border: 2px solid var(--art-pix-color-border);
+  border-radius: var(--art-pix-radius-card);
+  background: var(--art-pix-color-surface);
+}
+.art-pix-table-frame:focus-visible { outline: 3px solid var(--art-pix-color-focus); outline-offset: 3px; }
+.art-pix-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--art-pix-color-text);
+  font-family: var(--art-pix-font-mono);
+  line-height: 1.6;
+  text-align: start;
+}
+.art-pix-table > caption {
+  padding: 16px;
+  color: var(--art-pix-color-muted);
+  text-align: start;
+  font-weight: 700;
+}
+.art-pix-table > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+  padding: 12px 16px;
+  text-align: start;
+  vertical-align: top;
+  overflow-wrap: break-word;
+}
+.art-pix-table > thead { background: var(--art-pix-color-parchment); }
+.art-pix-table > :is(tbody, tfoot) > tr > :is(th, td) { border-top: 1px solid var(--art-pix-color-bevel); }
+.art-pix-table > tbody:first-child > tr:first-child > :is(th, td) { border-top: 0; }
+.art-pix-table > tfoot { background: var(--art-pix-color-parchment); font-weight: 700; }

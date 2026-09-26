@@ -32,7 +32,7 @@ Import the stylesheet once in the consumer application's global entry:
 import "art-pix-ui/styles.css";
 ```
 
-Available components: `List`, `ImageWithOverlay`, `Logo`, `AvatarGroup`, `Avatar`, `Thumbnail`, `Image`, `PlaceholderImage`, `FileUpload`, `Slider`, `ToggleSwitch`, `RadioButton`, `Checkbox`, `TextArea`, `TextInput`, `BasicCard`, `IconGroup`, `Icon`, `CodeBlock`, `Link`, `Title`, `Label`, `ContactCard`, `Button`, and `IconButton`. Their corresponding props types are also exported. Review status is tracked separately in `task-list.md`.
+Available components: `FaqAccordion`, `Pagination`, `Breadcrumbs`, `Sidebar`, `NavigationBar`, `Footer`, `Header`, `Timeline`, `Table`, `KeyValueDisplay`, `List`, `ImageWithOverlay`, `Logo`, `AvatarGroup`, `Avatar`, `Thumbnail`, `Image`, `PlaceholderImage`, `FileUpload`, `Slider`, `ToggleSwitch`, `RadioButton`, `Checkbox`, `TextArea`, `TextInput`, `BasicCard`, `IconGroup`, `Icon`, `CodeBlock`, `Link`, `Title`, `Label`, `ContactCard`, `Button`, and `IconButton`. Their corresponding props types are also exported. Review status is tracked separately in `task-list.md`.
 
 ```tsx
 import { Button, ContactCard, IconButton } from "art-pix-ui";
@@ -57,6 +57,209 @@ export function Contact() {
     </ContactCard>
   );
 }
+```
+
+### FaqAccordion
+
+Parchment disclosure panels with dark rounded borders, bold questions, and green plus/minus indicators. Each `items` entry has a unique stable `id`, a string `question`, and React-content `answer`. Questions render as native buttons inside headings; `headingLevel` defaults to 3 and accepts 2–6. Choose a level appropriate to the surrounding page.
+
+By default, multiple answers may be open and internal state starts closed. `defaultOpenIds` sets initial uncontrolled state. For controlled state, provide `openIds` and update it through `onOpenChange`. `singleOpen` permits at most one open answer, while still allowing every answer to close. Unknown IDs and duplicates are ignored; if singleOpen receives several valid IDs, the first supplied ID is used. Default IDs are read only on mount; keep controlled/uncontrolled usage consistent.
+
+Opening/closing uses a 180ms grid-height and opacity transition, removed for reduced-motion preferences. Answers stay mounted to preserve their state, but closed panels are inert and aria-hidden, so their controls leave the tab order immediately. Questions use aria-expanded/aria-controls, and answer regions are named by their questions. Tab follows normal document order; Enter and Space toggle a question. Native div props, `className`, `style`, and `ref` target the outer wrapper.
+
+```tsx
+import { FaqAccordion } from "art-pix-ui";
+
+<FaqAccordion singleOpen defaultOpenIds={["start"]} items={[
+  { id: "start", question: "Where do we start?", answer: "At the old oak." },
+  { id: "bring", question: "What should I bring?", answer: <p>A notebook and a little curiosity.</p> },
+]} />
+```
+
+`FaqAccordionProps` and `FaqAccordionItem` are exported. An empty items array renders an empty wrapper. This component does not fetch answers or impose a fixed panel height.
+
+### Pagination
+
+Controlled, one-based pagination with `page`, `totalPages`, and `onPageChange`. The caller updates page state and owns fetching, result rendering, and any loading announcements. Selecting the current page does not emit a change. Buttons do not change URLs or submit forms.
+
+Previous/Next disable at the boundaries; `disabled` disables every button. The current page has `aria-current="page"`, green styling, and an underline. Long ranges retain first/last pages and a compact nearby window with non-interactive decorative ellipses. The list wraps at narrow widths. Shared Button press/hover behavior respects its existing reduced-motion rules.
+
+Counts are floored and capped at the maximum safe integer. Non-finite or non-positive totals render nothing. Page values are floored and clamped into the available range; non-finite pages display page 1. Normalization does not emit callbacks or rewrite caller state. A single page displays page 1 with disabled Previous/Next controls.
+
+Native nav props, `className`, `style`, and `ref` target the outer navigation. Its accessible name defaults to "Pagination"; use `aria-label` or `aria-labelledby` to distinguish multiple controls.
+
+```tsx
+const [page, setPage] = useState(1);
+
+<Pagination page={page} totalPages={20} onPageChange={setPage} />
+```
+
+Import `useState` from React and `Pagination` from `art-pix-ui`. `PaginationProps` is exported. After building, run `node scripts/check-pagination.mjs` for dependency-free rendering checks covering boundaries, compact ranges, and invalid inputs.
+
+### Breadcrumbs
+
+Named native navigation containing an ordered list. Each item has a unique stable `id`, React-content `label`, and optional `href`. The last item is always the current page: it renders as dark text with `aria-current="page"`, ignoring any supplied href. Earlier items use the shared green Link when href is supplied, otherwise plain muted text. Do not put interactive elements inside labels.
+
+Pixel-chevron separators are decorative, hidden from assistive technology, and mirrored in RTL. Trails and long labels wrap without truncation. A single item has no separator; an empty array renders an empty navigation list. No route inference or added animation is performed; links retain their existing hover/focus and reduced-motion behavior.
+
+Native nav props, `className`, `style`, and `ref` target the outer element. The accessible name defaults to "Breadcrumbs"; customize it with `aria-label` or `aria-labelledby`. `BreadcrumbsProps` and `BreadcrumbsItem` are exported.
+
+```tsx
+import { Breadcrumbs } from "art-pix-ui";
+
+<Breadcrumbs items={[
+  { id: "home", label: "Home", href: "/" },
+  { id: "library", label: "Library", href: "/library" },
+  { id: "current", label: "Field notes" },
+]} />
+```
+
+### Sidebar
+
+Parchment `aside` with a dark border, optional `heading`, `items`, and custom `children`. Items require unique `id`, string `label`, and `href`; optional `icon` is decorative (do not pass interactive content), and `current` marks the current page. Other Link props are supported. Missing icons use a small square. `navigationLabel` names the inner nav. Use `aria-label` to name the sidebar and its drawer dialog. Native aside props and `ref` target the panel.
+
+Capability and state are separate:
+
+- `collapse` defaults to false: the sidebar stays expanded, ignores `collapsed`, and has no collapse control.
+- `collapse={true}` enables the toggle. `collapsed` (default false) is controlled; update it in `onCollapsedChange`.
+- The collapsed 72px rail peeks to 112px on hover-capable pointers or keyboard focus, without changing state. The expand control requests full 280px expansion. Links navigate rather than expand. Heading and custom content are hidden and non-focusable while collapsed; link names remain accessible.
+- `drawer` defaults to false (inline). When true, `open` (default false) controls visibility independently of collapse, with `onOpenChange` handling requests to dismiss.
+- Drawer mode uses a native modal dialog: backdrop, Escape/Close dismissal, Tab wrapping, focus restoration, and background scroll locking. Keep an accessible external trigger. Links do not automatically close it; use their onClick handlers if desired.
+- `animated` defaults to true: 180ms width changes and drawer entry slide. False or reduced-motion preference removes these sidebar animations. Closing is immediate. Shared Link/Button animations retain their own reduced-motion handling.
+
+The drawer opens from the left. Width is constrained to available space, and drawer contents scroll vertically. Custom content should be responsive. Use inline composition for a static sidebar; enabling drawer does not require enabling collapse.
+
+```tsx
+const [collapsed, setCollapsed] = useState(true);
+const [open, setOpen] = useState(false);
+const items = [{ id: "home", label: "Home", href: "/", current: true }];
+
+<Sidebar collapse collapsed={collapsed} onCollapsedChange={setCollapsed}
+  heading="Workspace" items={items} />
+
+<Button onClick={() => setOpen(true)}>Open navigation</Button>
+<Sidebar drawer open={open} onOpenChange={setOpen}
+  aria-label="Workspace navigation" heading="Workspace" items={items} />
+```
+
+Import `useState` from React and `Sidebar`/`Button` from `art-pix-ui`. `SidebarProps` and `SidebarItem` are exported. Collapse and drawer state remain owned by the caller; callbacks must update that state for controls to take effect.
+
+### NavigationBar
+
+A named native `nav` with a parchment surface, wrapping green Link components, and optional `brand` and `actions` slots. Supply `items` with unique `id`, `label` (React content), and `href`. Each item also accepts Link props such as `target`, `rel`, and click handlers. Do not put interactive elements inside an item's label, since the label is already inside an anchor.
+
+Set `current: true` on the current item to add `aria-current="page"`, a light background, and a green bottom border. Supply at most one current item per navigation set. Current state is controlled by your app, not inferred from the URL or changed automatically on click. New-tab safety and reduced-motion behavior come from the shared Link component.
+
+Native nav props, `className`, `style`, and `ref` target the outer element. It defaults to the accessible name "Primary navigation"; use `aria-label` or `aria-labelledby` to distinguish multiple navigation regions. This is already a nav, so do not place it inside Header/Footer's navigation slot (which creates another nav); it can be composed as their supporting children instead.
+
+Links and actions wrap naturally, including in RTL layouts. There is no mobile drawer, sticky positioning, router dependency, or added animation. Custom brand/action content should be responsive.
+
+```tsx
+import { NavigationBar, Button } from "art-pix-ui";
+
+<NavigationBar aria-label="Main sections"
+  brand={<strong>Your brand</strong>}
+  items={[
+    { id: "home", label: "Home", href: "/", current: true },
+    { id: "about", label: "About", href: "/about" },
+  ]}
+  actions={<Button link="/contact">Contact</Button>}
+/>
+```
+
+`NavigationBarProps` and `NavigationBarItem` are also exported.
+
+### Footer
+
+A native `footer` with a parchment background, dark top border, and muted mono supporting text. Optional `brand` and `navigation` props accept React content; `children` supplies a full-width supporting row. Missing slots are not rendered. Slots wrap naturally on narrow screens. There is no animation, fixed positioning, automatic copyright text, or date calculation.
+
+The navigation slot renders inside a native `nav`, named with `navigationLabel` (default "Footer navigation"). Pass links or a list, not another nav element. Use distinct labels when a page contains multiple navigation regions. Custom content should be responsive; links retain their native keyboard behavior.
+
+Native footer props, `className`, `style`, and `ref` target the outer footer. Landmark semantics depend on context: a page-level footer can be contentinfo, while one inside a section is a section footer. No contentinfo role is forced. Playground examples are section footers.
+
+```tsx
+import { Footer, Logo, Link } from "art-pix-ui";
+
+<Footer
+  brand={<Logo src="/brand.svg" alt="Your brand" width={180} />}
+  navigation={<><Link href="/about">About</Link><Link href="/contact">Contact</Link></>}
+>
+  © 2026 Your brand. Made with care.
+</Footer>
+```
+
+### Header
+
+A native `header` with a parchment background and dark bottom border. Optional React-content slots are `brand`, `navigation`, and `actions`; `children` adds a full-width supporting row. Missing slots are not rendered. Flex wrapping accommodates narrow containers without a collapsed menu. There is no animation, sticky positioning, or built-in state.
+
+The navigation slot is wrapped in a native `nav` with `navigationLabel` (default "Main navigation"). Pass links or a list of links, not another nav element. Give multiple navigation regions distinct names. Brand content can be a Logo or a heading appropriate to your page. Actions retain their own behavior. Custom slot content should also be responsive.
+
+Native header props, `className`, `style`, and `ref` apply to the outer header. Landmark behavior depends on context: a page-level header can be a banner; one inside a section is a section header. No banner role is forced. The playground examples are section headers.
+
+```tsx
+import { Header, Logo, Link, Button } from "art-pix-ui";
+
+<Header
+  brand={<Logo src="/brand.svg" alt="Your brand" width={180} link="/" />}
+  navigation={<><Link href="/">Home</Link><Link href="/about">About</Link></>}
+  actions={<Button link="/contact">Contact</Button>}
+>
+  A little introduction to your workspace.
+</Header>
+```
+
+### Timeline
+
+Displays an `items` array in supplied order using an `ol` and `li` elements, a solid vertical connector, and green square markers. Each item requires a unique stable `id` and `title`; optional `content` accepts custom React content. Titles are bold text rather than fixed heading levels. An empty array renders an empty list, and a single event has no connector. There is no animation, sorting, or automatic date formatting.
+
+Optional `timestamp` is displayed exactly as supplied. With a valid machine-readable `dateTime`, it renders as a native `time` element; without one, it is plain text so labels such as "Later that morning" remain valid. The caller is responsible for valid dateTime values. Omitting timestamp hides it entirely.
+
+Native ordered-list props, `ref`, `className`, and `style` target the outer list, except numbering props (`start`, `reversed`, `type`) are excluded because this is a marker-based display. Use `aria-label` or `aria-labelledby` to name the timeline. Right-to-left layouts use logical positioning; child links and controls retain their native behavior.
+
+```tsx
+import { Timeline } from "art-pix-ui";
+
+<Timeline aria-label="Adventure events" items={[
+  { id: "start", title: "Party assembled", timestamp: "September 25 · 8:00 AM", dateTime: "2026-09-25T08:00:00-04:00", content: "Meet at the old oak." },
+  { id: "camp", title: "Camp established", content: <p>Ready for the next chapter.</p> },
+]} />
+```
+
+`TimelineItem` and `TimelineProps` are also exported.
+
+### Table
+
+A native table inside a rounded parchment scrolling frame. Compose `thead`, `tbody`, optional `tfoot`, and native `tr`/`th`/`td` children. Supply appropriate `scope="col"` or `scope="row"` on headers. Custom cell content, `colSpan`, and `rowSpan` retain native behavior. There is no sorting, pagination, animation, or automatic empty state.
+
+`caption` renders a native caption before the table sections. If omitted, provide an accessible name through `aria-label` or `aria-labelledby`. Use either the caption prop or your own caption child, not both. `minWidth` defaults to 480px and can be adjusted for your columns. Native table props, `className`, `style`, and `ref` target the table, not its frame.
+
+The frame always has a keyboard tab stop, a visible focus ring, and horizontal overflow scrolling. Arrow keys scroll when overflow is present. `scrollLabel` names this region (default "Scrollable table"); give it a specific name when multiple tables appear together. Long unbroken content can make the table wider and remains accessible by scrolling.
+
+```tsx
+import { Table } from "art-pix-ui";
+
+<Table caption="Party supplies" scrollLabel="Party supplies — scroll horizontally">
+  <thead><tr><th scope="col">Item</th><th scope="col">Quantity</th></tr></thead>
+  <tbody><tr><th scope="row">Lantern</th><td>2</td></tr></tbody>
+</Table>
+```
+
+### KeyValueDisplay
+
+Displays `items` as a native description list (`dl` with paired `dt` and `dd`). Each item has a unique stable `id`, a `label`, and a `value`. Labels and values accept React content, including strings, numbers, links, and composed components. Numeric zero renders normally; null/undefined values render blank. An empty items array produces an empty list, not an automatic empty-state message.
+
+Muted labels and dark mono values appear in 1:2 columns with solid dividers between rows. At a container width of 400px or less, each label stacks above its value. The layout responds to its own available width, not just the viewport, using CSS container queries. Text wraps; consumers should make custom content responsive too. There is no animation or built-in action.
+
+Native description-list props, `className`, `style`, and `ref` apply to the `dl`. Use `aria-label` or `aria-labelledby` when a named grouping is useful. `KeyValueDisplayItem` and `KeyValueDisplayProps` are exported.
+
+```tsx
+import { KeyValueDisplay } from "art-pix-ui";
+
+<KeyValueDisplay aria-label="Adventure details" items={[
+  { id: "name", label: "Adventure", value: "The Mossglen trail" },
+  { id: "remaining", label: "Supplies remaining", value: 0 },
+  { id: "guide", label: "Guide", value: <a href="/guide">Mira Chen</a> },
+]} />
 ```
 
 ### List
@@ -426,7 +629,7 @@ The source catalog uses all 15 canonical categories:
 | Data visualization | `src/components/data-visualization/` |
 | Decorative Effects | `src/components/decorative-effects/` |
 
-The implemented components live in `data-display/List`, `media/ImageWithOverlay`, `media/Logo`, `media/AvatarGroup`, `media/Avatar`, `media/Thumbnail`, `media/Image`, `media/PlaceholderImage`, `forms-inputs/FileUpload`, `forms-inputs/Slider`, `forms-inputs/ToggleSwitch`, `forms-inputs/RadioButton`, `forms-inputs/Checkbox`, `forms-inputs/TextArea`, `forms-inputs/TextInput`, `cards-content/BasicCard`, `media/IconGroup`, `media/Icon`, `typography-text/CodeBlock`, `typography-text/Link`, `typography-text/Title`, `typography-text/Label`, `buttons-actions/Button`, `buttons-actions/IconButton`, and `cards-content/ContactCard`. The other 160 component folders remain empty stubs. The duplicate TextBox stub was removed, leaving 185 active catalog components. Each component folder contains a `.tsx` source file, a `.css` file, and an `index.ts`. The catalog is declared in `scripts/generate-component-stubs.mjs`; rerunning that script only creates missing files and preserves implementations.
+The implemented components live in `cards-content/FaqAccordion`, `navigation/Pagination`, `navigation/Breadcrumbs`, `navigation/Sidebar`, `navigation/NavigationBar`, `layout-containers/Footer`, `layout-containers/Header`, `data-display/Timeline`, `data-display/Table`, `data-display/KeyValueDisplay`, `data-display/List`, `media/ImageWithOverlay`, `media/Logo`, `media/AvatarGroup`, `media/Avatar`, `media/Thumbnail`, `media/Image`, `media/PlaceholderImage`, `forms-inputs/FileUpload`, `forms-inputs/Slider`, `forms-inputs/ToggleSwitch`, `forms-inputs/RadioButton`, `forms-inputs/Checkbox`, `forms-inputs/TextArea`, `forms-inputs/TextInput`, `cards-content/BasicCard`, `media/IconGroup`, `media/Icon`, `typography-text/CodeBlock`, `typography-text/Link`, `typography-text/Title`, `typography-text/Label`, `buttons-actions/Button`, `buttons-actions/IconButton`, and `cards-content/ContactCard`. The other 150 component folders remain empty stubs. The duplicate TextBox stub was removed, leaving 185 active catalog components. Each component folder contains a `.tsx` source file, a `.css` file, and an `index.ts`. The catalog is declared in `scripts/generate-component-stubs.mjs`; rerunning that script only creates missing files and preserves implementations.
 
 ## Adding a component implementation
 

@@ -1,0 +1,7 @@
+.art-pix-breadcrumbs { min-width: 0; color: var(--art-pix-color-muted); font-family: var(--art-pix-font-mono); line-height: 1.6; }
+.art-pix-breadcrumbs__list { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0; padding: 0; list-style: none; }
+.art-pix-breadcrumbs__item { display: flex; align-items: center; gap: 12px; min-width: 0; max-width: 100%; }
+.art-pix-breadcrumbs__separator { flex: 0 0 9px; width: 9px; height: 12px; color: var(--art-pix-color-muted); }
+.art-pix-breadcrumbs__separator:dir(rtl) { transform: scaleX(-1); }
+.art-pix-breadcrumbs__label { min-width: 0; overflow-wrap: anywhere; }
+.art-pix-breadcrumbs__current { color: var(--art-pix-color-text); font-weight: 700; }

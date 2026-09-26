@@ -1,0 +1,6 @@
+.art-pix-pagination { min-width: 0; }
+.art-pix-pagination__items { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0; padding: 4px 0 8px; list-style: none; }
+.art-pix-pagination__items > li { min-width: 0; max-width: 100%; }
+.art-pix-pagination .art-pix-pagination__button { min-width: 44px; min-height: 44px; padding: 8px 12px; }
+.art-pix-pagination__button[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
+.art-pix-pagination__ellipsis { display: inline-block; padding-inline: 4px; color: var(--art-pix-color-muted); font-family: var(--art-pix-font-mono); }
