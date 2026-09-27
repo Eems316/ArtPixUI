@@ -20,6 +20,7 @@
     "typecheck": "tsc -b",
     "lint": "oxlint",
     "build": "npm run typecheck && vite build",
+    "build:playground": "vite build --config vite.playground.config.ts",
     "prepack": "npm run build"
   },
   "peerDependencies": {
