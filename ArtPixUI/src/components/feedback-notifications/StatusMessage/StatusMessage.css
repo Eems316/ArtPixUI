@@ -1,0 +1,11 @@
+.art-pix-status-message { --art-pix-status-message-accent: #2b6573; display: flex; align-items: flex-start; gap: 8px; min-width: 0; max-width: 100%; color: var(--art-pix-color-text); font: 400 0.875rem/1.5 var(--art-pix-font-mono); }
+.art-pix-status-message--success { --art-pix-status-message-accent: var(--art-pix-color-primary); }
+.art-pix-status-message--warning { --art-pix-status-message-accent: #85601a; }
+.art-pix-status-message--error { --art-pix-status-message-accent: #b74432; }
+.art-pix-status-message__icon { flex-shrink: 0; margin-block-start: 3px; color: var(--art-pix-status-message-accent); }
+.art-pix-status-message__body { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; min-width: 0; overflow-wrap: anywhere; }
+.art-pix-status-message__severity { color: var(--art-pix-status-message-accent); font-weight: 700; }
+.art-pix-status-message__text { min-width: 0; }
+.art-pix-status-message__text > :first-child { margin-block-start: 0; }
+.art-pix-status-message__text > :last-child { margin-block-end: 0; }
+@media (forced-colors: active) { .art-pix-status-message { --art-pix-status-message-accent: CanvasText; } }

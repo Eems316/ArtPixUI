@@ -32,7 +32,7 @@ Import the stylesheet once in the consumer application's global entry:
 import "art-pix-ui/styles.css";
 ```
 
-Available components: `LoadingScreen`, `LoadingOverlay`, `BufferingIndicator`, `DownloadProgress`, `UploadProgress`, `LoadingButton`, `ShimmerSkeleton`, `SkeletonLoader`, `ProgressSteps`, `CircularProgress`, `IndeterminateProgressBar`, `ProgressBar`, `PulseLoader`, `DotsLoader`, `SpinnerStatus`, `FaqAccordion`, `Pagination`, `Breadcrumbs`, `Sidebar`, `NavigationBar`, `Footer`, `Header`, `Timeline`, `Table`, `KeyValueDisplay`, `List`, `ImageWithOverlay`, `Logo`, `AvatarGroup`, `Avatar`, `Thumbnail`, `Image`, `PlaceholderImage`, `FileUpload`, `Slider`, `ToggleSwitch`, `RadioButton`, `Checkbox`, `TextArea`, `TextInput`, `BasicCard`, `IconGroup`, `Icon`, `CodeBlock`, `Link`, `Title`, `Label`, `ContactCard`, `Button`, and `IconButton`. Their corresponding props types are also exported. Review status is tracked separately in `task-list.md`.
+Available components: `InfoMessage`, `SuccessMessage`, `WarningMessage`, `ErrorMessage`, `ValidationMessage`, `NotificationDot`, `NotificationBadge`, `NotificationBanner`, `EmptyState`, `ErrorState`, `SuccessState`, `Toast`, `Snackbar`, `UndoNotification`, `ProgressNotification`, `StatusMessage`, `Alert`, `LoadingScreen`, `LoadingOverlay`, `BufferingIndicator`, `DownloadProgress`, `UploadProgress`, `LoadingButton`, `ShimmerSkeleton`, `SkeletonLoader`, `ProgressSteps`, `CircularProgress`, `IndeterminateProgressBar`, `ProgressBar`, `PulseLoader`, `DotsLoader`, `SpinnerStatus`, `FaqAccordion`, `Pagination`, `Breadcrumbs`, `Sidebar`, `NavigationBar`, `Footer`, `Header`, `Timeline`, `Table`, `KeyValueDisplay`, `List`, `ImageWithOverlay`, `Logo`, `AvatarGroup`, `Avatar`, `Thumbnail`, `Image`, `PlaceholderImage`, `FileUpload`, `Slider`, `ToggleSwitch`, `RadioButton`, `Checkbox`, `TextArea`, `TextInput`, `BasicCard`, `IconGroup`, `Icon`, `CodeBlock`, `Link`, `Title`, `Label`, `ContactCard`, `Button`, and `IconButton`. Their corresponding props types are also exported. Review status is tracked separately in `task-list.md`.
 
 ```tsx
 import { Button, ContactCard, IconButton } from "art-pix-ui";
@@ -58,6 +58,43 @@ export function Contact() {
   );
 }
 ```
+
+### Feedback, notifications, and states batch
+
+The rest of phase 6 is implemented and awaiting review. See [feedback-review.md](./feedback-review.md) for props, timer/dismissal rules, field associations, examples, and the review checklist for all 15 new components. No dependencies were added. Run `node scripts/check-feedback-states.mjs` after building, plus the existing Alert and StatusMessage checks.
+
+### StatusMessage
+
+Compact monospaced feedback without an Alert card surface. A small decorative pixel icon and visible severity label accompany the message, with matching info, success, warning and error accents. No animation is included.
+
+```tsx
+import { StatusMessage } from "art-pix-ui";
+
+<StatusMessage severity="success">Your notes have been saved.</StatusMessage>
+<StatusMessage severity="error" announcement="assertive">Connection lost.</StatusMessage>
+<StatusMessage announcement="off">Your map is available offline.</StatusMessage>
+```
+
+`severity` defaults to info. `announcement` defaults to polite (role=status), with assertive (role=alert) and off (no live-region role) available independently of severity. Announcements are atomic unless disabled. StatusMessage and Alert share private icon definitions, severity types and announcement conventions. Keep a polite region mounted before changing its content where possible; actual announcements depend on assistive technology and mounting behavior. Reserve assertive announcements for urgent changes and use off for static text.
+
+`StatusMessageProps` includes native div attributes and ref except role, aria-live and aria-atomic, which are managed by the announcement prop. Children may contain text, rich content or links; long messages wrap and RTL is supported. There is no title, card, auto-dismissal, focus movement or timer. Run `node scripts/check-status-message.mjs` and `node scripts/check-alert.mjs` after building to verify all severity/announcement combinations and shared conventions.
+
+### Alert
+
+A persistent parchment message surface with dark rounded outlines, pixel severity icons and distinct accent colors. Visible severity text accompanies the icon so color is not the only state cue. No animation or automatic dismissal is included.
+
+```tsx
+import { Alert } from "art-pix-ui";
+
+<Alert severity="success" title="Supplies saved">Everything is ready.</Alert>
+<Alert severity="error" title="Save failed" announcement="assertive">
+  Your changes could not be saved. Please try again.
+</Alert>
+```
+
+`severity` is info (default), success, warning or error. `title` is optional React content; `children` supplies the message. `announcement` is polite (default role=status), assertive (role=alert), or off (no live-region role). Active announcements are atomic; severity never automatically escalates urgency. Prefer off for static informational content and reserve assertive for urgent updates. Actual announcements depend on assistive technology and how content is inserted or updated; keep a polite region mounted before updating its text where possible.
+
+`AlertProps` supports native div attributes and ref, excluding title/role/aria-live/aria-atomic which are managed by the component API. Icons use the shared decorative Icon primitive. Links or actions may be supplied within children; no focus movement, timer or dismissal control is added. The accent uses a logical border for RTL and long text wraps. Run `node scripts/check-alert.mjs` after building for all 12 severity/announcement combinations, title, children, props and static CSS checks.
 
 ### LoadingScreen
 
@@ -864,7 +901,7 @@ The source catalog uses all 15 canonical categories:
 | Data visualization | `src/components/data-visualization/` |
 | Decorative Effects | `src/components/decorative-effects/` |
 
-The implemented components live in `loading-progress/LoadingScreen`, `loading-progress/LoadingOverlay`, `loading-progress/BufferingIndicator`, `loading-progress/DownloadProgress`, `loading-progress/UploadProgress`, `loading-progress/LoadingButton`, `loading-progress/ShimmerSkeleton`, `loading-progress/SkeletonLoader`, `loading-progress/ProgressSteps`, `loading-progress/CircularProgress`, `loading-progress/IndeterminateProgressBar`, `loading-progress/ProgressBar`, `loading-progress/PulseLoader`, `loading-progress/DotsLoader`, `loading-progress/SpinnerStatus`, `cards-content/FaqAccordion`, `navigation/Pagination`, `navigation/Breadcrumbs`, `navigation/Sidebar`, `navigation/NavigationBar`, `layout-containers/Footer`, `layout-containers/Header`, `data-display/Timeline`, `data-display/Table`, `data-display/KeyValueDisplay`, `data-display/List`, `media/ImageWithOverlay`, `media/Logo`, `media/AvatarGroup`, `media/Avatar`, `media/Thumbnail`, `media/Image`, `media/PlaceholderImage`, `forms-inputs/FileUpload`, `forms-inputs/Slider`, `forms-inputs/ToggleSwitch`, `forms-inputs/RadioButton`, `forms-inputs/Checkbox`, `forms-inputs/TextArea`, `forms-inputs/TextInput`, `cards-content/BasicCard`, `media/IconGroup`, `media/Icon`, `typography-text/CodeBlock`, `typography-text/Link`, `typography-text/Title`, `typography-text/Label`, `buttons-actions/Button`, `buttons-actions/IconButton`, and `cards-content/ContactCard`. The other 135 component folders remain empty stubs. The duplicate TextBox stub was removed, leaving 185 active catalog components. Each component folder contains a `.tsx` source file, a `.css` file, and an `index.ts`. The catalog is declared in `scripts/generate-component-stubs.mjs`; rerunning that script only creates missing files and preserves implementations.
+The implemented components live in `feedback-notifications/InfoMessage`, `feedback-notifications/SuccessMessage`, `feedback-notifications/WarningMessage`, `feedback-notifications/ErrorMessage`, `feedback-notifications/ValidationMessage`, `feedback-notifications/NotificationDot`, `feedback-notifications/NotificationBadge`, `feedback-notifications/NotificationBanner`, `feedback-notifications/EmptyState`, `feedback-notifications/ErrorState`, `feedback-notifications/SuccessState`, `feedback-notifications/Toast`, `feedback-notifications/Snackbar`, `feedback-notifications/UndoNotification`, `feedback-notifications/ProgressNotification`, `feedback-notifications/StatusMessage`, `feedback-notifications/Alert`, `loading-progress/LoadingScreen`, `loading-progress/LoadingOverlay`, `loading-progress/BufferingIndicator`, `loading-progress/DownloadProgress`, `loading-progress/UploadProgress`, `loading-progress/LoadingButton`, `loading-progress/ShimmerSkeleton`, `loading-progress/SkeletonLoader`, `loading-progress/ProgressSteps`, `loading-progress/CircularProgress`, `loading-progress/IndeterminateProgressBar`, `loading-progress/ProgressBar`, `loading-progress/PulseLoader`, `loading-progress/DotsLoader`, `loading-progress/SpinnerStatus`, `cards-content/FaqAccordion`, `navigation/Pagination`, `navigation/Breadcrumbs`, `navigation/Sidebar`, `navigation/NavigationBar`, `layout-containers/Footer`, `layout-containers/Header`, `data-display/Timeline`, `data-display/Table`, `data-display/KeyValueDisplay`, `data-display/List`, `media/ImageWithOverlay`, `media/Logo`, `media/AvatarGroup`, `media/Avatar`, `media/Thumbnail`, `media/Image`, `media/PlaceholderImage`, `forms-inputs/FileUpload`, `forms-inputs/Slider`, `forms-inputs/ToggleSwitch`, `forms-inputs/RadioButton`, `forms-inputs/Checkbox`, `forms-inputs/TextArea`, `forms-inputs/TextInput`, `cards-content/BasicCard`, `media/IconGroup`, `media/Icon`, `typography-text/CodeBlock`, `typography-text/Link`, `typography-text/Title`, `typography-text/Label`, `buttons-actions/Button`, `buttons-actions/IconButton`, and `cards-content/ContactCard`. The other 118 component folders remain empty stubs. The duplicate TextBox stub was removed, leaving 185 active catalog components. Each component folder contains a `.tsx` source file, a `.css` file, and an `index.ts`. The catalog is declared in `scripts/generate-component-stubs.mjs`; rerunning that script only creates missing files and preserves implementations.
 
 ## Adding a component implementation
 

@@ -1,0 +1,2 @@
+.art-pix-notification-dot { display: inline-block; width: 10px; height: 10px; flex-shrink: 0; border: 1px solid var(--art-pix-color-border); border-radius: 50%; background: var(--art-pix-color-accent); vertical-align: middle; box-sizing: border-box; }
+@media (forced-colors: active) { .art-pix-notification-dot { background: Highlight; forced-color-adjust: none; } }

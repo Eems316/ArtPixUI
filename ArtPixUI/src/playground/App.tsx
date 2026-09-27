@@ -833,6 +833,17 @@ export function App() {
           <LoadingScreenDemo />
           <div className="playground-exhibit-footer"><span>Full-height page replacement, not an overlay. Shared pixel spinner; static with reduced motion.</span><span aria-hidden="true">↗</span></div>
         </section>
+        <section className="playground-exhibit" id="alert-demo" aria-labelledby="alert-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">51</span><h2 id="alert-heading">A note for your journey</h2><span className="playground-kind">ALERT · AWAITING REVIEW</span></div>
+          <AlertDemo />
+          <div className="playground-exhibit-footer"><span>Four severities. Polite by default; assertive only when requested. No automatic dismissal or animation.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <section className="playground-exhibit" id="status-message-demo" aria-labelledby="status-message-heading">
+          <div className="playground-exhibit-heading"><span className="playground-number">52</span><h2 id="status-message-heading">Small notes along the way</h2><span className="playground-kind">STATUS MESSAGE · AWAITING REVIEW</span></div>
+          <StatusMessageDemo />
+          <div className="playground-exhibit-footer"><span>Compact feedback without a card. Shared severity and announcement conventions; no animation or automatic dismissal.</span><span aria-hidden="true">↗</span></div>
+        </section>
+        <FeedbackStatesDemo />
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>
     </div>
@@ -980,4 +991,36 @@ function LoadingScreenDemo() {
   </div>;
 }
 
-import { ProgressBar, IndeterminateProgressBar, CircularProgress, ProgressSteps, SkeletonLoader, ShimmerSkeleton, LoadingButton, UploadProgress, DownloadProgress, BufferingIndicator, LoadingOverlay, LoadingScreen } from "../index.js";
+function AlertDemo() {
+  const [updated, setUpdated] = useState(false);
+  return <div style={{ display: "grid", gap: 28, padding: 28 }}>
+    <Alert title="Before you set off">Your map is available offline.</Alert>
+    <Alert severity="success" title="Supplies saved" announcement="off">Everything is packed for the adventure.</Alert>
+    <Alert severity="warning" title="Weather ahead" announcement="off">Check the forecast before leaving camp.</Alert>
+    <Alert severity="error" title="Map unavailable" announcement="off">The map could not be loaded. <Link href="#alert-heading">Review your route</Link>.</Alert>
+    <Button onClick={() => setUpdated(value => !value)}>Update polite message</Button>
+    <Alert title="Route status">{updated ? "The alternate route is ready." : "Your original route is selected."}</Alert>
+    <div style={{ maxWidth: 240 }}><Alert severity="warning" announcement="off">A longer message wraps in a narrow space without relying on color alone.</Alert></div>
+    <Alert dir="rtl" severity="success" announcement="off">Right-to-left layout example.</Alert>
+  </div>;
+}
+
+function StatusMessageDemo() {
+  const [saved, setSaved] = useState(false);
+  const [urgent, setUrgent] = useState(false);
+  return <div style={{ display: "grid", gap: 24, padding: 28 }}>
+    <StatusMessage announcement="off">Your map is available offline.</StatusMessage>
+    <StatusMessage severity="success" announcement="off">Supplies are packed.</StatusMessage>
+    <StatusMessage severity="warning" announcement="off">Check the weather before leaving.</StatusMessage>
+    <StatusMessage severity="error" announcement="off">The route could not be saved. <Link href="#status-message-heading">Review route</Link>.</StatusMessage>
+    <Button onClick={() => setSaved(value => !value)}>Update polite status</Button>
+    <StatusMessage severity={saved ? "success" : "info"}>{saved ? "Your notes have been saved." : "Your notes are ready to save."}</StatusMessage>
+    <Button onClick={() => setUrgent(value => !value)}>Update urgent status</Button>
+    <StatusMessage severity="error" announcement="assertive">{urgent ? "Connection lost. Your unsaved notes remain on this device." : null}</StatusMessage>
+    <div style={{ maxWidth: 190 }}><StatusMessage severity="warning" announcement="off">A longer status message wraps in a narrow space.</StatusMessage></div>
+    <StatusMessage dir="rtl" severity="success" announcement="off">Right-to-left layout example.</StatusMessage>
+  </div>;
+}
+
+import { ProgressBar, IndeterminateProgressBar, CircularProgress, ProgressSteps, SkeletonLoader, ShimmerSkeleton, LoadingButton, UploadProgress, DownloadProgress, BufferingIndicator, LoadingOverlay, LoadingScreen, Alert, StatusMessage } from "../index.js";
+import { FeedbackStatesDemo } from "./FeedbackStatesDemo.js";

@@ -1,0 +1,7 @@
+.art-pix-state-surface { display: grid; justify-items: center; gap: 16px; text-align: center; font-size: 0.875rem; line-height: 1.5; }
+.art-pix-state-surface__icon { color: var(--art-pix-color-muted); }
+.art-pix-state-surface--error .art-pix-state-surface__icon { color: #b74432; }
+.art-pix-state-surface--success .art-pix-state-surface__icon { color: var(--art-pix-color-primary); }
+.art-pix-state-surface__title { font-size: 1.125rem; font-weight: 700; }
+.art-pix-state-surface__content { min-width: 0; max-width: 40rem; }
+.art-pix-state-surface__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 100%; }
