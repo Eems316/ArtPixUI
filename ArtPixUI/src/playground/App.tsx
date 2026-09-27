@@ -844,6 +844,7 @@ export function App() {
           <div className="playground-exhibit-footer"><span>Compact feedback without a card. Shared severity and announcement conventions; no animation or automatic dismissal.</span><span aria-hidden="true">↗</span></div>
         </section>
         <FeedbackStatesDemo />
+        <OverlaysMenusDemo />
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>
     </div>
@@ -1024,3 +1025,4 @@ function StatusMessageDemo() {
 
 import { ProgressBar, IndeterminateProgressBar, CircularProgress, ProgressSteps, SkeletonLoader, ShimmerSkeleton, LoadingButton, UploadProgress, DownloadProgress, BufferingIndicator, LoadingOverlay, LoadingScreen, Alert, StatusMessage } from "../index.js";
 import { FeedbackStatesDemo } from "./FeedbackStatesDemo.js";
+import { OverlaysMenusDemo } from "./OverlaysMenusDemo.js";

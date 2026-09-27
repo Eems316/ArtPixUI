@@ -1,0 +1,32 @@
+.art-pix-overlay-surface { box-sizing: border-box; color: var(--art-pix-color-text); background: var(--art-pix-color-surface); font-family: var(--art-pix-font-mono); border: 2px solid var(--art-pix-color-border); border-radius: 16px; box-shadow: 0 5px 0 var(--art-pix-color-border); padding: 24px; overflow-wrap: anywhere; animation: art-pix-overlay-in 140ms ease-out; }
+.art-pix-overlay-surface :focus-visible, .art-pix-overlay-trigger:focus-visible, .art-pix-menu-item:focus-visible { outline: 3px solid var(--art-pix-color-focus); outline-offset: 3px; }
+.art-pix-dialog { max-width: min(520px, calc(100vw - 32px)); width: 100%; max-height: calc(100dvh - 40px); overflow: auto; }
+.art-pix-dialog::backdrop, .art-pix-backdrop { background: #2c30258c; }
+.art-pix-backdrop { position: fixed; inset: 0; z-index: 1000; }
+.art-pix-dialog-heading { margin: 0 0 20px; font-size: 1.25rem; }
+.art-pix-overlay-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.art-pix-overlay-trigger, .art-pix-menu-item { font: inherit; color: inherit; cursor: pointer; }
+.art-pix-overlay-trigger { padding: 10px 16px; border: 2px solid var(--art-pix-color-border); border-radius: 10px; background: var(--art-pix-color-parchment); box-shadow: 0 3px 0 var(--art-pix-color-border); font-family: var(--art-pix-font-mono); }
+.art-pix-overlay-trigger:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--art-pix-color-border); }
+.art-pix-overlay-trigger:disabled, .art-pix-menu-item:disabled { opacity: .5; cursor: not-allowed; }
+.art-pix-overlay-danger { background: #8b3028; color: #fff9e5; }
+.art-pix-drawer { margin: 0; height: 100dvh; max-height: 100dvh; width: min(380px, calc(100vw - 24px)); border-radius: 16px 0 0 16px; inset: 0 0 0 auto; animation-name: art-pix-drawer-right-in; }
+.art-pix-drawer[data-side=left] { inset: 0 auto 0 0; border-radius: 0 16px 16px 0; animation-name: art-pix-drawer-left-in; }
+.art-pix-sheet { width: min(680px, calc(100vw - 24px)); }
+.art-pix-bottom-sheet { inset: auto 0 0; margin: auto auto 0; height: auto; max-height: 80dvh; border-radius: 16px 16px 0 0; animation-name: art-pix-drawer-in; }
+.art-pix-popup { position: fixed; z-index: 1100; width: max-content; max-width: calc(100vw - 16px); max-height: calc(100dvh - 16px); overflow: auto; margin: 0; }
+.art-pix-popup::backdrop { background: transparent; }
+.art-pix-tooltip { padding: 8px 12px; font-size: .85rem; max-width: min(280px, calc(100vw - 16px)); }
+.art-pix-menu { min-width: min(200px, calc(100vw - 16px)); padding: 8px; }
+.art-pix-menu-item { display: flex; justify-content: space-between; align-items: center; gap: 16px; width: 100%; border: 0; border-radius: 6px; padding: 10px 12px; text-align: start; background: transparent; }
+.art-pix-menu-item:focus, .art-pix-menu-item:hover:not(:disabled), .art-pix-menu-item[aria-selected=true] { background: var(--art-pix-color-parchment); color: var(--art-pix-color-primary); }
+.art-pix-menu-bar { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px; background: var(--art-pix-color-parchment); border: 2px solid var(--art-pix-color-border); border-radius: 10px; }
+.art-pix-color-picker { display: grid; gap: 16px; width: min(260px, calc(100vw - 68px)); }
+.art-pix-color-swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.art-pix-color-swatch { width: 32px; height: 32px; border: 2px solid var(--art-pix-color-border); border-radius: 6px; cursor: pointer; }
+.art-pix-color-preview { height: 40px; border: 2px solid var(--art-pix-color-border); border-radius: 8px; }
+@keyframes art-pix-overlay-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes art-pix-drawer-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes art-pix-drawer-right-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes art-pix-drawer-left-in { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .art-pix-overlay-surface { animation: none; } }

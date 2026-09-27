@@ -1,6 +1,6 @@
 # ArtPixUI component task list
 
-Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **68 awaiting review** (67 implementations and 1 removal), **118 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
+Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **88 awaiting review** (87 implementations and 1 removal), **98 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
 
 ## Status and review workflow
 
@@ -19,7 +19,7 @@ Status markers: `[ ]` = not yet implemented; `[-]` = implemented or explicitly r
 - Embed a preview image beneath that link only when the user is messaging through ChatGPT Remote from a phone or another device without access to the project files. For local desktop messages with file access, provide the preview link without an embedded picture. Do not assume remote access from browser context alone; use explicit session information or the user's statement. If access is unknown, omit the picture unless requested.
 - Save component preview images in `samples/` at the workspace root (`artUI/samples/`), outside the `ArtPixUI/` package folder. Use descriptive filenames such as `progress-bar-preview.png`; do not leave new preview images in the package root.
 
-Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. The next phase starts with Backdrop, outside this batch.
+Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. The next unimplemented item is SearchInput in phase 8, outside this batch.
 
 The phases are implementation milestones, not replacement source categories. Keep each component in its existing canonical source folder. Similar components can share an implementation while retaining their individual catalog entries; do not silently merge or delete them.
 
@@ -199,28 +199,70 @@ Batch implementation complete. Build/lint, all 15 component rendering/behavior c
 
 ## 7. Overlays and menus
 
+**Authorized batch plan (2026-09-27):** The user asked to plan and implement every remaining item in this phase without further input. Build shared dialog/focus/scroll-lock behavior first, then anchored popup positioning, then menus and composed pickers. Retain Spritecraft's palette/pixel details and Plinth's outlined rounded surfaces, add no dependencies, export every component, add all 20 playground examples and automated checks, and mark each `[-]` with review notes. This batch authorization overrides the per-item approval pauses for phase 7 only. No item is marked user-approved. Browser-tool security policy prevented live visual/interaction verification; outstanding checks are explicit in the review guide.
+
 Implement shared focus management, Escape handling, dismissal, positioning, and keyboard navigation before the specialized overlays. CommandMenu moves to phase 8, Lightbox to phase 10, and DatePickerPopup to phase 11 to follow their content dependencies.
 
-- [ ] `Backdrop` — Shared overlay background.
-- [ ] `Dialog` — Accessible dialog core and focus lifecycle.
-- [ ] `Modal` — Modal presentation composed from Dialog and Backdrop.
-- [ ] `ConfirmationDialog` — Confirmation content and actions using Dialog.
-- [ ] `DestructiveConfirmation` — Destructive-action confirmation variant.
-- [ ] `AlertDialog` — Urgent decision variant with appropriate alert-dialog semantics.
-- [ ] `Drawer` — Edge-mounted dialog surface.
-- [ ] `Sheet` — Shared sheet presentation using the dialog/drawer behavior.
-- [ ] `BottomSheet` — Bottom-mounted Sheet variant.
-- [ ] `Popover` — Anchored popup positioning and dismissal.
-- [ ] `Tooltip` — Accessible short descriptions using the positioning primitive.
-- [ ] `HoverCard` — Richer hover/focus preview content.
-- [ ] `DropdownMenu` — Shared menu surface, items, and keyboard behavior.
-- [ ] `Submenu` — Nested menu navigation using the base menu behavior.
-- [ ] `ContextMenu` — Context-triggered menu with keyboard access.
-- [ ] `ActionMenu` — Action-focused menu composition.
-- [ ] `MenuBar` — Top-level menu navigation and Submenu composition.
-- [ ] `DisplayMenu` — Display-options menu; settle the intended options before implementation.
-- [ ] `ComboBoxPopup` — Accessible option-list popup for the upcoming autocomplete controls.
-- [ ] `ColorPickerPopup` — Color controls composed with Popover, TextInput, and Slider.
+- [-] `Backdrop` — Batch design — Look: Translucent dark-ink scrim. Animation: None. Function: Decorative, controlled visibility; no focus handling or built-in click action.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#backdrop-demo). Check scrim contrast. Modal uses the matching native dialog backdrop. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `Dialog` — Batch design — Look: Rounded parchment panel, ink outline and raised base. Animation: 140ms fade/lift entry; reduced-motion disables it; immediate close. Function: Controlled native modal dialog with title/description, Escape and outside dismissal settings, focus containment/return, and shared nested scroll lock.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#dialog-demo). Check Tab/Shift+Tab, nested dialog focus restoration, dismissal and long-content scrolling. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `Modal` — Batch design — Look: Centered Dialog surface over the shared dark scrim treatment. Animation: Same reduced-motion-aware entry as Dialog. Function: Dialog composition with modal background inertness and caller-controlled open state.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#modal-demo). Verify background cannot be activated while open; verify backdrop and Escape dismissal. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `ConfirmationDialog` — Batch design — Look: Parchment decision panel with distinct Cancel and Confirm actions. Animation: Dialog entry only. Function: Alert-dialog semantics, Cancel-first focus, no backdrop dismissal; onConfirm callback, busy state disables both actions.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#confirmation-dialog-demo). Confirm exactly once per activation; parent owns async state, closing and real data changes. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `DestructiveConfirmation` — Batch design — Look: Confirmation surface with a dark red destructive action and neutral Cancel. Animation: Dialog entry only. Function: ConfirmationDialog variant, safe initial focus and no accidental backdrop dismissal.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#destructive-confirmation-demo). Check Cancel-first focus and deliberate destructive callback; demo changes no real data. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `AlertDialog` — Batch design — Look: Named parchment alert surface with acknowledgment action. Animation: Dialog entry only. Function: Urgent alertdialog semantics; no backdrop dismissal, configurable Escape behavior.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#alert-dialog-demo). Review screen-reader announcement and acknowledgment focus. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `Drawer` — Batch design — Look: Left/right edge-mounted parchment panel, ink outline. Animation: 140ms edge slide/fade; reduced-motion disables it. Function: Controlled modal drawer with scrollable content and dialog dismissal/focus lifecycle.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#drawer-demo). Check both sides, narrow viewport, focus return and scrolling. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `Sheet` — Batch design — Look: Wider rounded parchment task surface. Animation: 140ms fade/lift; reduced-motion disables it. Function: Dialog-based sheet with centered or bottom placement.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#sheet-demo). Review long content and small viewport containment. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `BottomSheet` — Batch design — Look: Bottom-mounted parchment sheet with rounded upper corners. Animation: 140ms upward entry/fade; reduced-motion disables it. Function: Bottom Sheet variant, maximum 80dvh, dialog keyboard behavior; no drag gesture.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#bottom-sheet-demo). Check close/Escape and scrolling; drag-to-dismiss is intentionally not included. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `Popover` — Batch design — Look: Raised parchment popup, dark outline, viewport-clamped placement. Animation: 140ms entry; reduced-motion disables it. Function: Controlled anchored top-layer popup, four placements, flip/clamp, resize/scroll repositioning, outside/Escape/focus-leave dismissal.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#popover-demo). Caller supplies anchorRef and trigger aria-controls/expanded; check edge positioning and return focus. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `Tooltip` — Batch design — Look: Small parchment hint, compact mono text. Animation: 300ms hover delay, 180ms leave grace, reduced-motion-aware entry. Function: Text-only tooltip with owned button trigger; hover/focus/touch display, Escape dismissal and described-by association.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#tooltip-demo). No interactive tooltip children; review pointer travel and screen-reader description. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `HoverCard` — Batch design — Look: Richer parchment preview using the same popup family. Animation: Hover delay/leave grace and reduced-motion-aware entry. Function: Owned button trigger with focus/hover/touch preview; children may include links/actions; popup does not steal focus.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#hover-card-demo). Verify focus can move into content, pointer can cross the gap, and Escape closes. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `DropdownMenu` — Batch design — Look: Parchment menu, green highlighted items, mono labels and square checked indicators. Animation: Reduced-motion-aware 140ms entry. Function: Owned trigger; item callbacks, disabled skipping, arrows/Home/End, single-character typeahead, Escape/Tab exit and nested children.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#dropdown-menu-demo). Review pointer selection, keyboard wrapping, nested closure and focus return; unique item ids required. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `Submenu` — Batch design — Look: Matching menu surface beside a parent item with arrow indicator. Animation: Same popup entry. Function: Nested navigation primitive; Right opens, Left/Escape returns; DropdownMenu also nests via item.children.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#submenu-demo). Place standalone Submenu inside role=menu; verify child selection closes and invokes once. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `ContextMenu` — Batch design — Look: Same menu treatment anchored at the pointer or keyboard target. Animation: Same popup entry. Function: Right-click, ContextMenu key or Shift+F10 opens actions; focusable labeled context target.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#context-menu-demo). Check native browser context menu is replaced only within target, and dismissal restores target focus. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `ActionMenu` — Batch design — Look: Matching parchment action menu. Animation: Same popup entry. Function: Action-focused DropdownMenu composition with callbacks, disabled items and optional nesting.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#action-menu-demo). Review action callbacks and keyboard dismissal; no application data changes are performed internally. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `MenuBar` — Batch design — Look: Outlined parchment horizontal row of menu launchers. Animation: Popup entry only. Function: Roving tab stop, horizontal arrows/Home/End, Down to open, nested menus and disabled menu skipping.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#menu-bar-demo). Review lateral switching, Tab exit and nested Left handling. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `DisplayMenu` — Batch design — Look: Checked square display options in the shared parchment menu. Animation: Popup entry only. Function: Caller-defined checked options and onCheckedChange callback; examples toggle details/grid, without mutating the consuming layout.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#display-menu-demo). Autonomous batch choice: generic controlled display toggles, no hard-coded app settings. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `ComboBoxPopup` — Batch design — Look: TextInput and matching parchment option list. Animation: Popup entry only; steady caret where supported, native fallback otherwise. Function: Integrated controlled input/listbox; caller supplies filtered options, input and selection callbacks; active-descendant keyboard navigation, disabled skipping, empty state, no focus theft.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#combo-box-popup-demo). Review typing, Up/Down/Home/End/Enter/Escape, touch selection, empty/disabled options and assistive technology. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
+- [-] `ColorPickerPopup` — Batch design — Look: Parchment color panel, preview swatch, palette buttons and RGB sliders. Animation: Popup entry only; steady hex-field caret where supported. Function: Controlled six-digit RGB hex picker with valid-only change callbacks, TextInput, three Sliders, optional swatches and Done.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#color-picker-popup-demo). Review invalid draft, external value updates, sliders and swatch selection; no alpha/HSV support in this version. Automated scope and outstanding live checks are recorded in [overlays-menus-review.md](overlays-menus-review.md).
 
 ## 8. Search, filtering, and sorting
 
