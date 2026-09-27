@@ -51,3 +51,4 @@ export type { SearchSuggestion } from "./SearchSuggestions/SearchSuggestions.js"
 export type { FilterChip } from "./FilterChips/FilterChips.js";
 export type { FilterFacet } from "./FacetedFilters/FacetedFilters.js";
 export type { SavedSearchEntry } from "./SavedSearch/SavedSearch.js";
+export * from "./DateFilter/index.js";

@@ -45,3 +45,4 @@ export { CommandMenu } from "./CommandMenu/index.js";
 export type { CommandMenuProps, CommandItem } from "./CommandMenu/index.js";
 export { Lightbox } from "./Lightbox/index.js";
 export type { LightboxProps } from "./Lightbox/index.js";
+export * from "./DatePickerPopup/index.js";

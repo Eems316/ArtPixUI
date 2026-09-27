@@ -1,0 +1,14 @@
+.art-pix-date-stack { display: grid; gap: 12px; min-width: 0; color: var(--art-pix-color-text); font-family: var(--art-pix-font-mono); }
+.art-pix-date-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.art-pix-calendar { border: 2px solid var(--art-pix-color-border); border-radius: 16px; padding: 16px; background: var(--art-pix-color-surface); box-shadow: 0 4px 0 var(--art-pix-color-border); max-width: 420px; box-sizing: border-box; }
+.art-pix-calendar-grid { table-layout: fixed; width: 100%; border-spacing: 3px; }
+.art-pix-calendar-grid th { font-size: .75rem; color: var(--art-pix-color-muted); }
+.art-pix-calendar-grid td { padding: 0; text-align: center; }
+.art-pix-calendar-grid button[data-date] { width: 100%; min-height: 36px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.art-pix-calendar-grid button[data-outside=true] { color: var(--art-pix-color-muted); }
+.art-pix-calendar-grid button[data-in-range=true] { background: var(--art-pix-color-parchment); }
+.art-pix-calendar-grid button[aria-pressed=true] { background: var(--art-pix-color-primary); color: var(--art-pix-color-on-primary); }
+.art-pix-calendar-grid button:disabled { opacity: .35; cursor: not-allowed; }
+.art-pix-date-stack :focus-visible { outline: 3px solid var(--art-pix-color-focus); outline-offset: 2px; }
+.art-pix-date-badge { display: inline-grid; gap: 4px; padding: 10px 14px; text-align: center; background: var(--art-pix-color-parchment); border: 2px solid var(--art-pix-color-border); border-radius: 10px; font-family: var(--art-pix-font-mono); }
+.art-pix-date-error { color: #94382c; font-size: .875rem; }

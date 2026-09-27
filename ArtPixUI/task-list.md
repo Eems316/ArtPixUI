@@ -1,6 +1,6 @@
 # ArtPixUI component task list
 
-Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **137 awaiting review** (136 implementations and 1 removal), **49 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
+Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **161 awaiting review** (160 implementations and 1 removal), **25 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
 
 ## Status and review workflow
 
@@ -19,7 +19,7 @@ Status markers: `[ ]` = not yet implemented; `[-]` = implemented or explicitly r
 - Embed a preview image beneath that link only when the user is messaging through ChatGPT Remote from a phone or another device without access to the project files. For local desktop messages with file access, provide the preview link without an embedded picture. Do not assume remote access from browser context alone; use explicit session information or the user's statement. If access is unknown, omit the picture unless requested.
 - Save component preview images in `samples/` at the workspace root (`artUI/samples/`), outside the `ArtPixUI/` package folder. Use descriptive filenames such as `progress-bar-preview.png`; do not leave new preview images in the package root.
 
-Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. Phase 8's 25 components also await review under the user-authorized autonomous batch. The 10 remaining phase 9 cards also await review; ContactCard retains its existing review status. Phase 10's 14 components also await review and are committed locally. The next unimplemented item is Timestamp in phase 11, Date and time.
+Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. Phase 8's 25 components also await review under the user-authorized autonomous batch. The 10 remaining phase 9 cards also await review; ContactCard retains its existing review status. Phase 10's 14 components also await review and are committed locally. Phase 11's 24 components also await review and are committed locally. The next unimplemented item is ChartContainer in phase 12, Chart foundations, charts, and decorative effects.
 
 The phases are implementation milestones, not replacement source categories. Keep each component in its existing canonical source folder. Similar components can share an implementation while retaining their individual catalog entries; do not silently merge or delete them.
 
@@ -437,30 +437,78 @@ Build reusable controls and viewing primitives before complete galleries and pla
 
 Define shared private date parsing, formatting, selection, locale, and timezone conventions first. Then build inputs and calendar parts before complete calendars, popups, ranges, and the scheduler.
 
-- [ ] `Timestamp` — Date/time formatting and semantic time output.
-- [ ] `DateBadge` — Compact date presentation.
-- [ ] `DateInput` — Validated date entry.
-- [ ] `TimeInput` — Validated time entry.
-- [ ] `DurationInput` — Duration entry with explicit units.
-- [ ] `TimezoneSelector` — Timezone selection for the later date/time controls.
-- [ ] `CalendarHeader` — Displayed month/year and calendar navigation.
-- [ ] `CalendarGrid` — Day cells, selection, disabled dates, and keyboard navigation.
-- [ ] `Calendar` — CalendarHeader and CalendarGrid composition.
-- [ ] `InlineCalendar` — Embedded calendar selection variant.
-- [ ] `MonthPicker` — Month selection.
-- [ ] `YearPicker` — Year selection.
-- [ ] `WeekPicker` — Week selection using the calendar conventions.
-- [ ] `TimePicker` — TimeInput with time-selection controls.
-- [ ] `DatePicker` — DateInput and Calendar selection behavior.
-- [ ] `DatePickerPopup` — Popover presentation of DatePicker with focus and dismissal integration.
-- [ ] `CalendarRange` — Calendar-based start/end range selection.
-- [ ] `DateRangePicker` — Range inputs and CalendarRange composition.
-- [ ] `TimeRangePicker` — Start/end time selection using TimePicker.
-- [ ] `DateTimePicker` — Combined DatePicker and TimePicker with timezone handling.
-- [ ] `DateFilter` — Date/DateRangePicker integrated with the phase 8 filter state.
-- [ ] `Countdown` — Remaining-time display with cleanup and completion behavior.
-- [ ] `Timer` — Elapsed-time controls and display.
-- [ ] `Scheduler` — Scheduling composition using calendar, date/time selection, navigation, and dialogs.
+- [-] `Timestamp` — Batch design — Look: Quiet monospaced time text. Animation: None. Function: Formats offset-qualified instants using explicit locale/timezone (UTC default), semantic time markup and invalid fallback.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#timestamp-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DateBadge` — Batch design — Look: Compact rounded parchment badge with year/month and bold day. Animation: None. Function: Strict ISO date parsing and accessible localized date label.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#date-badge-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DateInput` — Batch design — Look: Parchment inset native date field with associated label. Animation: None. Function: Controlled ISO date string, native min/max, required, read-only, disabled and ARIA passthrough.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#date-input-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `TimeInput` — Batch design — Look: Matching labeled native time field. Animation: None. Function: Controlled 24-hour HH:mm values and native validation; one-minute precision.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#time-input-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DurationInput` — Batch design — Look: Labeled parchment number field and explicit unit. Animation: None. Function: Stores seconds; displays seconds/minutes/hours, rejects negative/nonfinite edits, no silent unit conversion of stored values.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#duration-input-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `TimezoneSelector` — Batch design — Look: Parchment native selection control. Animation: None. Function: Named timezone list with current valid zone included; caller-supplied zone choices supported.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#timezone-selector-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `CalendarHeader` — Batch design — Look: Monospaced month heading with tactile previous/next buttons. Animation: None. Function: Controlled month navigation bounded to years 0001–9999; announced month changes.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#calendar-header-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `CalendarGrid` — Batch design — Look: Seven-column day grid; green selection and parchment range fill. Animation: None. Function: 42 cells, date bounds/disabled callbacks, Sunday/Monday start, roving tab stop, arrows/Home/End/Page Up/Down.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#calendar-grid-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `Calendar` — Batch design — Look: Rounded outlined parchment calendar with raised base. Animation: None. Function: Composes header/grid; controlled selection and controlled or internal displayed month.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#calendar-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `InlineCalendar` — Batch design — Look: Always-visible Calendar presentation. Animation: None. Function: Reuses Calendar selection, bounds and keyboard behavior without a popup.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#inline-calendar-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `MonthPicker` — Batch design — Look: Labeled native month field. Animation: None. Function: Controlled YYYY-MM selection with native min/max and disabled state.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#month-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `YearPicker` — Batch design — Look: Matching numeric year field. Animation: None. Function: Controlled integer year with normalized supported bounds 1–9999.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#year-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `WeekPicker` — Batch design — Look: Labeled native week field. Animation: None. Function: Controlled ISO week string (Monday-based); native browser picker or browser fallback.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#week-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `TimePicker` — Batch design — Look: Matching TimeInput presentation. Animation: None. Function: Native time-selection UI where supported, controlled HH:mm value and native input semantics.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#time-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DatePicker` — Batch design — Look: DateInput above the shared Calendar. Animation: None. Function: Typing and calendar selection share a controlled date; external date changes update the displayed month.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#date-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DatePickerPopup` — Batch design — Look: Tactile trigger opening a parchment calendar popover. Animation: Inherited overlay lifecycle; no calendar motion. Function: DatePicker with native popover focus/dismissal lifecycle and explicit Done action.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#date-picker-popup-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `CalendarRange` — Batch design — Look: Shared calendar with highlighted endpoints and span. Animation: None. Function: First click chooses start, second sorts and finishes the inclusive range, next starts a new range.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#calendar-range-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DateRangePicker` — Batch design — Look: Labeled start/end fields above CalendarRange. Animation: None. Function: Controlled range, intersected endpoint bounds, invalid/reversed-range messaging and calendar selection.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#date-range-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `TimeRangePicker` — Batch design — Look: Paired labeled time fields. Animation: None. Function: Controlled start/end; same-day validation with optional allowOvernight behavior.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#time-range-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DateTimePicker` — Batch design — Look: Grouped date, time and timezone controls. Animation: None. Function: Explicit zoned wall-time object; timezone changes preserve wall time, caller resolves DST ambiguity.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#date-time-picker-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `DateFilter` — Batch design — Look: DateRangePicker with secondary clear action. Animation: None. Function: Controlled inclusive date range suitable for caller-owned filter state; emits empty bounds on Clear.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#date-filter-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `Countdown` — Batch design — Look: Monospaced remaining HH:MM:SS. Animation: No decorative motion; time updates without live-region chatter. Function: Offset-qualified target instant, clock-based remaining time, once-per-target completion callback and interval cleanup.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#countdown-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `Timer` — Batch design — Look: Elapsed HH:MM:SS with tactile Start/Pause and Reset buttons. Animation: No decorative motion; time updates without live-region chatter. Function: Monotonic elapsed time, pause/resume/reset and interval cleanup; no automatic start.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#timer-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
+- [-] `Scheduler` — Batch design — Look: Calendar, date-specific agenda and parchment event dialog. Animation: Inherited overlay lifecycle; no calendar motion. Function: Controlled event collection, validated title/date/time/timezone creation and optional remove callbacks; no persistence or reminders.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#scheduler-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [date-time-review.md](date-time-review.md).
 
 ## 12. Chart foundations, charts, and decorative effects
 

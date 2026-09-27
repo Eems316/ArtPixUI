@@ -848,6 +848,7 @@ export function App() {
         <SearchFilteringDemo />
         <SpecializedCardsDemo />
         <AdvancedMediaDemo />
+        <DateTimeDemo />
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>
     </div>
@@ -1032,3 +1033,4 @@ import { OverlaysMenusDemo } from "./OverlaysMenusDemo.js";
 import { SearchFilteringDemo } from "./SearchFilteringDemo.js";
 import { SpecializedCardsDemo } from "./SpecializedCardsDemo.js";
 import { AdvancedMediaDemo } from "./AdvancedMediaDemo.js";
+import { DateTimeDemo } from "./DateTimeDemo.js";
