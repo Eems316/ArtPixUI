@@ -6,3 +6,5 @@ export { Table } from "./Table/index.js";
 export type { TableProps } from "./Table/index.js";
 export { Timeline } from "./Timeline/index.js";
 export type { TimelineProps, TimelineItem } from "./Timeline/index.js";
+export { KpiStatCard } from "./KpiStatCard/index.js";
+export type { KpiStatCardProps } from "./KpiStatCard/index.js";

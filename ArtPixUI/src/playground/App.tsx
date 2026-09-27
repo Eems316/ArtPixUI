@@ -846,6 +846,7 @@ export function App() {
         <FeedbackStatesDemo />
         <OverlaysMenusDemo />
         <SearchFilteringDemo />
+        <SpecializedCardsDemo />
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>
     </div>
@@ -1028,3 +1029,4 @@ import { ProgressBar, IndeterminateProgressBar, CircularProgress, ProgressSteps,
 import { FeedbackStatesDemo } from "./FeedbackStatesDemo.js";
 import { OverlaysMenusDemo } from "./OverlaysMenusDemo.js";
 import { SearchFilteringDemo } from "./SearchFilteringDemo.js";
+import { SpecializedCardsDemo } from "./SpecializedCardsDemo.js";
