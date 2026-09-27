@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { TextInput } from "../../forms-inputs/TextInput/TextInput.js";
 import { PopupCore } from "./popup.js";
 import { nextOptionIndex } from "./geometry.js";
@@ -9,9 +9,11 @@ export function ComboBoxCore({ label, value, onInputChange, options, onSelect, s
  const [open, setOpen] = useState(false); const [active, setActive] = useState<string>(); const ref = useRef<HTMLInputElement>(null); const id = useId();
  const enabled = options.filter(option => !option.disabled);
  const current = enabled.find(option => option.id === active);
+ useEffect(() => { if (open && current) document.getElementById(`${id}-option-${options.indexOf(current)}`)?.scrollIntoView({ block: "nearest" }); }, [open, current, id, options]);
  const select = (option: ComboBoxOption) => { if (option.disabled) return; setOpen(false); onSelect(option); ref.current?.focus(); };
  return <div><label htmlFor={`${id}-input`}>{label}</label><TextInput ref={ref} id={`${id}-input`} role="combobox" aria-autocomplete="list" aria-expanded={open && !disabled} aria-controls={open && !disabled ? `${id}-list` : undefined} aria-activedescendant={open && current ? `${id}-option-${options.indexOf(current)}` : undefined} value={value} disabled={disabled} placeholder={placeholder}
  onChange={event => { onInputChange(event.target.value); setActive(undefined); setOpen(true); }} onClick={() => setOpen(true)} onBlur={() => setOpen(false)} onKeyDown={event => {
+  if (event.nativeEvent.isComposing) return;
   if (event.key === "ArrowDown" || event.key === "ArrowUp") { event.preventDefault(); setOpen(true); const i = enabled.findIndex(option => option.id === active); setActive(enabled[nextOptionIndex(enabled.length, i, event.key === "ArrowDown" ? "next" : "previous")]?.id); }
   if (open && (event.key === "Home" || event.key === "End")) { event.preventDefault(); setActive((event.key === "Home" ? enabled[0] : enabled.at(-1))?.id); }
   if (event.key === "Enter" && open && current) { event.preventDefault(); select(current); }

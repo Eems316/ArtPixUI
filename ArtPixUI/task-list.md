@@ -1,6 +1,6 @@
 # ArtPixUI component task list
 
-Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **88 awaiting review** (87 implementations and 1 removal), **98 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
+Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **113 awaiting review** (112 implementations and 1 removal), **73 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
 
 ## Status and review workflow
 
@@ -19,7 +19,7 @@ Status markers: `[ ]` = not yet implemented; `[-]` = implemented or explicitly r
 - Embed a preview image beneath that link only when the user is messaging through ChatGPT Remote from a phone or another device without access to the project files. For local desktop messages with file access, provide the preview link without an embedded picture. Do not assume remote access from browser context alone; use explicit session information or the user's statement. If access is unknown, omit the picture unless requested.
 - Save component preview images in `samples/` at the workspace root (`artUI/samples/`), outside the `ArtPixUI/` package folder. Use descriptive filenames such as `progress-bar-preview.png`; do not leave new preview images in the package root.
 
-Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. The next unimplemented item is SearchInput in phase 8, outside this batch.
+Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. Phase 8's 25 components also await review under the user-authorized autonomous batch. The next unimplemented item is UserCard in phase 9; ContactCard already awaits review.
 
 The phases are implementation milestones, not replacement source categories. Keep each component in its existing canonical source folder. Similar components can share an implementation while retaining their individual catalog entries; do not silently merge or delete them.
 
@@ -266,33 +266,85 @@ Implement shared focus management, Escape handling, dismissal, positioning, and 
 
 ## 8. Search, filtering, and sorting
 
+**Authorized batch plan (2026-09-27):** The user asked to plan and finish this entire phase without per-item input. Implement search fields/suggestions/history, then command search using phase 7 overlays, then choice/range/sort primitives, followed by coordinated filter layouts and saved configurations. Reuse existing controls, keep the established Spritecraft/Plinth appearance and steady-caret preference, add no dependencies or hidden storage/network calls, export every component and add all 25 playground examples plus regression checks. Mark each `[-]`, not `[x]`, with review notes. This authorization overrides the normal per-item approval pauses for phase 8 only. DateFilter remains in phase 11. Live browser and assistive-technology verification remain manual; see the review guide.
+
 Compose the inputs and popup/menu primitives into search workflows. DateFilter is deliberately scheduled after the date-range controls in phase 11.
 
-- [ ] `SearchInput` — Canonical search field using TextInput.
-- [ ] `SearchBar` — SearchInput with actions and layout.
-- [ ] `SearchSuggestions` — Reusable suggestion rendering and selection.
-- [ ] `Autocomplete` — Search input with ComboBoxPopup and suggestions.
-- [ ] `SearchHistory` — Previously used query presentation and selection.
-- [ ] `CommandMenu` — Searchable command overlay using Dialog, SearchInput, and option navigation.
-- [ ] `CommandSearch` — Command-search entry and matching built on CommandMenu.
-- [ ] `CheckboxFilter` — Multiple-choice filter using Checkbox.
-- [ ] `RadioFilter` — Single-choice filter using RadioButton.
-- [ ] `RangeFilter` — Numeric range state and input controls.
-- [ ] `RangeFilterSlider` — RangeFilter with slider interaction.
-- [ ] `RatingFilter` — Rating-based selection.
-- [ ] `CategoryFilter` — Category selection using the shared choice controls.
-- [ ] `SortSelect` — Accessible sorting-option selection.
-- [ ] `SortDirectionToggle` — Ascending/descending toggle.
-- [ ] `ResultsCount` — Accessible result-count presentation.
-- [ ] `ClearFilters` — Reset action for the shared filter state.
-- [ ] `NoResultsDisplay` — Search-specific EmptyState.
-- [ ] `FilterChips` — Active filter summaries with removal actions.
-- [ ] `FilterDropdown` — Dropdown presentation of filter controls.
-- [ ] `FilterMenu` — Menu-style filter selection.
-- [ ] `FilterBar` — Inline filter controls, chips, count, and reset action.
-- [ ] `FilterPanel` — Expanded filter groups and actions.
-- [ ] `FacetedFilters` — Multiple coordinated filter groups and facet counts.
-- [ ] `SavedSearch` — Saved query and filter configuration composition.
+- [-] `SearchInput` — Batch design — Look: Inset parchment field with a green pixel magnifier and rounded ink border. Animation: No added motion; steady visible caret where supported, native fallback otherwise. Function: TextInput-based native search field with forwarded input/ref attributes; caller supplies its accessible label.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#search-input-demo). Native clear/editing, label association, disabled/required states and narrow-width fit. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `SearchBar` — Batch design — Look: Labeled search field alongside a tactile submit action. Animation: No added motion; steady editable caret. Function: Controlled query and submit callback in a named search form, optional supporting children, disabled and busy submit states.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#search-bar-demo). Enter/click submission, busy guard and query updates; avoid nesting it inside another form. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `SearchSuggestions` — Batch design — Look: Parchment suggestion buttons with text descriptions and green hover treatment. Animation: No animation. Function: Standalone list of suggestion actions with optional descriptions, disabled items and empty text.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#search-suggestions-demo). Tab/Enter selection, long suggestions and callback output; not a duplicate listbox. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `Autocomplete` — Batch design — Look: Existing ComboBoxPopup input and parchment option list. Animation: Inherited reduced-motion-aware popup entry and steady caret. Function: Controlled query/selection; local case-insensitive filtering by default, optional caller-filtered results, disabled options and empty state.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#autocomplete-demo). Typing, IME, arrows/Enter/Escape, visible active option and active-descendant announcement. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `SearchHistory` — Batch design — Look: Monospaced recent-query list with optional removal buttons and clear action. Animation: None; inherits tactile buttons. Function: Caller-owned queries, deduplicated display, select/remove/clear callbacks; no automatic storage.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#search-history-demo). Empty history, duplicate queries, disabled actions and keyboard removal. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `CommandMenu` — Batch design — Look: Parchment Dialog containing a search field and highlighted command options. Animation: Inherited reduced-motion-aware dialog entry; steady search caret. Function: Controlled modal search over labels/keywords, disabled commands, arrows/Home/End/Enter, fresh query per opening and callback execution.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#command-menu-demo). Focus entry/return, Escape, composition input, empty matches and one callback per activation. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `CommandSearch` — Batch design — Look: Secondary tactile search-command launcher. Animation: Inherited Button and Dialog behavior; steady popup search caret. Function: Launcher owning CommandMenu open state; caller supplies commands. No global shortcut interception.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#command-search-demo). Open/close and execute a matching command; disabled launcher. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `CheckboxFilter` — Batch design — Look: Outlined group of native checkboxes, monospaced labels and muted counts. Animation: None. Function: Controlled multi-selection, named inputs, legend, disabled group/options, optional normalized counts.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#checkbox-filter-demo). Select/deselect, preserved unrelated selections, zero-count and empty groups. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `RadioFilter` — Batch design — Look: Matching group with native round radio controls. Animation: None. Function: Controlled single selection with unique generated radio group name unless supplied.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#radio-filter-demo). Arrow-key grouping, disabled/empty options and independent multiple instances. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `RangeFilter` — Batch design — Look: Two inset parchment numeric fields under a shared legend. Animation: No added motion; steady numeric carets where supported. Function: Controlled min/max pair with normalized bounds, step snapping, ordered limits and temporary editable invalid/blank drafts that reset on blur.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#range-filter-demo). Boundary/crossing/decimal values, blank drafts and disabled fieldset. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `RangeFilterSlider` — Batch design — Look: RangeFilter fields plus separate labeled lower/upper native green sliders. Animation: Inherited slider appearance; steady numeric carets. Function: Synchronized numeric/range controls with noncrossing endpoints; defaults 0–100, step 1.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#range-filter-slider-demo). Keyboard and pointer adjustment of both sliders, constrained endpoints and values. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `RatingFilter` — Batch design — Look: Matching radio group with clear textual star thresholds. Animation: None. Function: Any rating or minimum 1–5 stars; controlled number/null state.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#rating-filter-demo). Any/reset and each threshold, arrow navigation, no unlabeled star-only controls. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `CategoryFilter` — Batch design — Look: Shared parchment checkbox-group styling. Animation: None. Function: Category-oriented multi-select composition using CheckboxFilter, default legend Categories.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#category-filter-demo). Multi-category changes, disabled options and counts. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `SortSelect` — Batch design — Look: Native parchment select with ink outline and visible green focus. Animation: None. Function: Labeled controlled sort choices, disabled options and a placeholder for empty/unknown values.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#sort-select-demo). Native keyboard/mobile selection and invalid-value fallback. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `SortDirectionToggle` — Batch design — Look: Tactile secondary button with up/down arrow and current direction text. Animation: Inherited button press/hover, reduced-motion aware. Function: Controlled asc/desc toggle with stable accessible name and aria-pressed for descending.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#sort-direction-toggle-demo). Both directions, pressed state and disabled behavior. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `ResultsCount` — Batch design — Look: Compact muted monospaced count. Animation: None. Function: Normalized result count with optional total, customizable singular/plural nouns, loading text and optional polite announcement.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#results-count-demo). Zero/one/many, nonfinite inputs and loading; avoid redundant live regions in a consuming page. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `ClearFilters` — Batch design — Look: Secondary tactile reset button. Animation: Inherited button motion, reduced-motion aware. Function: Explicit clear callback, optional active count disables action when zero, custom children and disabled state.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#clear-filters-demo). Clears only caller-owned state via callback; no implicit data mutation. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `NoResultsDisplay` — Batch design — Look: Search-specific parchment EmptyState with optional recovery action. Animation: Inherited static state presentation. Function: Optional escaped query text, custom title/content/action, optional clear-search-and-filters callback.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#no-results-display-demo). No-match wording, query escaping, recovery action and custom content. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `FilterChips` — Batch design — Look: Rounded parchment pills with dark outlines and removal marks. Animation: None. Function: Controlled active-filter summaries, labeled remove buttons, disabled items; moves focus to an adjacent chip or the list on removal.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#filter-chips-demo). Keyboard removal through the last chip and long labels. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `FilterDropdown` — Batch design — Look: Tactile launcher with optional active count and parchment popup. Animation: Inherited reduced-motion-aware popup entry. Function: Owned open state, caller-supplied filter children, Done/outside/Escape close through Popover.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#filter-dropdown-demo). Multiple filter changes without closing, viewport placement and focus return. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `FilterMenu` — Batch design — Look: Checked menu items using the phase 7 parchment menu. Animation: Inherited popup entry with reduced-motion support. Function: Controlled multiple-choice filter via menuitemcheckbox callbacks; selection closes, disabled and empty trigger support.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#filter-menu-demo). Checked states, disabled skipping, keyboard selection and reopen behavior. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `FilterBar` — Batch design — Look: Responsive inline parchment filter surface with controls, count, chips and reset. Animation: Only child controls animate. Function: Composition slots with caller-owned children, chip removal, count and clear callbacks.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#filter-bar-demo). Wrapping at narrow widths, linked chip/count changes and clear action; child control disabled state is caller-owned. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `FilterPanel` — Batch design — Look: Raised parchment section with heading, description, groups and action row. Animation: Only child controls animate. Function: Semantic labeled container for expanded filter groups; custom children/actions/className.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#filter-panel-demo). Heading relationship, long content, optional description/actions and narrow layouts. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `FacetedFilters` — Batch design — Look: Stacked checkbox/radio groups within FilterPanel; muted option counts. Animation: Only child controls animate. Function: Controlled keyed facet selections, single/multiple group modes, optional clear; preserves other groups and accepts caller-computed counts.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#faceted-filters-demo). Cross-facet changes and counts; demo recomputes counts excluding each facet's own selection. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
+- [-] `SavedSearch` — Batch design — Look: Parchment saved-search section with name field, save action and reusable entries. Animation: Inherited button motion and steady name-field caret. Function: Caller-owned query/filter/range/sort snapshots, copied nested arrays on save/load; named save/load/remove callbacks, no hidden persistence.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#saved-search-demo). Blank names, snapshot isolation, restore/remove, disabled state; demo is memory-only. Automated coverage and pending live checks: [search-filtering-review.md](search-filtering-review.md).
 
 ## 9. Specialized cards
 

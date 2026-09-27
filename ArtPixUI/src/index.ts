@@ -74,3 +74,4 @@ export type { StatusMessageProps } from "./components/feedback-notifications/ind
 export { InfoMessage, SuccessMessage, WarningMessage, ErrorMessage, ValidationMessage, NotificationDot, NotificationBadge, NotificationBanner, EmptyState, ErrorState, SuccessState, Toast, Snackbar, UndoNotification, ProgressNotification } from "./components/feedback-notifications/index.js";
 export type { InfoMessageProps, SuccessMessageProps, WarningMessageProps, ErrorMessageProps, ValidationMessageProps, NotificationDotProps, NotificationBadgeProps, NotificationBannerProps, EmptyStateProps, ErrorStateProps, SuccessStateProps, ToastProps, SnackbarProps, UndoNotificationProps, ProgressNotificationProps, ToastDismissReason } from "./components/feedback-notifications/index.js";
 export * from "./components/overlays-menus/index.js";
+export * from "./components/search-filtering/index.js";

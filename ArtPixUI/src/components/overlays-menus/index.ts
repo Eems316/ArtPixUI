@@ -41,3 +41,5 @@ export type { ColorPickerPopupProps } from "./ColorPickerPopup/index.js";
 export type { MenuItem } from "./_shared/menu.js";
 export type { ComboBoxOption } from "./_shared/combobox.js";
 export type { PopupPlacement } from "./_shared/popup.js";
+export { CommandMenu } from "./CommandMenu/index.js";
+export type { CommandMenuProps, CommandItem } from "./CommandMenu/index.js";
