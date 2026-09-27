@@ -79,3 +79,5 @@ export { UserCard, FeatureCard, ProductCard, MediaCard, PricingCard, Notificatio
 export type { UserCardProps, FeatureCardProps, ProductCardProps, MediaCardProps, PricingCardProps, NotificationCardProps, EventCardProps, TestimonialCardProps, DashboardCardProps } from "./components/cards-content/index.js";
 export { KpiStatCard } from "./components/data-display/index.js";
 export type { KpiStatCardProps } from "./components/data-display/index.js";
+export { MediaControls, ImageGrid, Carousel, ImageSlider, VideoThumbnail, ZoomableImage, ImageViewer, ImageGallery, BeforeAfterImage, AudioPlayer, VideoPlayer, MediaPreview, QrCodeDisplay } from "./components/media/index.js";
+export type { MediaControlsProps, ImageGridProps, CarouselProps, ImageSliderProps, VideoThumbnailProps, ZoomableImageProps, ImageViewerProps, ImageGalleryProps, BeforeAfterImageProps, AudioPlayerProps, VideoPlayerProps, MediaPreviewProps, QrCodeDisplayProps, GalleryImage, MediaTrack, CarouselSlide } from "./components/media/index.js";

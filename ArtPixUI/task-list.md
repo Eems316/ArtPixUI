@@ -1,6 +1,6 @@
 # ArtPixUI component task list
 
-Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **123 awaiting review** (122 implementations and 1 removal), **63 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
+Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **137 awaiting review** (136 implementations and 1 removal), **49 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
 
 ## Status and review workflow
 
@@ -19,7 +19,7 @@ Status markers: `[ ]` = not yet implemented; `[-]` = implemented or explicitly r
 - Embed a preview image beneath that link only when the user is messaging through ChatGPT Remote from a phone or another device without access to the project files. For local desktop messages with file access, provide the preview link without an embedded picture. Do not assume remote access from browser context alone; use explicit session information or the user's statement. If access is unknown, omit the picture unless requested.
 - Save component preview images in `samples/` at the workspace root (`artUI/samples/`), outside the `ArtPixUI/` package folder. Use descriptive filenames such as `progress-bar-preview.png`; do not leave new preview images in the package root.
 
-Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. Phase 8's 25 components also await review under the user-authorized autonomous batch. The 10 remaining phase 9 cards also await review; ContactCard retains its existing review status. The next unimplemented item is MediaControls in phase 10, Advanced media and viewers.
+Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. Phase 8's 25 components also await review under the user-authorized autonomous batch. The 10 remaining phase 9 cards also await review; ContactCard retains its existing review status. Phase 10's 14 components also await review and are committed locally. The next unimplemented item is Timestamp in phase 11, Date and time.
 
 The phases are implementation milestones, not replacement source categories. Keep each component in its existing canonical source folder. Similar components can share an implementation while retaining their individual catalog entries; do not silently merge or delete them.
 
@@ -386,22 +386,52 @@ Compose BasicCard and the earlier primitives. Card APIs should accept content an
 
 ## 10. Advanced media and viewers
 
+**Section 10 plan (2026-09-27):** After staging/committing section 9 as requested, implement this phase in dependency order: reusable playback controls and zoom, grid/carousel primitives, viewer/lightbox/gallery, comparison and video thumbnail, native players and media preview, then validated QR display. Preserve the parchment/pixel/outlined style, keyboard alternatives and user-initiated playback; add no dependencies. QR encoding is deliberately bounded and cross-checked against an independent reference. Add all 14 exports/previews, offline regressions and per-item `[-]` notes. Live playback, focus, pointer, scanning and assistive-technology review remain pending. Section 10 is not committed or pushed by this request.
+
 Build reusable controls and viewing primitives before complete galleries and players. Lightbox belongs here because it composes the phase 7 overlay behavior with an image viewer.
 
-- [ ] `MediaControls` — Reusable playback, time, volume, and related controls.
-- [ ] `ZoomableImage` — Image zoom and pan behavior.
-- [ ] `ImageGrid` — Responsive image arrangement.
-- [ ] `Carousel` — Shared slide navigation and accessibility.
-- [ ] `ImageSlider` — Image-focused composition of Carousel.
-- [ ] `ImageViewer` — Embedded viewing surface with image navigation and zoom.
-- [ ] `Lightbox` — Modal image-viewing composition using ImageViewer and Dialog.
-- [ ] `ImageGallery` — ImageGrid with viewer/lightbox selection.
-- [ ] `BeforeAfterImage` — Accessible comparison of two images.
-- [ ] `VideoThumbnail` — Video preview image and play affordance.
-- [ ] `AudioPlayer` — Native audio playback with MediaControls.
-- [ ] `VideoPlayer` — Native video playback, thumbnail, buffering state, and MediaControls.
-- [ ] `MediaPreview` — Preview composition for supported media types.
-- [ ] `QrCodeDisplay` — Valid QR encoding and accessible alternative content; resolve any encoding dependency before implementation.
+- [-] `MediaControls` — Batch design — Look: Parchment controls with tactile play/mute actions, green seek/volume sliders and monospaced time. Animation: No added motion. Function: Controlled playback UI, finite-duration seeking, volume/mute callbacks, buffering status and optional fullscreen action.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#media-controls-demo). Play/pause and mute names, unknown duration, disabled state, slider keyboard operation. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `ZoomableImage` — Batch design — Look: Contained image viewport with parchment backdrop and zoom controls. Animation: Immediate zoom/pan, without animated motion. Function: 1× to bounded max zoom, reset, pointer drag and keyboard arrow panning; resets on source/configuration change.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#zoomable-image-demo). Pan bounds on resize, capture cancellation, keyboard access and image fallback. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `ImageGrid` — Batch design — Look: Responsive image tiles with rounded ink outlines and optional captions. Animation: None. Function: Semantic image list, adaptive minimum tile width, optional labeled selection buttons, empty state.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#image-grid-demo). Narrow layout, meaningful alt text, selection callbacks and missing images. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `Carousel` — Batch design — Look: Single visible slide with previous/next tactile controls and position text. Animation: No autoplay or slide animation. Function: Controlled or internal slide index, optional looping, named carousel/slide semantics and polite position updates.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#carousel-demo). Empty/single slide, endpoints, controlled updates, callback and keyboard button navigation. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `ImageSlider` — Batch design — Look: Image-and-caption slides within Carousel. Animation: No autoplay or animation. Function: Image-focused Carousel composition with image fallback and caller-provided accessible descriptions.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#image-slider-demo). Captions/alt, image switching and loop/end states. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `ImageViewer` — Batch design — Look: Zoomable image viewport with navigation and caption. Animation: Immediate zoom/pan; no autoplay. Function: Carousel of ZoomableImage figures; selection and max zoom props, per-image reset.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#image-viewer-demo). Zoom reset when switching images, long captions, empty collection and navigation. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `Lightbox` — Batch design — Look: Wide parchment modal over the shared dark scrim. Animation: Inherited Dialog entry with reduced-motion support; viewer itself static. Function: Dialog plus ImageViewer, controlled opening/selection, Escape/close and focus lifecycle.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#lightbox-demo). Background inertness, focus return, image navigation and close while zoomed. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `ImageGallery` — Batch design — Look: ImageGrid opening the shared modal viewer. Animation: Inherited Lightbox motion only. Function: Owned selection/open state, thumbnail-to-full-image viewing, empty collection handling.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#image-gallery-demo). Grid selection opens correct image; closing returns focus to its tile. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `BeforeAfterImage` — Batch design — Look: Overlaid image pair with amber divider and native green comparison slider. Animation: Immediate reveal; no animation. Function: Controlled/internal 0–100 split, separate alt text and labels, accessible percentage values.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#before-after-image-demo). 0/50/100 bounds, keyboard/touch slider use and source failures. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `VideoThumbnail` — Batch design — Look: Image/placeholder with a central green play affordance and optional duration. Animation: Static. Function: Labeled button with onPlay callback and disabled state; it does not own playback.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#video-thumbnail-demo). Accessible play label, keyboard activation, missing poster and disabled state. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `AudioPlayer` — Batch design — Look: Named parchment player with MediaControls and optional transcript. Animation: No decorative animation or autoplay. Function: Native audio engine, event-synchronized state, safe play-promise errors, seek/volume/mute, native-controls option; pauses on unmount/source change.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#audio-player-demo). Actual codec/playback, buffering/error states, source replacement and transcript access. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `VideoPlayer` — Batch design — Look: Responsive native video/poster with parchment MediaControls and transcript slot. Animation: No autoplay; playback is user initiated. Function: Video engine, caption/subtitle tracks, buffering/errors, playsInline, fullscreen request and native-controls option.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#video-player-demo). Real playback, captions, fullscreen/exit, mobile volume behavior and source cleanup. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `MediaPreview` — Batch design — Look: Type-appropriate image, audio or video presentation. Animation: Inherited chosen component behavior. Function: Discriminated image/audio/video props compose Image, AudioPlayer or VideoPlayer; no type guessing.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#media-preview-demo). All supported types, missing source and caller-provided labels/alt/tracks. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
+- [-] `QrCodeDisplay` — Batch design — Look: Black-on-white crisp square modules with four-module quiet zone and readable alternative text. Animation: None. Function: Dependency-free QR Model 2, versions 1–5, level L, UTF-8 ECI byte mode, fixed mask 0; 105-byte maximum and explicit oversize error.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#qr-code-display-demo). 13 matrices match independent reference; physical scanning/print/zoom review still pending. No silent truncation. API scope, validation and pending live checks: [advanced-media-review.md](advanced-media-review.md).
 
 ## 11. Date and time
 

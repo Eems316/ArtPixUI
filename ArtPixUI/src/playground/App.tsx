@@ -847,6 +847,7 @@ export function App() {
         <OverlaysMenusDemo />
         <SearchFilteringDemo />
         <SpecializedCardsDemo />
+        <AdvancedMediaDemo />
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>
     </div>
@@ -1030,3 +1031,4 @@ import { FeedbackStatesDemo } from "./FeedbackStatesDemo.js";
 import { OverlaysMenusDemo } from "./OverlaysMenusDemo.js";
 import { SearchFilteringDemo } from "./SearchFilteringDemo.js";
 import { SpecializedCardsDemo } from "./SpecializedCardsDemo.js";
+import { AdvancedMediaDemo } from "./AdvancedMediaDemo.js";

@@ -43,3 +43,5 @@ export type { ComboBoxOption } from "./_shared/combobox.js";
 export type { PopupPlacement } from "./_shared/popup.js";
 export { CommandMenu } from "./CommandMenu/index.js";
 export type { CommandMenuProps, CommandItem } from "./CommandMenu/index.js";
+export { Lightbox } from "./Lightbox/index.js";
+export type { LightboxProps } from "./Lightbox/index.js";
