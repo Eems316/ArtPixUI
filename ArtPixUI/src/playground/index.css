@@ -10,6 +10,7 @@
 body { min-width: 320px; margin: 0; }
 .playground * { box-sizing: border-box; }
 .playground a { -webkit-tap-highlight-color: transparent; }
+.playground { forced-color-adjust: none; }
 .playground-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 4.5%; border-bottom: 1px solid #d9d3bf; }
 .playground-brand { display: inline-flex; align-items: center; color: inherit; text-decoration: none; font-size: 25px; font-weight: 800; letter-spacing: -1px; }
 .playground-brand > span:first-child { display: grid; place-items: center; width: 28px; height: 28px; margin-right: 10px; color: var(--art-pix-color-primary); }
@@ -122,4 +123,34 @@ body { min-width: 320px; margin: 0; }
   .playground-contact-stage { padding-inline: 14px; }
   .playground-icon-stage { gap: 30px; }
   .playground-footer { align-items: flex-start; flex-direction: column; }
+}
+
+/* Keep this visual catalog in the ArtPixUI palette when a mobile browser
+   incorrectly exposes its contrast mode through forced-colors. Components
+   retain their standalone forced-color behavior outside the playground. */
+@media (forced-colors: active) {
+  .playground .art-pix-spinner-status__spinner { color: var(--art-pix-color-primary); }
+  .playground .art-pix-dots-loader__dot,
+  .playground .art-pix-pulse-loader__indicator { background: var(--art-pix-color-primary); }
+  .playground .art-pix-progress-bar__fill { background: var(--art-pix-color-primary); }
+  .playground .art-pix-notification-dot { background: var(--art-pix-color-accent); }
+  .playground .art-pix-checkbox,
+  .playground .art-pix-radio-button {
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: 0 3px 0 var(--art-pix-color-border), inset 2px 2px 0 var(--art-pix-color-highlight);
+  }
+  .playground .art-pix-checkbox::before,
+  .playground .art-pix-radio-button::before { display: block; }
+  .playground .art-pix-toggle-switch {
+    border-color: var(--art-pix-color-border);
+    background: var(--art-pix-color-parchment);
+    box-shadow: inset 1px 1px 0 var(--art-pix-color-bevel);
+  }
+  .playground .art-pix-toggle-switch:checked { background: var(--art-pix-color-primary); }
+  .playground .art-pix-toggle-switch::before {
+    border-color: var(--art-pix-color-border);
+    background: var(--art-pix-color-surface);
+    box-shadow: 0 2px 0 var(--art-pix-color-border), inset 1px 1px 0 var(--art-pix-color-highlight);
+  }
 }
