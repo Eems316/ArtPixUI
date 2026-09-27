@@ -1,6 +1,7 @@
 .art-pix-slider {
   --art-pix-slider-fill: 50%;
   --art-pix-slider-direction: to right;
+  -webkit-appearance: none;
   appearance: none;
   display: block;
   box-sizing: border-box;
@@ -28,6 +29,7 @@
   box-shadow: inset 0 1px 0 var(--art-pix-color-bevel);
 }
 .art-pix-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
   appearance: none;
   width: 24px;
   height: 24px;
@@ -51,6 +53,6 @@
 .art-pix-slider:focus-visible { outline: 3px solid var(--art-pix-color-focus); outline-offset: 3px; border-radius: 8px; }
 .art-pix-slider:disabled { opacity: 0.6; cursor: not-allowed; }
 @media (forced-colors: active) {
-  .art-pix-slider { appearance: auto; accent-color: Highlight; }
-  .art-pix-slider::-webkit-slider-thumb { appearance: auto; box-shadow: none; }
+  .art-pix-slider { -webkit-appearance: auto; appearance: auto; accent-color: Highlight; }
+  .art-pix-slider::-webkit-slider-thumb { -webkit-appearance: auto; appearance: auto; box-shadow: none; }
 }

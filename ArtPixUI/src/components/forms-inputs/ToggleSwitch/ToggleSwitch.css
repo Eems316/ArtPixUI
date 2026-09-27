@@ -1,4 +1,5 @@
 .art-pix-toggle-switch {
+  -webkit-appearance: none;
   appearance: none;
   box-sizing: border-box;
   display: inline-block;

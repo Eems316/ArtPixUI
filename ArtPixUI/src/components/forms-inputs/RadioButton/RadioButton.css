@@ -1,4 +1,5 @@
 .art-pix-radio-button {
+  -webkit-appearance: none;
   appearance: none;
   box-sizing: border-box;
   display: inline-grid;
@@ -32,6 +33,6 @@
   .art-pix-radio-button:active:not(:disabled) { transform: none; }
 }
 @media (forced-colors: active) {
-  .art-pix-radio-button { appearance: auto; box-shadow: none; }
+  .art-pix-radio-button { -webkit-appearance: auto; appearance: auto; box-shadow: none; }
   .art-pix-radio-button::before { display: none; }
 }

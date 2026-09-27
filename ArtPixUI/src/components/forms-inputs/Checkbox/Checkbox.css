@@ -1,4 +1,5 @@
 .art-pix-checkbox {
+  -webkit-appearance: none;
   appearance: none;
   box-sizing: border-box;
   display: inline-grid;
@@ -37,6 +38,6 @@
   .art-pix-checkbox:active:not(:disabled) { transform: none; }
 }
 @media (forced-colors: active) {
-  .art-pix-checkbox { appearance: auto; box-shadow: none; }
+  .art-pix-checkbox { -webkit-appearance: auto; appearance: auto; box-shadow: none; }
   .art-pix-checkbox::before { display: none; }
 }

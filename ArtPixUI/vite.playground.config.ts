@@ -5,6 +5,7 @@ export default defineConfig({
   base: "/ArtPixUI/",
   plugins: [react()],
   build: {
+    cssTarget: ["chrome61", "safari12"],
     outDir: "dist-playground",
     emptyOutDir: true,
   },
