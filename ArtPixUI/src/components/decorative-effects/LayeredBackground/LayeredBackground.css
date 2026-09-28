@@ -1,0 +1,3 @@
+.art-pix-layered-background { position:relative; isolation:isolate; border-radius:16px; overflow:hidden; }
+.art-pix-layered-background__layers,.art-pix-layered-background__scrim { position:absolute; inset:0; pointer-events:none; z-index:-1; }
+.art-pix-layered-background__content { position:relative; padding:24px; }

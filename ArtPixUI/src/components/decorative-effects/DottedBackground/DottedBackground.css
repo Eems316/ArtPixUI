@@ -1,0 +1,9 @@
+.art-pix-dotted-background {
+  background-color: var(--art-pix-dotted-background-color, #eee5c8);
+  background-image: radial-gradient(
+    circle,
+    var(--art-pix-dotted-background-dot-color, #9a854526) var(--art-pix-dotted-background-dot-size, 0.7px),
+    transparent var(--art-pix-dotted-background-dot-size, 0.7px)
+  );
+  background-size: var(--art-pix-dotted-background-spacing, 8px) var(--art-pix-dotted-background-spacing, 8px);
+}

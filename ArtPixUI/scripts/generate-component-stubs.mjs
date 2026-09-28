@@ -16,7 +16,7 @@ const categories = {
   "date-time": ["Calendar", "DatePicker", "DateRangePicker", "TimePicker", "DateTimePicker", "MonthPicker", "YearPicker", "WeekPicker", "TimeRangePicker", "CalendarRange", "InlineCalendar", "CalendarHeader", "CalendarGrid", "DateInput", "TimeInput", "DurationInput", "Countdown", "Timestamp", "Timer", "Scheduler", "DateBadge", "TimezoneSelector"],
   "search-filtering": ["SearchInput", "SearchBar", "Autocomplete", "SearchSuggestions", "SearchHistory", "CommandSearch", "FilterBar", "FilterPanel", "FilterDropdown", "FilterMenu", "FilterChips", "FacetedFilters", "CheckboxFilter", "RadioFilter", "RangeFilter", "RangeFilterSlider", "DateFilter", "RatingFilter", "CategoryFilter", "SortSelect", "SortDirectionToggle", "ResultsCount", "ClearFilters", "NoResultsDisplay", "SavedSearch"],
   "data-visualization": ["BarChart", "PieChart", "StackedBarChart", "HorizontalBarChart", "LineChart", "AreaChart", "DonutChart", "ScatterPlot", "BubbleChart", "RadarChart", "Gauge", "Meter", "TrendIndicator", "Temperature", "Legend", "ChartTooltip", "Axis", "Grid", "DataLabel", "ChartTitle", "ChartContainer", "ChartEmptyState", "ChartLoadingState"],
-  "decorative-effects": ["LayeredBackground", "Stripes"],
+  "decorative-effects": ["LayeredBackground", "Stripes", "DottedBackground", "PixelVistaBackground"],
 };
 
 const componentsRoot = join(process.cwd(), "src", "components");

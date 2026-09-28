@@ -1,0 +1,7 @@
+.art-pix-pixel-vista { position:relative; isolation:isolate; overflow:hidden; min-height:320px; background:#a8d8ee; border-radius:16px; }
+.art-pix-pixel-vista__canvas { position:absolute; inset:0; width:100%; height:100%; image-rendering:pixelated; pointer-events:none; z-index:-1; }
+.art-pix-pixel-vista__content { position:relative; padding:32px; padding-bottom:76px; }
+.art-pix-pixel-vista__pause { position:absolute; right:16px; bottom:16px; min-height:40px; padding:8px 14px; border:2px solid #2c3025; border-radius:8px; color:#2c3025; background:#fff9e5; box-shadow:0 3px 0 #2c3025; font:700 .8rem var(--art-pix-font-mono,monospace); cursor:pointer; }
+.art-pix-pixel-vista__pause:focus-visible { outline:3px solid #247b3b; outline-offset:3px; }
+.art-pix-pixel-vista__pause:disabled { cursor:default; }
+@media (prefers-reduced-motion:reduce) { .art-pix-pixel-vista__canvas { image-rendering:pixelated; } }

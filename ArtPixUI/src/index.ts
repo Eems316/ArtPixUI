@@ -82,3 +82,6 @@ export type { KpiStatCardProps } from "./components/data-display/index.js";
 export { MediaControls, ImageGrid, Carousel, ImageSlider, VideoThumbnail, ZoomableImage, ImageViewer, ImageGallery, BeforeAfterImage, AudioPlayer, VideoPlayer, MediaPreview, QrCodeDisplay } from "./components/media/index.js";
 export type { MediaControlsProps, ImageGridProps, CarouselProps, ImageSliderProps, VideoThumbnailProps, ZoomableImageProps, ImageViewerProps, ImageGalleryProps, BeforeAfterImageProps, AudioPlayerProps, VideoPlayerProps, MediaPreviewProps, QrCodeDisplayProps, GalleryImage, MediaTrack, CarouselSlide } from "./components/media/index.js";
 export * from "./components/date-time/index.js";
+export * from "./components/data-visualization/index.js";
+export * from "./components/decorative-effects/index.js";
+export type { ChartDatum, ChartPoint, ChartSeries, Domain } from "./components/data-visualization/_shared/chart.js";

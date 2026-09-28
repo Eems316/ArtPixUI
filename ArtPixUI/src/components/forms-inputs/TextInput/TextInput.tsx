@@ -2,7 +2,7 @@ import type { ComponentPropsWithRef } from "react";
 import "./TextInput.css";
 
 export type TextInputProps = Omit<ComponentPropsWithRef<"input">, "type"> & {
-  type?: "text" | "email" | "password" | "search" | "tel" | "url";
+  type?: "text" | "email" | "password" | "search" | "tel" | "url" | "number";
 };
 
 /** Native single-line editing; associate an external Label using id/htmlFor. */

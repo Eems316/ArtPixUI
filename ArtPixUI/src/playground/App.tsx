@@ -48,6 +48,7 @@ export function App() {
       </header>
       <main className="playground-main">
         <section className="playground-intro" aria-labelledby="playground-title">
+          <PixelVistaBackground className="playground-intro-background" showControls={false} />
           <div>
             <p className="playground-eyebrow"><span className="playground-status-dot" /> THE COMPONENT WORKSHOP</p>
             <h1 id="playground-title">Small details.<br /><span>A little character.</span></h1>
@@ -849,6 +850,8 @@ export function App() {
         <SpecializedCardsDemo />
         <AdvancedMediaDemo />
         <DateTimeDemo />
+        <ChartsDecorationsDemo />
+        <PixelVistaDemo />
         <footer className="playground-footer"><span><PixelMark /> MADE OF LITTLE THINGS.</span><span>ARTPIXUI / COMPONENT STUDIES</span></footer>
       </main>
     </div>
@@ -1034,3 +1037,6 @@ import { SearchFilteringDemo } from "./SearchFilteringDemo.js";
 import { SpecializedCardsDemo } from "./SpecializedCardsDemo.js";
 import { AdvancedMediaDemo } from "./AdvancedMediaDemo.js";
 import { DateTimeDemo } from "./DateTimeDemo.js";
+import { ChartsDecorationsDemo } from "./ChartsDecorationsDemo.js";
+import { PixelVistaBackground } from "../index.js";
+import { PixelVistaDemo } from "./PixelVistaDemo.js";

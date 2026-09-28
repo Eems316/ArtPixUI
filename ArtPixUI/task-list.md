@@ -1,6 +1,6 @@
 # ArtPixUI component task list
 
-Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once**: **0 completed after review**, **161 awaiting review** (160 implementations and 1 removal), **25 not yet implemented**. The active source catalog has 185 components after removing the duplicate TextBox stub. An item's position shows where it fits in the dependency plan, not when it was created.
+Build one component at a time in the numbered phase order below, and top to bottom within each list. This retains all **186 original catalog entries exactly once** and adds the requested `DottedBackground` and `PixelVistaBackground` entries: **0 completed after review**, **188 awaiting review** (187 implementations and 1 removal), **0 not yet implemented**. The active source catalog has 187 components after removing the duplicate TextBox stub and adding the two backgrounds. An item's position shows where it fits in the dependency plan, not when it was created.
 
 ## Status and review workflow
 
@@ -19,7 +19,7 @@ Status markers: `[ ]` = not yet implemented; `[-]` = implemented or explicitly r
 - Embed a preview image beneath that link only when the user is messaging through ChatGPT Remote from a phone or another device without access to the project files. For local desktop messages with file access, provide the preview link without an embedded picture. Do not assume remote access from browser context alone; use explicit session information or the user's statement. If access is unknown, omit the picture unless requested.
 - Save component preview images in `samples/` at the workspace root (`artUI/samples/`), outside the `ArtPixUI/` package folder. Use descriptive filenames such as `progress-bar-preview.png`; do not leave new preview images in the package root.
 
-Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. Phase 8's 25 components also await review under the user-authorized autonomous batch. The 10 remaining phase 9 cards also await review; ContactCard retains its existing review status. Phase 10's 14 components also await review and are committed locally. Phase 11's 24 components also await review and are committed locally. The next unimplemented item is ChartContainer in phase 12, Chart foundations, charts, and decorative effects.
+Button, IconButton, and ContactCard were previously marked complete based on implementation. They are now `[-]` under this review workflow; their descriptions below capture the current review targets. Label, Title, Link, CodeBlock, Icon, IconGroup, BasicCard, TextInput, TextArea, Checkbox, RadioButton, and ToggleSwitch also await review. TextBox's duplicate stub was removed and its removal awaits review; renaming the existing TextInput to TextBox is recorded as a pending TextInput review change, not yet implemented. Earlier items retain their pending-review status. Slider also awaits review. FileUpload also awaits review. PlaceholderImage also awaits review. Image also awaits review. Thumbnail also awaits review. Avatar also awaits review. AvatarGroup also awaits review. Logo also awaits review. ImageWithOverlay also awaits review. List also awaits review. KeyValueDisplay also awaits review. Table also awaits review. Timeline also awaits review. Header also awaits review. Footer also awaits review. NavigationBar also awaits review. Sidebar also awaits review. Breadcrumbs also awaits review. Pagination also awaits review. FaqAccordion also awaits review. SpinnerStatus also awaits review. DotsLoader also awaits review. PulseLoader also awaits review. ProgressBar also awaits review. IndeterminateProgressBar also awaits review. CircularProgress also awaits review. ProgressSteps also awaits review. SkeletonLoader also awaits review. ShimmerSkeleton also awaits review. LoadingButton also awaits review. UploadProgress also awaits review. DownloadProgress also awaits review. BufferingIndicator also awaits review. LoadingOverlay also awaits review. LoadingScreen also awaits review. Alert also awaits review. StatusMessage also awaits review. The remaining 15 phase 6 components also await review under the approved batch plan. Phase 6 implementation is finished; no item is user-approved yet. Phase 7's 20 components now also await review under the user-authorized autonomous batch. Phase 8's 25 components also await review under the user-authorized autonomous batch. The 10 remaining phase 9 cards also await review; ContactCard retains its existing review status. Phase 10's 14 components also await review. The final 49 original items in phases 11–12 and the subsequently requested DottedBackground also await review. No catalog implementation remains; the TextInput rename and all user review decisions remain pending. Sections 10 and 11 are committed locally at the user's request; section 12, DottedBackground and PixelVistaBackground are included in the final component commit requested by the user, along with a push of all local commits.
 
 The phases are implementation milestones, not replacement source categories. Keep each component in its existing canonical source folder. Similar components can share an implementation while retaining their individual catalog entries; do not silently merge or delete them.
 
@@ -66,7 +66,7 @@ Establish reusable appearance and native interaction conventions before building
 
 Build native controls first. Standardize labels, controlled/uncontrolled values, descriptions, invalid states, disabled states, and keyboard behavior.
 
-- [-] `TextInput` — Agreed look: parchment field, rounded dark outline, inset bevel, dark monospaced text, muted placeholder, green focus outline, distinct invalid state (rust double border), and subdued disabled styling. Animation: none; steady non-blinking caret where supported, native visible caret otherwise. Function: native input with text/email/password/search/tel/url types, controlled or uncontrolled values, native required/readOnly/disabled attributes, ref support, merged className, aria-invalid styling, external Label via id/htmlFor, and external descriptions via aria-describedby. No internal validation or generated messages.
+- [-] `TextInput` — Agreed look: parchment field, rounded dark outline, inset bevel, dark monospaced text, muted placeholder, green focus outline, distinct invalid state (rust double border), and subdued disabled styling. Animation: none; steady non-blinking caret where supported, native visible caret otherwise. Function: native input with text/email/password/search/tel/url/number types, controlled or uncontrolled values, native required/readOnly/disabled attributes, ref support, merged className, aria-invalid styling, external Label via id/htmlFor, and external descriptions via aria-describedby. No internal validation or generated messages.
 
   **Review:** Playground `#text-input-demo` shows controlled required, uncontrolled, invalid, read-only, and disabled fields. Verified label focus, controlled/uncontrolled typing, read-only edit prevention, disabled tab skipping, focus/invalid styling, and computed `caret-animation: manual` support in the current browser. Unsupported browsers retain their native caret. Typecheck, build, and lint passed; no new dependencies.
   **Requested review change (pending):** Rename the existing `TextInput` component to `TextBox`, preserving its look and functionality. Update its source folder/files, component and props names, public exports, generator catalog, examples, documentation, and internal references together. The public name remains `TextInput` until this review change is implemented; do not create a second duplicate implementation.
@@ -348,7 +348,7 @@ Compose the inputs and popup/menu primitives into search workflows. DateFilter i
 
 ## 9. Specialized cards
 
-**Section 9 work plan (2026-09-27):** Following the request to commit section 8 and work on section 9, implement the 10 remaining cards in this section using BasicCard and established controls. Keep ContactCard unchanged. Share heading association, optional content/action/footer slots and the parchment/outlined visual treatment. Keep card bodies static and non-interactive by default, avoid nested clickable wrappers, and defer media players, date controls and chart implementations to their later phases. Add all 10 previews, public exports, automated checks and per-item design/review notes. All implemented items remain `[-]`; no review approval is implied. Section 8 was committed separately as `d9cf7dc`; section 9 remains uncommitted for review.
+**Section 9 work plan (2026-09-27):** Following the request to commit section 8 and work on section 9, implement the 10 remaining cards in this section using BasicCard and established controls. Keep ContactCard unchanged. Share heading association, optional content/action/footer slots and the parchment/outlined visual treatment. Keep card bodies static and non-interactive by default, avoid nested clickable wrappers, and defer media players, date controls and chart implementations to their later phases. Add all 10 previews, public exports, automated checks and per-item design/review notes. All implemented items remain `[-]`; no review approval is implied. Section 8 was committed separately as `d9cf7dc`; section 9 was subsequently committed as `463fd6c` without changing review status.
 
 Compose BasicCard and the earlier primitives. Card APIs should accept content and slots so advanced media, date, and chart components can be added later without coupling the card implementation to them.
 
@@ -516,37 +516,96 @@ The order within this phase matters: shared chart infrastructure first, small in
 
 ### 12.1 Shared chart components — complete before the charts
 
-- [ ] `ChartContainer` — Responsive plotting surface, dimensions, plot margins, and shared chart context.
-- [ ] `ChartTitle` — Accessible chart heading and description integration.
-- [ ] `Axis` — Scale/domain contract, ticks, labels, and orientation.
-- [ ] `Grid` — Plot gridlines from the same scales and ticks as Axis; this is the chart Grid, not ImageGrid or a layout grid.
-- [ ] `Legend` — Series labels, colors, symbols, and visibility conventions.
-- [ ] `DataLabel` — Reusable value-label formatting and placement; this is the catalog name for data labels.
-- [ ] `ChartTooltip` — Data inspection content, positioning, formatting, and keyboard-accessible equivalents.
-- [ ] `ChartEmptyState` — Chart-specific empty/invalid-data presentation using EmptyState.
-- [ ] `ChartLoadingState` — Chart-specific loading presentation using the phase 5 placeholders.
+- [-] `ChartContainer` — Batch design — Look: Responsive SVG in a raised parchment frame. Animation: None. Function: Shared dimensions, domains, margins/context, linked title/description and HTML footer.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#chart-container-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `ChartTitle` — Batch design — Look: Monospaced heading and optional description. Animation: None. Function: Semantic figure caption and ID integration with ChartContainer.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#chart-title-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `Axis` — Batch design — Look: Dark axis rules with compact muted labels. Animation: None. Function: Shared linear scales/ticks, x/y orientations and radial spokes; full label text in title/data table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#axis-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `Grid` — Batch design — Look: Quiet parchment gridlines. Animation: None. Function: Uses Axis scale/tick domains; horizontal/vertical or concentric radial polygons.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#grid-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `Legend` — Batch design — Look: Color swatches with readable series names. Animation: None. Function: Static list or controlled visibility-toggle buttons using aria-pressed; no color-only identification.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#legend-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `DataLabel` — Batch design — Look: Compact monospaced SVG value labels. Animation: None. Function: Finite-value placement, numeric formatter override and text alignment.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#data-label-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `ChartTooltip` — Batch design — Look: Bordered parchment inspection strip below the plot. Animation: None. Function: Persistent region shared by pointer hover and keyboard focus; full values also exposed in chart data tables.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#chart-tooltip-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `ChartEmptyState` — Batch design — Look: Shared parchment empty-state surface. Animation: None. Function: Explicit empty/invalid chart-data explanation.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#chart-empty-state-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `ChartLoadingState` — Batch design — Look: Static skeleton plot with visible status text. Animation: None. Function: Busy/loading semantics without fabricated data or decorative motion.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#chart-loading-state-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
 
 ### 12.2 Small visualization components
 
-- [ ] `Meter` — Value-within-a-range display and shared numeric-domain handling.
-- [ ] `Gauge` — Gauge geometry using the established range and formatting conventions.
-- [ ] `TrendIndicator` — Direction and change display using Icon and shared numeric formatting.
-- [ ] `Temperature` — Temperature display with explicit units and range conventions.
+- [-] `Meter` — Batch design — Look: Parchment range indicator with readable value and units. Animation: None. Function: Native meter, finite increasing bounds, clamped visual fill and original numeric text.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#meter-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `Gauge` — Batch design — Look: Green semicircular gauge on a muted track. Animation: None. Function: Shared safe numeric scale, bounded arc and textual value/range equivalent.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#gauge-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `TrendIndicator` — Batch design — Look: Direction glyph plus readable signed-change meaning. Animation: None. Function: Increase/decrease/unchanged text, absolute magnitude, explicit units and configurable positive-is-good coloring.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#trend-indicator-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `Temperature` — Batch design — Look: Compact monospaced temperature or range meter. Animation: None. Function: Explicit C/F/K units, optional bounds, no implicit conversion.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#temperature-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
 
 ### 12.3 Actual charts — reuse the shared components
 
-- [ ] `BarChart` — First Cartesian chart; validates the container, axis, grid, labels, legend, tooltip, and state contracts.
-- [ ] `HorizontalBarChart` — Horizontal orientation of the shared bar-chart behavior.
-- [ ] `StackedBarChart` — Multiple stacked series using the established bar geometry and series contracts.
-- [ ] `LineChart` — Line-series geometry using the shared Cartesian infrastructure.
-- [ ] `AreaChart` — Filled-area variant built on LineChart's series geometry.
-- [ ] `ScatterPlot` — Point plotting and data inspection.
-- [ ] `BubbleChart` — ScatterPlot with an additional size scale.
-- [ ] `PieChart` — Shared radial slice geometry and labels.
-- [ ] `DonutChart` — PieChart geometry with an inner radius and optional center content.
-- [ ] `RadarChart` — Radial axes, grid, and multiple series; extend the earlier Axis/Grid conventions for radial layouts.
+- [-] `BarChart` — Batch design — Look: Outlined green columns with shared grid and axes. Animation: None. Function: Finite signed/zero values, zero baseline, optional labels, focus/hover inspection and accessible data table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#bar-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `HorizontalBarChart` — Batch design — Look: Horizontal green bars on parchment. Animation: None. Function: Shared signed-value bar geometry with category/value axes swapped, optional labels and data table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#horizontal-bar-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `StackedBarChart` — Batch design — Look: Muted multi-series stacked columns. Animation: None. Function: Independent positive/negative stacks, missing-value omission, legend visibility, inspection and full table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#stacked-bar-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `LineChart` — Batch design — Look: Colored line series with inspectable point markers. Animation: None. Function: Shared categorical axes, explicit gaps for missing values, legend visibility, optional labels and table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#line-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `AreaChart` — Batch design — Look: Translucent fills below shared line-series geometry. Animation: None. Function: Zero-based signed areas, gaps for missing values, legend toggles, inspection and full table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#area-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `ScatterPlot` — Batch design — Look: Outlined green points on a two-axis grid. Animation: None. Function: Finite numeric x/y domains, coincident-domain padding, keyboard/pointer inspection and data table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#scatter-plot-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `BubbleChart` — Batch design — Look: Translucent outlined circles of varying size. Animation: None. Function: Scatter geometry with positive finite size values and square-root radius scaling, inspection and table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#bubble-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `PieChart` — Batch design — Look: Muted colored sectors with matching legend. Animation: None. Function: Positive finite values only, safe proportional geometry, one-slice circle, optional labels, inspection and table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#pie-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `DonutChart` — Batch design — Look: Shared pie sectors around a parchment center. Animation: None. Function: Pie behavior with inner circle and optional centerLabel, keyboard/pointer inspection and table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#donut-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `RadarChart` — Batch design — Look: Outlined translucent series on shared radial grid/spokes. Animation: None. Function: At least three categories, complete nonnegative series, shared maximum scale, legend toggles, focusable vertices and table.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#radar-chart-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
 
 ### 12.4 Decorative effects
 
-- [ ] `LayeredBackground` — Composable background layers with content readability controls.
-- [ ] `Stripes` — Reusable repeating stripe treatment.
+- [-] `PixelVistaBackground` — Autonomous design — Look: Procedural side-on pixel-art plains, hills, desert mesas/cacti and ocean, with blue sky, orbiting pixel sun/moon and pale clouds inspired by the supplied references. Animation: Right-to-left four-depth terrain parallax; slower clouds; randomly selected fresh scenery entering from the right every 15–20 active seconds at rate 1, scaling inversely with movement speed, with spatial palette/height interpolation (hills flatten into plains), no screen-wide fade, no fixed playlist; pause and reduced-motion support. Function: Dependency-free decorative canvas with independent foreground children, initialScenery, seed, speed, movementRate (decimal overall multiplier; preview number field), paused, showControls and native div props; responsive backing canvas, bounded world-chunk caching, offscreen/hidden suspension and lifecycle cleanup. Review fixes: preview foreground text-box toggle; opaque terrain columns remove strip lines; renderer-height synchronization removes stale horizontal bands after world restarts. Ocean review change: land retains its colors and slopes below the viewport to reveal a separate scrolling wave backdrop; incoming land rises over the water. No land-to-blue palette fade. Latest review change: remove rear ocean band, move middle water bands to 78%/83.5% height near the front at 88.5%, and increase default base speed from 24 to 240 (10×), retaining movementRate=1. Latest timing revision: default base speed 720 (3× previous), rate 2 uses 7.5–10-second scenery intervals and 0.5 uses 30–40; movement-scaled 120-second default elliptical sun/moon day/night cycle. Pause/reduced motion freeze both clocks.
+
+  Latest layering revision: removed the translucent night rectangle causing the hard horizontal line. Rear water remains behind all terrain; the second (middle) wave is now behind the front two terrain layers, and the first (closest) wave is now also behind the front two terrain layers. The sun/moon path is a tall oval centered just below the ocean horizon (80% height), with its apex near 11% height and horizon clipping at 78%. Wave placement and spacing are unchanged. Latest update: day/night defaults to two minutes and scales inversely with movement speed (2× = 60 seconds; 0.5× = 240 seconds). Default scenery backs playground-intro without controls; the demo removes explanatory paragraphs and uses library controls, including numeric TextInput support. Awaiting review.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#pixel-vista-background-demo). Check all four scenery types, terrain/cloud seams, orbiting sun and moon, random returns, transition comfort, front-wave overlap, absence of the rectangular night tint, pause/resume and narrow layouts. Automated model/renderer checks pass; live browser appearance remains pending because browser access was blocked. API and limitations: [pixel-vista-background-review.md](pixel-vista-background-review.md). Included in the user-requested final component commit.
+
+- [-] `LayeredBackground` — Batch design — Look: Layered parchment texture behind readable content. Animation: None. Function: Caller-provided CSS background-image layers (front to back), optional scrim and noninteractive decorative layers.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#layered-background-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `Stripes` — Batch design — Look: Static repeating diagonal parchment stripes. Animation: None. Function: Configurable colors, angle and stripe width; composes LayeredBackground without affecting content interaction.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#stripes-demo). Check keyboard/focus, narrow layout, valid/empty/disabled boundaries where applicable and the documented API contract. Automated checks and pending live review: [final-sections-review.md](final-sections-review.md).
+- [-] `DottedBackground` — Agreed look: static, evenly spaced translucent dots over a parchment-colored surface, matching the ContactCard playground stage. Animation: none. Function: CSS-only radial-gradient dot grid with configurable background, dot color, dot size, and spacing; native div content and attributes remain available, with no image asset or interaction.
+
+  **Review:** [Preview](http://127.0.0.1:5173/#dotted-background-demo). Check the default 0.7px dots at 8px spacing, custom colors/sizing, content readability, and narrow layouts.
